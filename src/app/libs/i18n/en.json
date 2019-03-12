@@ -1,0 +1,69 @@
+{
+  "general": {
+    "search": "Search",
+    "passwordField": {
+      "show": "SHOW",
+      "hide": "HIDE"
+    },
+    "update": "Update",
+    "create": "Create",
+    "save": "Save",
+    "cancel": "Cancel",
+    "gender": {
+      "male": "Male",
+      "female": "Female"
+    },
+    "table": {
+      "filter": {
+        "confirm": "Ok",
+        "reset": "Reset",
+        "emptyText": "No data to show"
+      }
+    },
+    "datePicker": {
+      "placeholder": "Select date",
+      "startDate": "Start Datetime",
+      "endDate": "End Datetime",
+      "today": "Today",
+      "now": "Now",
+      "ok": "Ok",
+      "clear": "Clear",
+      "timeSelect": "Select time",
+      "dateSelect": "Select date"
+    }
+  },
+
+  "dummy": {
+    "getResult": "Get results",
+    "gender": "Gender",
+    "age": "Age"
+  },
+
+  "login" : {
+    "error" : {
+      "badCredentials" : "Wrong email or password"
+    }
+  },
+
+  "product" : {
+    "tableData": {
+      "product": "Product",
+      "quantity" : "Quantity",
+      "unit" : "Unit",
+      "unitPrice" : "Unit Price",
+      "itemPrice" : "Item price",
+      "totalPrice" : "Total price",
+      "status" : "Status"
+    },
+    "currentAcquisition" : "Current acquisition"
+  },
+
+  "menuItems" : {
+    "menu" : "MENU",
+    "acquisition" : "Acquisition",
+    "store" : "Store",
+    "dashboard" : "Dashboard",
+    "carriers" : "Carriers",
+    "sales" : "Sales"
+  }
+}

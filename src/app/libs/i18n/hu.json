@@ -1,0 +1,65 @@
+{
+  "general": {
+    "search": "Keresés",
+    "passwordField": {
+      "show": "MUTASD",
+      "hide": "ELREJTÉS"
+    }
+  },
+  
+  "menu": {
+    "companies": "Ügyfelek",
+    "logs": "Logok",
+    "reports": "Riportok",
+    "logout": "Kijelentkezés"
+  },
+
+  "companies": {
+    "listTitle": "Ügyfelek",
+    "addNewCompany": "Új ügyfél hozzáadása",
+    "table": {
+      "name": "Név",
+      "email": "Email",
+      "address": "Cím"
+    }
+  },
+
+  "login": {
+    "title": "Jelentkezz be!",
+    "subtitle": "Használd a kapott bejelentkezési adatokat",
+    "form": {
+      "email": "Email",
+      "emailError": "Hibás az email formátuma!",
+      "password": "Jelszó",
+      "passwordError": "Kérlek add meg a jelszavad!",
+      "submit": "Bejelentkezés"
+    },
+    "error": {
+      "badCredentials" : "Hibás email, vagy jelszó!"
+    },
+    "register": "Nem vagy még regisztrálva?",
+    "registerHere": "Itt megteheted"
+  },
+
+  "product" : {
+    "tableData": {
+      "product": "Termék",
+      "quantity" : "Mennyiség",
+      "unit": "Egység",
+      "unitPrice": "Egységár",
+      "itemPrice": "Tétel ára",
+      "totalPrice": "Teljes összeg",
+      "status" : "Státusz"
+    },
+    "currentAcquisition" : "Aktuális beszerzés"
+  },
+  "menuItems" : {
+    "menu" : "MENÜ",
+    "acquisition" : "Beszerzés",
+    "store" : "Raktár",
+    "dashboard" : "Kimutatás",
+    "carriers" : "Hordárok",
+    "sales" : "Eladások"
+  }
+
+}

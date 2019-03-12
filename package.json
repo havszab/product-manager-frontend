@@ -1,0 +1,53 @@
+{
+  "name": "webadmin",
+  "version": "1.0.0",
+  "description": "XUND Webadmin",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --content-base=src/public --mode development --hot --history-api-fallback --config webpack/dev.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "webpack --env.NODE_ENV=production --progress --mode production --config webpack/prod.config.js"
+  },
+  "author": "Marcell Simon <simon@nextleap.io>",
+  "license": "ISC",
+  "dependencies": {
+    "@progress/kendo-drawing": "^1.5.8",
+    "@progress/kendo-react-pdf": "^2.6.1",
+    "ajv": "^6.8.1",
+    "antd": "^3.13.2",
+    "axios": "^0.18.0",
+    "dotenv-webpack": "^1.7.0",
+    "intl-messageformat": "^2.2.0",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "react": "^16.8.1",
+    "react-animate-height": "^2.0.7",
+    "react-dom": "^16.8.1",
+    "react-loading": "^2.0.3",
+    "string-format": "^2.0.0",
+    "uid": "0.0.2"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.120",
+    "@types/node": "^11.9.2",
+    "@types/react": "^16.8.2",
+    "@types/react-dom": "^16.8.0",
+    "@types/react-router-dom": "^4.3.1",
+    "@types/uuid": "^3.4.4",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-plugin-import": "^1.11.0",
+    "css-loader": "^2.1.0",
+    "customize-cra": "^0.2.11",
+    "html-webpack-plugin": "^3.2.0",
+    "less-loader": "^4.1.0",
+    "react-router-dom": "^4.3.1",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.3",
+    "webpack": "4.29.0",
+    "webpack-cli": "3.2.1",
+    "webpack-dev-server": "3.1.13",
+    "webpack-merge": "^4.2.1"
+  }
+}

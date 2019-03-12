@@ -1,0 +1,56 @@
+@import '~antd/dist/antd.css';
+
+body {
+  font-family: 'Nunito Sans', sans-serif !important;
+  letter-spacing: 0.1px;
+
+}
+
+.layout {
+  min-height: 100vh;
+}
+
+.loginBox {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.footer{ 
+  text-align: center;
+  color: rgba(0,0,0,0.4)
+}
+
+.ant-menu-item {
+  line-height: 32px !important;
+  height: 32px !important;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.ant-menu {
+  background: linear-gradient(red 0%, black 100%);
+}
+
+.ant-menu-item-selected {
+  color: #00ADEF;
+}
+
+.ant-menu-item-group-title {
+  margin-top: 16px !important;
+  margin-bottom: 8px !important;
+  border-bottom: 1px solid white;
+  color: white;
+  font-weight: 600;
+  line-height: 19px;
+  font-size: 17px;
+  padding: 4px;
+}
+
+.ant-menu-item > a {
+  color: white !important;
+}
+
+.ant-menu-item > a:hover, .ant-menu-item-selected > a {
+  color: #0065BD !important;
+}
