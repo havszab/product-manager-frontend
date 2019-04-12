@@ -50,7 +50,7 @@ class CreateProductCategory extends React.Component<CreateProductCategoryProps, 
           })}
         </div>
         <Row type="flex" justify="space-around">
-          <Button type={"primary"} htmlType={"submit"}>Add category</Button>
+          <Button type={"primary"} style={{width: '100%'}} htmlType={"submit"}>Add product type</Button>
         </Row>
       </div>
     </Form>

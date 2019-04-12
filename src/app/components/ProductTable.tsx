@@ -2,11 +2,13 @@ import * as React from "react";
 import i18n from "../libs/i18n";
 import {message, Table} from "antd";
 import {get, post} from "../libs/utils/request";
-import {string} from "prop-types";
 import Cascader, {CascaderOptionType} from "antd/es/cascader";
+import Popconfirm from "antd/es/popconfirm";
 
 interface ProductTableProps extends React.Props<any> {
   data: Array<Product>
+  stockOperations?: boolean
+  onSell?: (product:Product) => void
 }
 
 type state = {
@@ -85,7 +87,15 @@ class ProductTable extends React.Component<ProductTableProps, state> {
   render() {
     const currency = 'HUF'
 
-    //const statusOptions = this.populateStatuses()
+    const sellColumn = this.props.stockOperations ? {
+      title: 'Sell',
+      render: (text: string, product: Product) => (
+        this.props.data.length >= 1
+          ? (
+              <a onClick={() => this.props.onSell(product)}>Sell</a>
+          ):{}
+      )
+    }:{}
 
     const columns = [
       {
@@ -110,7 +120,11 @@ class ProductTable extends React.Component<ProductTableProps, state> {
         title: i18n('product.tableData.status'),
         dataIndex: 'status',
         render: ((value: string, product: Product):React.ReactNode => {
-         return <Cascader options={this.populateStatuses(product.id)} defaultValue={[product.status]} allowClear={false} onChange={this.handleUnitCascaderChange} style={{width: 100}}/>
+         return <Cascader options={this.populateStatuses(product.id)}
+                          defaultValue={[product.status]}
+                          allowClear={false}
+                          onChange={this.handleUnitCascaderChange}
+                          style={{width: 100}}/>
         } )
       },
       {
@@ -120,12 +134,12 @@ class ProductTable extends React.Component<ProductTableProps, state> {
           `${product.itemPrice.toLocaleString()} ${currency}`
         )
       },
+      sellColumn
     ]
 
 
     return (
-      <div>
-        <div>{i18n('product.currentAcquisition')}</div>
+      <div style={{marginTop: 10}}>
         <Table dataSource={this.props.data} columns={columns} />
       </div>)
   }

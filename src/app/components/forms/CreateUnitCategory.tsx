@@ -50,7 +50,7 @@ class CreateUnitCategory extends React.Component<CreateUnitCategoryProps, {}> {
           })}
         </div>
         <Row type="flex" justify="space-around" >
-        <Button type={"primary"} htmlType={"submit"}>Add category</Button>
+        <Button type={"primary"} htmlType={"submit"} style={{width: '100%'}}>Add unit type</Button>
         </Row>
       </div>
     </Form>

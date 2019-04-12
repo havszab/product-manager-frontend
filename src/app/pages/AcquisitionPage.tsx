@@ -8,6 +8,7 @@ import CreateUnitCategory from "../components/forms/CreateUnitCategory";
 import CreateProduct from "../components/forms/CreateProduct";
 import {user} from "../libs/utils/user";
 import NumberFormat from 'react-number-format'
+import PageTitle from "../components/PageTitle";
 
 interface Props extends React.Props<any> {
 
@@ -77,7 +78,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
   }
 
   async componentDidMount(): Promise<void> {
-    this.fetchAcquisition();
+    this.fetchAcquisition()
     this.fetchProductCategories()
     this.fetchUnitCategories()
   }
@@ -127,6 +128,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
     await post('finish-acquisition', req)
       .then(response => {
         message.success(response)
+        this.fetchAcquisition()
       })
       .catch(err => {
         message.error(err)
@@ -139,15 +141,17 @@ export default class AcquisitionPage extends React.Component<Props, State> {
 
     return (
       <div>
+        <PageTitle title={'Current acquisition'}/>
         <CreateProduct productCategories={this.state.productCategories} unitCategories={this.state.unitCategories}
                        onSuccess={this.fetchAcquisition}/>
         <ProductTable data={this.state.acquisition.products}/>
         <Row type="flex" justify="space-around">
           <CreateProductCategory onSuccess={this.fetchProductCategories}/>
           <CreateUnitCategory onSuccess={this.fetchUnitCategories}/>
-          <div style={{ margin: 5, border: '1px solid #ccc', borderRadius: 7, padding: '10px 15px'}}>
-            <h2 style={{ borderBottom: '1px solid #ccc'}}>Total: {total} HUF</h2>
-            <Button type={"primary"} style={{marginTop: 70, width: '100%'}} onClick={this.finishAcquisitionHandler}>Complete acquisition</Button>
+          <div style={{margin: 5, border: '1px solid #ccc', borderRadius: 7, padding: '10px 15px'}}>
+            <h2 style={{borderBottom: '1px solid #ccc'}}>Total: {total} HUF</h2>
+            <Button type={"primary"} style={{marginTop: 70, width: '100%'}} onClick={this.finishAcquisitionHandler}>Complete
+              acquisition</Button>
           </div>
         </Row>
       </div>)

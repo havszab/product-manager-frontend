@@ -95,19 +95,19 @@ export default class MainFrame extends React.Component<MainFrameProps, { redirec
                             </Menu.Item>
 
                             <Menu.Item key="menuItem#3" style={menuItemStyle}>
-                                <Link to="/dashboard/list">
+                                <Link to="/sales">
                                     <Icon type={'dollar'} style={menuIconStyle}/><span>{i18n('menuItems.sales')}</span>
                                 </Link>
                             </Menu.Item>
 
                             <Menu.Item key="menuItem#4" style={menuItemStyle}>
-                                <Link to="/dashboard/list">
+                                <Link to="/dashboard">
                                     <Icon type={'area-chart'} style={menuIconStyle}/><span>{i18n('menuItems.dashboard')}</span>
                                 </Link>
                             </Menu.Item>
 
                             <Menu.Item key="menuItem#5" style={{ marginBottom: '8px' }}>
-                                <Link to="/dashboard/list">
+                                <Link to="/carriers">
                                     <Icon type={'team'} style={menuIconStyle}/><span>{i18n('menuItems.carriers')}</span>
                                 </Link>
                             </Menu.Item>

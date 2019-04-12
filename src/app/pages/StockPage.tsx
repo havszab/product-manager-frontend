@@ -2,12 +2,17 @@ import * as React from "react";
 import ProductTable from "../components/ProductTable";
 import {post} from "../libs/utils/request";
 import {user} from "../libs/utils/user";
+import {Modal} from 'antd'
+import ItemSell from "../components/forms/ItemSellForm";
+import PageTitle from "../components/PageTitle";
 
 interface StockPageProps extends React.Props <any> {
 }
 
 type state = {
   stock: Stock
+  isModalVisible: boolean
+  prodToSell?: Product
 }
 
 interface Stock {
@@ -56,7 +61,8 @@ class StockPage extends React.Component<StockPageProps, state> {
         id: number;
         owner: User;
         products: Array<Product>;
-      }
+      },
+      isModalVisible: false
     }
   }
 
@@ -69,10 +75,38 @@ class StockPage extends React.Component<StockPageProps, state> {
       })
   }
 
+  handleSell =(prod: Product)=> {
+    console.log(prod)
+    this.setState({
+      prodToSell: prod,
+      isModalVisible: true
+    })
+  }
+
+  modalCancelHandler = () => {
+    this.setState({
+      isModalVisible: false
+    })
+  }
 
   render() {
+
+    const modalOnSell = this.state.prodToSell ? (
+      <Modal title="SELL ITEM"
+             visible={this.state.isModalVisible}
+             footer={null}
+             centered={true}
+             onCancel={this.modalCancelHandler}
+      >
+        <ItemSell product={this.state.prodToSell}
+                  onCancel={this.modalCancelHandler}/>
+      </Modal>) : null
+
+
     return <div>
-      <ProductTable data={this.state.stock.products}/>
+      <PageTitle title={'Products in stock'}/>
+      <ProductTable data={this.state.stock.products} stockOperations={true} onSell={this.handleSell}/>
+      {modalOnSell}
     </div>
   }
 }
