@@ -6,7 +6,7 @@ module.exports = merge(baseConfig, {
 
   devServer: {
     compress: true,
-    port: 4000,
+    port: 5000,
     disableHostCheck: true
   },
 

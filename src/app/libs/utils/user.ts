@@ -1,8 +1,9 @@
 import eventbus from '../eventbus'
 
 type User = {
-	email: string
-	token: string
+	email?: string
+	token?: string
+	name?: string
 }
 
 export const user = (): User => {

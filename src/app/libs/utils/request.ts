@@ -2,7 +2,7 @@
 import axios from 'axios'
 import eventbus from '../eventbus'
 
-export const baseUrl: string = "http://ws.test.pixrating.com:24589/"
+export const baseUrl: string = "http://localhost:8080/"
 //process.env.baseUrl
 
 export const getAuthenticationHeader = () => {

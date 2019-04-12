@@ -4316,6 +4316,13 @@ react-loading@^2.0.3:
   resolved "https://registry.yarnpkg.com/react-loading/-/react-loading-2.0.3.tgz#e8138fb0c3e4674e481b320802ac7048ae14ffb9"
   integrity sha512-Vdqy79zq+bpeWJqC+xjltUjuGApyoItPgL0vgVfcJHhqwU7bAMKzysfGW/ADu6i0z0JiOCRJjo+IkFNkRNbA3A==
 
+react-number-format@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/react-number-format/-/react-number-format-4.0.7.tgz#b3294b95bcadfbbec1b7e86740c3950818f532bc"
+  integrity sha512-boRHwPzkNDuyqeQ9zyHp0XgVAqT5RyS+BsohOhiTz6VMxEQr3DuSuNdg0Q8c3CYTgNESYlxnH278DPqaQFO72w==
+  dependencies:
+    prop-types "^15.6.0"
+
 react-router-dom@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.3.1.tgz#4c2619fc24c4fa87c9fd18f4fb4a43fe63fbd5c6"

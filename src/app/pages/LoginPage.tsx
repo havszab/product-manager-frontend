@@ -38,10 +38,10 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
                 })
                 try {
                     const loginData = {
-                        name: values.email,
+                        email: values.email,
                         password: values.password
                     }
-                    //const response = await post('auth/authenticate', loginData)
+                    const response = await post('auth/login', loginData)
                     let result = JSON.parse(JSON.stringify(loginData));
                     localStorage.setItem('user', JSON.stringify(result))
                     this.setState({
@@ -77,7 +77,7 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
                 <Content style={{}}>
                     <Row type="flex" justify="space-around" style={{marginTop: 200}} className="">
                         <Col xs={8} sm={6} lg={4} style={{textAlign: 'center'}}>
-                            <img src='images/logo.png' style={{maxWidth: "60%", marginBottom: 48}}/>
+                            {/*<img src='images/logo.png' style={{maxWidth: "60%", marginBottom: 48}}/>*/}
                             <Form onSubmit={this.handleSubmit} className="login-form">
                                 <Form.Item>
                                     {getFieldDecorator('email', {
@@ -96,15 +96,7 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
                                     )}
                                 </Form.Item>
                                 <Form.Item>
-                                    <Row type="flex" justify="space-between">
-                                        <Col>
-                                            {getFieldDecorator('remember', {
-                                                valuePropName: 'checked',
-                                                initialValue: true,
-                                            })(
-                                                <Checkbox><TranslatedText code="login.form.rememberMe"/></Checkbox>
-                                            )}
-                                        </Col>
+                                    <Row type="flex" justify="space-around">
                                         {errorMsg}
                                         <Col>
                                             <Button type="primary" htmlType="submit" className="login-form-button">

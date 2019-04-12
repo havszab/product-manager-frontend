@@ -59,7 +59,8 @@
     "store" : "Raktár",
     "dashboard" : "Kimutatás",
     "carriers" : "Hordárok",
-    "sales" : "Eladások"
+    "sales" : "Eladások",
+    "logout" : "Kijelentkezés"
   }
 
 }

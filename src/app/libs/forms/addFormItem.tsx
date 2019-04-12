@@ -4,14 +4,16 @@ import Input from "antd/lib/input";
 
 type Props = {
   key: string
-  required: boolean 
-  errorMessage: string 
-  placeholder: string
-  description: string
-  disabled: boolean
-  onChange: Function
+  required?: boolean
+  errorMessage?: string
+  placeholder?: string
+  description?: string
+  disabled?: boolean
+  onChange?: Function
   getFieldDecorator: Function
-  loading: boolean
+  loading?: boolean
+  label?: string
+  type?: string
 }
 
 export default (options: Props) => {
@@ -24,15 +26,17 @@ export default (options: Props) => {
     disabled, 
     onChange,
     getFieldDecorator,
-    loading
+    loading,
+    type,
+    label
   } = options
   return (
-      <Form.Item key={key}>
+      <Form.Item label={label} key={key}>
         {getFieldDecorator(key, {
           onChange,
           rules: [{ required, message: errorMessage }]
         })(
-            <Input placeholder={placeholder} disabled={loading || disabled}/>
+            <Input type={type} placeholder={placeholder} disabled={loading || disabled}/>
         )}
         {
           description

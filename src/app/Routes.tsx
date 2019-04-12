@@ -7,6 +7,7 @@ import AcquisitionPage from './pages/AcquisitionPage'
 import './App.css'
 import MainFrame from './MainFrame'
 import IndexPage from './pages/IndexPage'
+import StockPage from "./pages/StockPage";
 
 class Routes extends React.Component<{}, {}> {
   render() {
@@ -19,7 +20,9 @@ class Routes extends React.Component<{}, {}> {
             <MainFrame>
               <Switch>
                 <Route exact path="/acquisition" component={AcquisitionPage} />
-                <Redirect to="/acquisition" />
+              </Switch>
+              <Switch>
+                <Route exact path="/stock" component={StockPage} />
               </Switch>
             </MainFrame>
           </Route>

@@ -3,7 +3,13 @@
 body {
   font-family: 'Nunito Sans', sans-serif !important;
   letter-spacing: 0.1px;
+}
 
+
+
+.separator-line {
+  margin: 2px;
+  border-bottom: darkgray 1px solid;
 }
 
 .layout {
@@ -29,7 +35,7 @@ body {
 }
 
 .ant-menu {
-  background: linear-gradient(red 0%, black 100%);
+  background: linear-gradient(#9B8281 0%, black 100%);
 }
 
 .ant-menu-item-selected {

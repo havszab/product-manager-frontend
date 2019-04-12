@@ -42,6 +42,11 @@
   "login" : {
     "error" : {
       "badCredentials" : "Wrong email or password"
+    },
+    "form" : {
+      "submit" : "Login",
+      "email" : "Email",
+      "password" : "Password"
     }
   },
 
@@ -64,6 +69,7 @@
     "store" : "Store",
     "dashboard" : "Dashboard",
     "carriers" : "Carriers",
-    "sales" : "Sales"
+    "sales" : "Sales",
+    "logout" : "Logout"
   }
 }
