@@ -17,6 +17,7 @@
     "antd": "^3.13.2",
     "axios": "^0.18.0",
     "dotenv-webpack": "^1.7.0",
+    "image-webpack-loader": "^4.6.0",
     "intl-messageformat": "^2.2.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",

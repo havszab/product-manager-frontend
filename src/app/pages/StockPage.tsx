@@ -58,15 +58,19 @@ class StockPage extends React.Component<StockPageProps, state> {
 
     this.state = {
       stock: new class implements Stock {
-        id: number;
-        owner: User;
-        products: Array<Product>;
+        id: number
+        owner: User
+        products: Array<Product>
       },
       isModalVisible: false
     }
   }
 
-  async componentDidMount(): Promise<void> {
+  componentDidMount(): void {
+    this.fetchStock()
+  }
+
+  fetchStock = async () => {
     await post('get-stock', user())
       .then((response: Response) => {
         this.setState({
@@ -75,7 +79,7 @@ class StockPage extends React.Component<StockPageProps, state> {
       })
   }
 
-  handleSell =(prod: Product)=> {
+  handleSell = (prod: Product) => {
     console.log(prod)
     this.setState({
       prodToSell: prod,
@@ -83,9 +87,18 @@ class StockPage extends React.Component<StockPageProps, state> {
     })
   }
 
+  onSellFormSubmitHandler = () => {
+    this.fetchStock()
+    this.setState({
+      isModalVisible: false,
+      prodToSell: null
+    })
+  }
+
   modalCancelHandler = () => {
     this.setState({
-      isModalVisible: false
+      isModalVisible: false,
+      prodToSell: null
     })
   }
 
@@ -96,10 +109,10 @@ class StockPage extends React.Component<StockPageProps, state> {
              visible={this.state.isModalVisible}
              footer={null}
              centered={true}
-             onCancel={this.modalCancelHandler}
-      >
+             onCancel={this.modalCancelHandler}>
         <ItemSell product={this.state.prodToSell}
-                  onCancel={this.modalCancelHandler}/>
+                  onCancel={this.modalCancelHandler}
+                  onSubmit={this.onSellFormSubmitHandler}/>
       </Modal>) : null
 
 

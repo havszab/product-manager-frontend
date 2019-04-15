@@ -6,7 +6,7 @@
       "hide": "ELREJTÉS"
     }
   },
-  
+
   "menu": {
     "companies": "Ügyfelek",
     "logs": "Logok",
@@ -58,7 +58,7 @@
     "acquisition" : "Beszerzés",
     "store" : "Raktár",
     "dashboard" : "Kimutatás",
-    "carriers" : "Hordárok",
+    "employees" : "Alkalmazottak",
     "sales" : "Eladások",
     "logout" : "Kijelentkezés"
   }

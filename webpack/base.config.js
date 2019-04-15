@@ -27,12 +27,12 @@ module.exports = {
       // Add '.ts' and '.tsx' as resolvable extensions.
       extensions: [".ts", ".tsx", ".js", ".json", '.scss', '.css']
   },
-  
+
   module: {
       rules: [
-          { 
-            test: /\.tsx?$/, 
-            loader: "ts-loader" 
+          {
+            test: /\.tsx?$/,
+            loader: "ts-loader"
           },
           {
             test: /\.less$/,

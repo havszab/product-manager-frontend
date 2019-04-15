@@ -140,7 +140,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
 
     return (
       <div style={{marginTop: 10}}>
-        <Table dataSource={this.props.data} columns={columns} />
+        <Table rowKey={record => {return record.id.toString()}} dataSource={this.props.data} columns={columns} />
       </div>)
   }
 }

@@ -1,14 +1,16 @@
 import * as React from "react";
-import {Form, Input, Slider} from 'antd'
-import {WrappedFormUtils} from "antd/lib/form/Form";
+import {Input, message, Slider} from 'antd'
 import Row from "antd/lib/grid/row";
 import {ChangeEvent} from "react";
 import Button from "antd/lib/button";
+import {user} from "../../libs/utils/user";
+import {post} from "../../libs/utils/request";
 
 
 interface ItemSellProps extends React.Props <any> {
   product: Product
   onCancel: () => void
+  onSubmit: () => void
 }
 
 interface Product {
@@ -69,6 +71,25 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
     })
   }
 
+  productSellHandler = async () => {
+    let requestBody = {
+      prodToSell: this.props.product.id,
+      quantToSell: this.state.quantToSell,
+      value: this.props.product.unitPrice * this.state.quantToSell,
+      income: !isNaN(this.state.priceToSell) ? this.state.priceToSell : 0,
+      profit: (!isNaN(this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell) ?
+        this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell : 0),
+      email: user().email
+    }
+    await post('sell-item', requestBody)
+      .then(res => {
+        message.success(`${requestBody.quantToSell} ${this.props.product.productCategory.productName} sold!`)
+      }).catch(err => {
+        message.error('Error occurred while selling product')
+      })
+    this.props.onSubmit()
+  }
+
 
   render() {
     const {product} = this.props
@@ -80,6 +101,8 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
 
     const profit =  !isNaN(this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell) ?
       this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell : 0
+
+    const fontColor = profit >  0 ? {width: '50%', color: '#52c41a'} : {width: '50%', color: '#f5222d'}
 
     const income = !isNaN(this.state.priceToSell) ?
       this.state.priceToSell : 0
@@ -111,7 +134,11 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
 
         <Row type={"flex"} justify={"space-around"}>
             <span style={{marginTop: 5}}>0</span>
-            <Slider min={0} max={product.quantity} style={{width: '60%'}} onChange={this.sliderChangeHandler}/>
+            <Slider min={0}
+                    max={product.quantity}
+                    style={{width: '60%'}}
+                    dots={product.quantity <= 5}
+                    onChange={this.sliderChangeHandler}/>
             <span style={{marginTop: 5}}>{product.quantity}</span>
         </Row>
 
@@ -134,17 +161,17 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
             <div style={colStyle}>{this.state.profit / this.state.quantToSell} HUF</div>
           </Row>*/}
           <Row type={"flex"} justify={"space-between"}>
-            <div style={headerCol}>Profit</div>
-            <div style={colStyle}>{profit.toLocaleString()} HUF</div>
-          </Row>
-          <Row type={"flex"} justify={"space-between"}>
             <div style={headerCol}>Income</div>
             <div style={colStyle}>{income.toLocaleString()} HUF</div>
+          </Row>
+          <Row type={"flex"} justify={"space-between"}>
+            <div style={headerCol}>Profit</div>
+            <div style={fontColor}>{profit.toLocaleString()} HUF</div>
           </Row>
         </div>
          <Row type={"flex"} justify={"space-around"}>
            <Button type={"danger"} onClick={this.props.onCancel} style={{minWidth: '30%'}}>Cancel</Button>
-           <Button type={"primary"} style={{minWidth: '30%'}}>Sell</Button>
+           <Button type={"primary"} style={{minWidth: '30%'}} onClick={this.productSellHandler}>Sell</Button>
          </Row>
       </div>
 

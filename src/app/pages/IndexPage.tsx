@@ -1,14 +1,16 @@
 import * as React from "react"
-import { user } from '../libs/utils/user'
-import { Redirect } from "react-router-dom";
+import { Carousel } from 'antd';
 
 export default class IndexPage extends React.Component<{}, {}> {
 
   render() {
-    if (user()) {
-      return <Redirect to="/dashboard"/>
-    } else {
-      return <Redirect to="/login"/>
-    }
+        //<div><img src={require("../assets/carousel-bgs/vegetables_mix.jpg")} alt="veg"/></div>
+    return(
+      <Carousel>
+        <div><h3>2</h3></div>
+        <div><h3>3</h3></div>
+        <div><h3>4</h3></div>
+      </Carousel>
+    )
   }
 }

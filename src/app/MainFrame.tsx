@@ -1,5 +1,5 @@
 import * as React from "react"
-import {Layout, Menu, Breadcrumb, Row, Col, Icon, Button} from 'antd'
+import {Layout, Menu,  Row, Icon, Button} from 'antd'
 import eventbus from "./libs/eventbus"
 import {Redirect} from "react-router"
 import {Link} from "react-router-dom"
@@ -82,40 +82,39 @@ export default class MainFrame extends React.Component<MainFrameProps, { redirec
                         style={{height: '100%', borderRight: 0, paddingTop: 32, paddingLeft: 8}}
                     >
                         <Menu.ItemGroup title={i18n('menuItems.menu')}>
-                            <Menu.Item key="menuItem#1" style={menuItemStyle}>
+                            <Menu.Item key={1} style={menuItemStyle}>
                                 <Link to="/acquisition">
                                     <Icon type={'shopping-cart'} style={menuIconStyle}/><span>{i18n('menuItems.acquisition')}</span>
                                 </Link>
                             </Menu.Item>
 
-                            <Menu.Item key="menuItem#2" style={menuItemStyle}>
+                            <Menu.Item key={2} style={menuItemStyle}>
                                 <Link to="/stock">
                                     <Icon type={'home'} style={menuIconStyle}/><span>{i18n('menuItems.store')}</span>
                                 </Link>
                             </Menu.Item>
 
-                            <Menu.Item key="menuItem#3" style={menuItemStyle}>
+                            <Menu.Item key={3} style={menuItemStyle}>
                                 <Link to="/sales">
                                     <Icon type={'dollar'} style={menuIconStyle}/><span>{i18n('menuItems.sales')}</span>
                                 </Link>
                             </Menu.Item>
 
-                            <Menu.Item key="menuItem#4" style={menuItemStyle}>
+                            <Menu.Item key={4} style={menuItemStyle}>
                                 <Link to="/dashboard">
                                     <Icon type={'area-chart'} style={menuIconStyle}/><span>{i18n('menuItems.dashboard')}</span>
                                 </Link>
                             </Menu.Item>
 
-                            <Menu.Item key="menuItem#5" style={{ marginBottom: '8px' }}>
+                            <Menu.Item key={5} style={{ marginBottom: '8px' }}>
                                 <Link to="/carriers">
-                                    <Icon type={'team'} style={menuIconStyle}/><span>{i18n('menuItems.carriers')}</span>
+                                    <Icon type={'team'} style={menuIconStyle}/><span>{i18n('menuItems.employees')} & admin</span>
                                 </Link>
                             </Menu.Item>
 
-                            <div className="separator-line"/>
 
-                            <Menu.Item key="menuItem#6" style={{ marginTop: '15px' }}>
-                                <Link to="/dashboard/list" onClick={this.logoutHandler}>
+                            <Menu.Item key={6} style={{ marginTop: '15px', borderTop: '1px solid #ccc'}}>
+                                <Link to="/login" onClick={this.logoutHandler}>
                                     <Icon type={'export'} style={menuIconStyle}/><span>{i18n('menuItems.logout')}</span>
                                 </Link>
                             </Menu.Item>
@@ -128,15 +127,11 @@ export default class MainFrame extends React.Component<MainFrameProps, { redirec
                         <Button type="primary" onClick={this.toggleCollapsed} style={{marginTop: 16, marginBottom: 5}}>
                             <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}/>
                         </Button>
-                        {/*<Breadcrumb  style={{margin: '16px 0'}}>
-                            <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item>{this.state.currentPage}</Breadcrumb.Item>
-                        </Breadcrumb>*/}
                         {userEmail}
                         <LanguageSelector/>
                     </Row>
 
-                    <Content style={{}}>
+                    <Content >
                         {this.props.children}
                     </Content>
 
