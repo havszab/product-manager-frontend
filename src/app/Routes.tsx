@@ -8,6 +8,8 @@ import './App.css'
 import MainFrame from './MainFrame'
 import IndexPage from './pages/IndexPage'
 import StockPage from "./pages/StockPage";
+import SalesPage from "./pages/SalesPage";
+import DashboardPage from "./pages/DashboardPage";
 
 class Routes extends React.Component<{}, {}> {
   render() {
@@ -23,6 +25,12 @@ class Routes extends React.Component<{}, {}> {
               </Switch>
               <Switch>
                 <Route exact path="/stock" component={StockPage} />
+              </Switch>
+              <Switch>
+                <Route exact path="/sales" component={SalesPage} />
+              </Switch>
+              <Switch>
+                <Route exact path="/dashboard" component={DashboardPage} />
               </Switch>
             </MainFrame>
           </Route>

@@ -16,7 +16,7 @@ class PageTitle extends React.Component<props, state> {
 
   render() {
     return <div>
-      <Row type="flex" justify="space-around" style={{ borderBottom: '1px #ccc solid', fontSize: '1.5em' }}>
+      <Row type="flex" justify="space-around" style={{ borderBottom: '1px #ccc solid', fontSize: '1.5em', marginBottom: 15 }}>
         <h2>{this.props.title}</h2>
       </Row>
     </div>

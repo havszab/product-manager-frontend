@@ -5,6 +5,10 @@ body {
     letter-spacing: 0.1px;
 }
 
+.ant-table {
+    font-size: 1.1em;
+}
+
 .ant-carousel .slick-slide {
     text-align: center;
     height: 100%;

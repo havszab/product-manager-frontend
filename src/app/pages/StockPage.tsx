@@ -80,7 +80,6 @@ class StockPage extends React.Component<StockPageProps, state> {
   }
 
   handleSell = (prod: Product) => {
-    console.log(prod)
     this.setState({
       prodToSell: prod,
       isModalVisible: true

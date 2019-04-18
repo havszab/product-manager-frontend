@@ -3,7 +3,6 @@ import i18n from "../libs/i18n";
 import {message, Table} from "antd";
 import {get, post} from "../libs/utils/request";
 import Cascader, {CascaderOptionType} from "antd/es/cascader";
-import Popconfirm from "antd/es/popconfirm";
 
 interface ProductTableProps extends React.Props<any> {
   data: Array<Product>
@@ -27,7 +26,8 @@ interface Product {
   quantity: number
   status: string
   productCategory: ProductCategory,
-  unitCategory: UnitCategory
+  unitCategory: UnitCategory,
+  selling_date?: Date
 }
 
 interface ProductCategory {
@@ -83,7 +83,6 @@ class ProductTable extends React.Component<ProductTableProps, state> {
 
   }
 
-
   render() {
     const currency = 'HUF'
 
@@ -136,7 +135,6 @@ class ProductTable extends React.Component<ProductTableProps, state> {
       },
       sellColumn
     ]
-
 
     return (
       <div style={{marginTop: 10}}>
