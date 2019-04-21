@@ -104,8 +104,7 @@ class StockPage extends React.Component<StockPageProps, state> {
   render() {
 
     const modalOnSell = this.state.prodToSell ? (
-      <Modal title="SELL ITEM"
-             visible={this.state.isModalVisible}
+      <Modal visible={this.state.isModalVisible}
              footer={null}
              centered={true}
              onCancel={this.modalCancelHandler}>

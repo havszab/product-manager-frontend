@@ -112,7 +112,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
         title: i18n('product.tableData.unitPrice'),
         dataIndex: 'unitPrice',
         render: (value: string, product: Product) => (
-          `${product.unitPrice.toLocaleString()} ${currency}`
+          `${product.unitPrice.toLocaleString()} ${currency} / ${product.unitCategory.unitName}`
         )
       },
       {

@@ -6,6 +6,7 @@ import {Link} from "react-router-dom"
 import i18n from "./libs/i18n"
 import LanguageSelector from "./components/LanguageSelector";
 import {user} from "./libs/utils/user";
+import Badge from "antd/lib/badge";
 
 const {Content, Footer, Sider} = Layout;
 
@@ -107,7 +108,7 @@ export default class MainFrame extends React.Component<MainFrameProps, { redirec
                             </Menu.Item>
 
                             <Menu.Item key={5} style={{ marginBottom: '8px' }}>
-                                <Link to="/carriers">
+                                <Link to="/admin">
                                     <Icon type={'team'} style={menuIconStyle}/><span>{i18n('menuItems.employees')} & admin</span>
                                 </Link>
                             </Menu.Item>

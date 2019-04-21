@@ -10,6 +10,7 @@ import IndexPage from './pages/IndexPage'
 import StockPage from "./pages/StockPage";
 import SalesPage from "./pages/SalesPage";
 import DashboardPage from "./pages/DashboardPage";
+import AdminPage from "./pages/AdminPage";
 
 class Routes extends React.Component<{}, {}> {
   render() {
@@ -31,6 +32,9 @@ class Routes extends React.Component<{}, {}> {
               </Switch>
               <Switch>
                 <Route exact path="/dashboard" component={DashboardPage} />
+              </Switch>
+              <Switch>
+                <Route exact path="/admin" component={AdminPage} />
               </Switch>
             </MainFrame>
           </Route>
