@@ -1,10 +1,11 @@
 import * as React from "react";
-import {Form, Button, Row, Cascader, message} from 'antd'
+import {Form, Button, Row, Cascader, message, Icon} from 'antd'
 import {WrappedFormUtils} from "antd/lib/form/Form";
 import addFormItem from "../../libs/forms/addFormItem";
 import i18n from "../../libs/i18n";
 import {post} from "../../libs/utils/request";
 import {user} from "../../libs/utils/user";
+import Tooltip from "antd/lib/tooltip";
 
 
 interface CreateProductProps extends React.Props<any> {
@@ -12,6 +13,7 @@ interface CreateProductProps extends React.Props<any> {
   productCategories?: Array<Category>
   unitCategories?: Array<Category>
   onSuccess?: () => void
+  onCancel: () => void
 }
 
 interface Option {
@@ -43,8 +45,7 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
   constructor(props: CreateProductProps) {
     super(props)
 
-    this.state = {
-    }
+    this.state = {}
   }
 
   async componentDidMount(): Promise<void> {
@@ -67,7 +68,7 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
   handleSubmit = (e: any): void => {
     e.preventDefault()
     this.props.form.validateFields(async (err, values) => {
-      let body : SaveRequestBody= values
+      let body: SaveRequestBody = values
       body.email = user().email
       body.name = this.state.selectedProd.productName
       body.unit = this.state.selectedUnit.unitName
@@ -85,14 +86,14 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
 
 
   handleProdCascaderChange = (value: string[], selectedOptions: Option[]) => {
-    const category: Category= JSON.parse(selectedOptions[0].value)
+    const category: Category = JSON.parse(selectedOptions[0].value)
     this.setState({
       selectedProd: category
     })
   }
 
   handleUnitCascaderChange = (value: string[], selectedOptions: Option[]) => {
-    const category: Category= JSON.parse(selectedOptions[0].value)
+    const category: Category = JSON.parse(selectedOptions[0].value)
     this.setState({
       selectedUnit: category
     })
@@ -109,36 +110,46 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
     const unitCatOptions = this.mapCategoriesToOptions(this.props.unitCategories)
 
     const cascaderStyle = {width: 200, margin: 5}
-    const simpleMargin = {margin: 5}
+    const simpleMargin = {margin: 5, height: 50, window: 20}
     const rowStyle = {margin: 10, border: '#ccc solid 1px', borderRadius: 7, padding: 10}
 
+
     return <Form onSubmit={this.handleSubmit}>
-      <Row type="flex" justify="space-around" style={rowStyle}>
-        <div style={cascaderStyle}>
-          <Cascader options={prodCatOptions} showSearch={{filter}} onChange={this.handleProdCascaderChange} placeholder={'Select product'}/>
-        </div>
-        {addFormItem({
-          key: 'quantity',
-          required: true,
-          getFieldDecorator,
-          type: 'number',
-          placeholder: i18n('product.tableData.quantity'),
-          errorMessage: 'This field is required'
-        })}
-        <div style={cascaderStyle}>
-          <Cascader options={unitCatOptions} showSearch={{filter}} onChange={this.handleUnitCascaderChange} placeholder={'Select unit'}/>
-        </div>
-        {addFormItem({
-          key: 'price',
-          required: true,
-          getFieldDecorator,
-          type: 'number',
-          placeholder: i18n('product.tableData.itemPrice'),
-          errorMessage: 'This field is required'
-        })}
-        <Button style={simpleMargin} type={"primary"} htmlType={"submit"}>Save</Button>
-        <Button style={simpleMargin} type={"danger"}>Cancel</Button>
-      </Row>
+      <div style={rowStyle}>
+        <Row type="flex" justify="space-around">
+          <div style={cascaderStyle}>
+            <Cascader options={prodCatOptions} showSearch={{filter}} onChange={this.handleProdCascaderChange}
+                      placeholder={'Select product'}/>
+          </div>
+          {addFormItem({
+            key: 'quantity',
+            required: true,
+            getFieldDecorator,
+            type: 'number',
+            placeholder: i18n('product.tableData.quantity'),
+            errorMessage: 'This field is required'
+          })}
+          <div style={cascaderStyle}>
+            <Cascader options={unitCatOptions} showSearch={{filter}} onChange={this.handleUnitCascaderChange}
+                      placeholder={'Select unit'}/>
+          </div>
+          {addFormItem({
+            key: 'price',
+            required: true,
+            getFieldDecorator,
+            type: 'number',
+            placeholder: i18n('product.tableData.itemPrice'),
+            errorMessage: 'This field is required'
+          })}
+          <Tooltip placement="topLeft" title="Save item">
+            <Button shape={'round'} style={simpleMargin} type={"primary"} htmlType={"submit"}><Icon
+              type="save"/></Button>
+          </Tooltip>
+          <Tooltip placement="topLeft" title="Cancel">
+            <Button shape={'round'} style={simpleMargin} type={"danger"} onClick={this.props.onCancel}><Icon type="rollback"/></Button>
+          </Tooltip>
+        </Row>
+      </div>
     </Form>
   }
 }

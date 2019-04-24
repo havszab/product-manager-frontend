@@ -2,13 +2,14 @@ import * as React from "react"
 import {Row, Button, message} from 'antd'
 import {get, post} from "../libs/utils/request"
 import i18n from "../libs/i18n"
-import ProductTable from "../components/ProductTable";
+import ProductTable from "../components/tables/ProductTable";
 import CreateProductCategory from "../components/forms/CreateProductCategory";
 import CreateUnitCategory from "../components/forms/CreateUnitCategory";
 import CreateProduct from "../components/forms/CreateProduct";
 import {user} from "../libs/utils/user";
 import NumberFormat from 'react-number-format'
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/utils/PageTitle";
+import Tooltip from "antd/lib/tooltip";
 
 interface Props extends React.Props<any> {
 
@@ -135,15 +136,34 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       })
   }
 
+  addItemHandler = () => {
+    this.setState({
+      isCreating: true
+    })
+  }
+
+  addItemCancelHandler = () => {
+    this.setState({
+      isCreating: false
+    })
+  }
+
   render() {
 
     const total = this.state.totalPrice !== undefined ? this.state.totalPrice.toLocaleString() : 0
 
+    const addItemForm = this.state.isCreating ?
+      <CreateProduct productCategories={this.state.productCategories}
+                     unitCategories={this.state.unitCategories}
+                     onSuccess={this.fetchAcquisition}
+                     onCancel={this.addItemCancelHandler}/> :
+      <Tooltip placement="topLeft" title="Add new item">
+      <Button shape={'round'} onClick={this.addItemHandler} type={'primary'} style={{height: 45, width: 45, fontSize: '1.3em'}} >+</Button>
+      </Tooltip>
     return (
       <div>
         <PageTitle title={'Current acquisition'}/>
-        <CreateProduct productCategories={this.state.productCategories} unitCategories={this.state.unitCategories}
-                       onSuccess={this.fetchAcquisition}/>
+        {addItemForm}
         <ProductTable data={this.state.acquisition.products}/>
         <Row type="flex" justify="space-around">
           <CreateProductCategory onSuccess={this.fetchProductCategories}/>

@@ -4,7 +4,7 @@ import eventbus from "./libs/eventbus"
 import {Redirect} from "react-router"
 import {Link} from "react-router-dom"
 import i18n from "./libs/i18n"
-import LanguageSelector from "./components/LanguageSelector";
+import LanguageSelector from "./components/utils/LanguageSelector";
 import {user} from "./libs/utils/user";
 import Badge from "antd/lib/badge";
 
@@ -114,9 +114,9 @@ export default class MainFrame extends React.Component<MainFrameProps, { redirec
                             </Menu.Item>
 
 
-                            <Menu.Item key={6} style={{ marginTop: '15px', borderTop: '1px solid #ccc'}}>
+                            <Menu.Item key={6} style={{ marginTop: '15px'}}>
                                 <Link to="/login" onClick={this.logoutHandler}>
-                                    <Icon type={'export'} style={menuIconStyle}/><span>{i18n('menuItems.logout')}</span>
+                                    <Icon type={'logout'} style={menuIconStyle}/><span>{i18n('menuItems.logout')}</span>
                                 </Link>
                             </Menu.Item>
 
@@ -125,9 +125,10 @@ export default class MainFrame extends React.Component<MainFrameProps, { redirec
                 </Sider>
                 <Layout style={{padding: '0 24px 24px', marginLeft: marginLeft, transition: '0.5s'}}>
                     <Row type="flex" justify="space-between" style={{margin: 20}}>
-                        <Button type="primary" onClick={this.toggleCollapsed} style={{marginTop: 16, marginBottom: 5}}>
+                        <Button type="primary" shape={'circle'} onClick={this.toggleCollapsed} style={{marginTop: 16, marginBottom: 5, position: 'fixed', zIndex: 1}}>
                             <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}/>
                         </Button>
+                        <div style={{width: '20%'}}></div>
                         {userEmail}
                         <LanguageSelector/>
                     </Row>

@@ -4,8 +4,8 @@ import {Timeline, Icon} from "antd";
 import {get} from "../libs/utils/request";
 import {user} from "../libs/utils/user";
 import Row from "antd/lib/grid/row";
-import {Bar, Doughnut} from "react-chartjs-2"
-import PageTitle from "../components/PageTitle";
+import {Bar, Doughnut, Pie, Line} from "react-chartjs-2"
+import PageTitle from "../components/utils/PageTitle";
 import Button from "antd/lib/button";
 
 type props = {}
@@ -227,7 +227,7 @@ class DashboardPage extends Component<props, state> {
       }
     }
 
-    const donoughOptions: Options = {
+    const doughnutOptions: Options = {
       legend: {
         display: true,
         position: 'bottom'
@@ -254,11 +254,11 @@ class DashboardPage extends Component<props, state> {
             {this.renderTimeLineItems()}
           </Timeline>
         </div>
-        <div style={{border: '1px solid #ccc', borderRadius: 7, paddingBottom: 0, margin: 10, maxHeight: 400, backgroundColor: '#F2F2FF'}}>
-          <Doughnut data={this.state.profitPercent} height={355} width={300} options={donoughOptions}/>
+        <div style={{border: '1px solid #ccc', borderRadius: 7, paddingBottom: 0, margin: 5, maxHeight: 380, backgroundColor: '#F2F2FF'}}>
+          <Doughnut data={this.state.profitPercent} height={355} width={290} options={doughnutOptions}/>
         </div>
-        <div style={{border: '1px solid #ccc', borderRadius: 7, paddingBottom: 0, margin: 10, maxHeight: 400, backgroundColor: '#F2F2FF'}}>
-          <Doughnut data={this.state.profitPercent} height={355} width={300} options={donoughOptions}/>
+        <div style={{border: '1px solid #ccc', borderRadius: 7, paddingBottom: 0, margin: 5, maxHeight: 380, backgroundColor: '#F2F2FF'}}>
+          <Pie data={this.state.profitPercent} height={355} width={290} options={doughnutOptions}/>
         </div>
       </Row>
 
@@ -283,12 +283,11 @@ class DashboardPage extends Component<props, state> {
         <div style={monthlyCharts}>
           <Bar data={this.state.profitOfCats} options={chartOptions}/>
         </div>
-
         <div style={monthlyCharts}>
-          <Bar data={this.state.profitOfCats} options={chartOptions}/>
+          <Line data={this.state.profitOfCats} options={chartOptions}/>
         </div>
         <div style={monthlyCharts}>
-          <Bar data={this.state.profitOfCats} options={chartOptions}/>
+          <Line data={this.state.profitOfCats} options={chartOptions}/>
         </div>
         <div style={monthlyCharts}>
           <Bar data={this.state.profitOfCats} options={chartOptions}/>

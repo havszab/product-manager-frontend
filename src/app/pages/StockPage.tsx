@@ -1,10 +1,10 @@
 import * as React from "react";
-import ProductTable from "../components/ProductTable";
+import ProductTable from "../components/tables/ProductTable";
 import {post} from "../libs/utils/request";
 import {user} from "../libs/utils/user";
 import {Modal} from 'antd'
 import ItemSell from "../components/forms/ItemSellForm";
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/utils/PageTitle";
 
 interface StockPageProps extends React.Props <any> {
 }

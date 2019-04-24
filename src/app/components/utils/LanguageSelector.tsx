@@ -1,6 +1,6 @@
 import * as React from "react"
 import {Radio} from 'antd'
-import { setLanguage } from "../libs/i18n";
+import { setLanguage } from "../../libs/i18n";
 import {RadioChangeEvent} from "antd/lib/radio";
 
 const RadioButton = Radio.Button;

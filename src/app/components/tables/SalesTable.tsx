@@ -1,8 +1,8 @@
 import * as React from "react";
 import {Table} from "antd";
-import i18n from "../libs/i18n";
-import PageTitle from "./PageTitle";
-import {post} from "../libs/utils/request";
+import i18n from "../../libs/i18n";
+import PageTitle from "../utils/PageTitle";
+import {post} from "../../libs/utils/request";
 
 type props = {
   data: Array<Product>
