@@ -110,13 +110,13 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
     const unitCatOptions = this.mapCategoriesToOptions(this.props.unitCategories)
 
     const cascaderStyle = {width: 200, margin: 5}
-    const simpleMargin = {margin: 5, height: 50, window: 20}
-    const rowStyle = {margin: 10, border: '#ccc solid 1px', borderRadius: 7, padding: 10}
+    const rowStyle = {margin: 10, border: '#ccc solid 1px', borderRadius: 7, padding: '20px 20px 0px 20px'}
+    const buttonStyle = {fontSize: '1em', paddingRight: 8, paddingLeft: 8, margin: 5}
 
 
     return <Form onSubmit={this.handleSubmit}>
       <div style={rowStyle}>
-        <Row type="flex" justify="space-around">
+        <Row type="flex" justify="space-between">
           <div style={cascaderStyle}>
             <Cascader options={prodCatOptions} showSearch={{filter}} onChange={this.handleProdCascaderChange}
                       placeholder={'Select product'}/>
@@ -142,11 +142,11 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
             errorMessage: 'This field is required'
           })}
           <Tooltip placement="topLeft" title="Save item">
-            <Button shape={'round'} style={simpleMargin} type={"primary"} htmlType={"submit"}><Icon
+            <Button shape={'round'} style={buttonStyle} type={"primary"} htmlType={"submit"}><Icon
               type="save"/></Button>
           </Tooltip>
           <Tooltip placement="topLeft" title="Cancel">
-            <Button shape={'round'} style={simpleMargin} type={"danger"} onClick={this.props.onCancel}><Icon type="rollback"/></Button>
+            <Button shape={'round'} style={buttonStyle} type={"danger"} onClick={this.props.onCancel}><Icon type="rollback"/></Button>
           </Tooltip>
         </Row>
       </div>

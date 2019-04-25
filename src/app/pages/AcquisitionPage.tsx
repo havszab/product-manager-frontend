@@ -1,15 +1,14 @@
 import * as React from "react"
 import {Row, Button, message} from 'antd'
 import {get, post} from "../libs/utils/request"
-import i18n from "../libs/i18n"
 import ProductTable from "../components/tables/ProductTable";
 import CreateProductCategory from "../components/forms/CreateProductCategory";
 import CreateUnitCategory from "../components/forms/CreateUnitCategory";
 import CreateProduct from "../components/forms/CreateProduct";
 import {user} from "../libs/utils/user";
-import NumberFormat from 'react-number-format'
 import PageTitle from "../components/utils/PageTitle";
 import Tooltip from "antd/lib/tooltip";
+import Icon from "antd/lib/icon";
 
 interface Props extends React.Props<any> {
 
@@ -60,6 +59,7 @@ type State = {
   totalPrice?: number
   isCreating: boolean
   isEditing: boolean
+  selectedProducts: Array<Product>
 }
 
 
@@ -74,18 +74,23 @@ export default class AcquisitionPage extends React.Component<Props, State> {
         products: Array<Product>;
       },
       isCreating: false,
-      isEditing: false
+      isEditing: false,
+      selectedProducts: Array<Product>()
     }
   }
 
   async componentDidMount(): Promise<void> {
-    this.fetchAcquisition()
-    this.fetchProductCategories()
-    this.fetchUnitCategories()
+    this.fetchAll()
+  }
+
+  fetchAll = async () => {
+    await this.fetchAcquisition()
+    await this.fetchProductCategories()
+    await this.fetchUnitCategories()
   }
 
   fetchAcquisition = async () => {
-    await post('get-acquisition', JSON.parse(localStorage.getItem('user')))
+    await get('get-acquisition', {email: user().email})
       .then((response: Response) => {
         this.setState({
           acquisition: response.acquisition
@@ -123,18 +128,46 @@ export default class AcquisitionPage extends React.Component<Props, State> {
   }
 
   finishAcquisitionHandler = async () => {
-    let req = {
-      email: user().email
+    if (this.state.selectedProducts.length <= 0) {
+      message.warning("Add items first!")
+      return
     }
-    await post('finish-acquisition', req)
+    await post('finish-acquisition', {email: user().email})
       .then(response => {
         message.success(response)
-        this.fetchAcquisition()
+        this.fetchAll()
       })
       .catch(err => {
         message.error(err)
       })
   }
+
+  finishAcquisitionWithSelectedItems = async () => {
+    if (this.state.selectedProducts.length <= 0) {
+      message.warning("Select items first!")
+      return
+    }
+    await post('finish-selected-items', {email: user().email, products: this.state.selectedProducts})
+      .then((response: { success: boolean, message: string }) => {
+        if (response.success) message.success(response.message)
+        else message.error(message)
+        this.fetchAll()
+      })
+  }
+
+  removeSelectedItemsFromAcquisition = async () => {
+    if (this.state.selectedProducts.length <= 0) {
+      message.warning("Select items first!")
+      return
+    }
+    await post('remove-selected-items', {email: user().email, products: this.state.selectedProducts})
+      .then((response: { success: boolean, message: string }) => {
+        if (response.success) message.success(response.message)
+        else message.error(message)
+        this.fetchAll()
+      })
+  }
+
 
   addItemHandler = () => {
     this.setState({
@@ -148,6 +181,12 @@ export default class AcquisitionPage extends React.Component<Props, State> {
     })
   }
 
+  addSelectedItems = (products: Array<Product>) => {
+    this.setState({
+      selectedProducts: products
+    })
+  }
+
   render() {
 
     const total = this.state.totalPrice !== undefined ? this.state.totalPrice.toLocaleString() : 0
@@ -158,20 +197,27 @@ export default class AcquisitionPage extends React.Component<Props, State> {
                      onSuccess={this.fetchAcquisition}
                      onCancel={this.addItemCancelHandler}/> :
       <Tooltip placement="topLeft" title="Add new item">
-      <Button shape={'round'} onClick={this.addItemHandler} type={'primary'} style={{height: 45, width: 45, fontSize: '1.3em'}} >+</Button>
+        <Button shape={'round'} onClick={this.addItemHandler} type={'primary'}
+                style={{fontSize: '1em', paddingRight: 8, paddingLeft: 8, margin: 5}}><Icon type="plus"/></Button>
       </Tooltip>
     return (
       <div>
         <PageTitle title={'Current acquisition'}/>
         {addItemForm}
-        <ProductTable data={this.state.acquisition.products}/>
+        <ProductTable data={this.state.acquisition.products} onSelect={this.addSelectedItems}/>
         <Row type="flex" justify="space-around">
           <CreateProductCategory onSuccess={this.fetchProductCategories}/>
           <CreateUnitCategory onSuccess={this.fetchUnitCategories}/>
           <div style={{margin: 5, border: '1px solid #ccc', borderRadius: 7, padding: '10px 15px'}}>
             <h2 style={{borderBottom: '1px solid #ccc'}}>Total: {total} HUF</h2>
-            <Button type={"primary"} style={{marginTop: 70, width: '100%'}} onClick={this.finishAcquisitionHandler}>Complete
-              acquisition</Button>
+            <Button type={"danger"} style={{marginTop: 5, width: '100%'}}
+                    onClick={this.removeSelectedItemsFromAcquisition}>Remove selected items</Button>
+            <Button type={"primary"} style={{marginTop: 5, width: '100%'}}
+                    onClick={this.finishAcquisitionWithSelectedItems}>Move <span
+              style={{fontWeight: 'bold', padding: '0px 3px', fontSize: '1.2em'}}>selected</span> to stock</Button>
+            <Button type={"primary"} style={{marginTop: 5, width: '100%'}}
+                    onClick={this.finishAcquisitionHandler}>Move <span
+              style={{fontWeight: 'bold', padding: '0px 3px', fontSize: '1.2em'}}>all</span> to stock</Button>
           </div>
         </Row>
       </div>)

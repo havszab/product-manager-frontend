@@ -4,19 +4,25 @@ import {Timeline, Icon} from "antd";
 import {get} from "../libs/utils/request";
 import {user} from "../libs/utils/user";
 import Row from "antd/lib/grid/row";
-import {Bar, Doughnut, Pie, Line} from "react-chartjs-2"
+import {Bar, Line} from "react-chartjs-2"
 import PageTitle from "../components/utils/PageTitle";
 import Button from "antd/lib/button";
+import RoundChart from "../components/charts/RoundChart";
 
 type props = {}
 
 type state = {
   actions?: Array<Action>
   profitOfCats?: ChartData
-  profitPercent?: ChartData
+  profitPercent?: Array<[number, string]>
   selectedMonth?: Date
   dateFrom: Date
   dateTo: Date
+  top5Annual: Array<[number, string]>
+  top5Monthly: Array<[number, string]>
+  top5Weekly: Array<[number, string]>
+  top5Other: Array<[number, string]>
+  isExtended: boolean
 }
 
 interface Action {
@@ -79,13 +85,15 @@ class DashboardPage extends Component<props, state> {
       datasets: [{ _meta?: {}; data: number[]; backgroundColor?: string[]; borderColor?: string; borderWidth?: number; hoverBackgroundColor?: string; hoverBorderColor?: string; label?: string }];
       labels: any[];
     },
-    profitPercent: new class implements ChartData {
-      datasets: [{ _meta?: {}; data: number[]; backgroundColor?: string[]; borderColor?: string; borderWidth?: number; hoverBackgroundColor?: string; hoverBorderColor?: string; label?: string }];
-      labels: any[];
-    },
+    profitPercent: Array<[number, string]>(),
     selectedMonth: new Date(),
     dateFrom: new Date(),
-    dateTo: new Date()
+    dateTo: new Date(),
+    top5Annual: Array<[number, string]>(),
+    top5Monthly: Array<[number, string]>(),
+    top5Weekly: Array<[number, string]>(),
+    top5Other: Array<[number, string]>(),
+    isExtended: false
   }
 
 
@@ -96,16 +104,31 @@ class DashboardPage extends Component<props, state> {
     this.setSelectedDateToRange()
     this.fetchRecentActions()
     this.fetchDasboardItems()
-    this.fetchDoughnutChart()
+    this.fetchDoughnutCharts()
   }
 
   fetchRecentActions = async () => {
-    await get(`get-recent-actions?email=${user().email}`)
+    await get('get-recent-5-actions', {email: user().email})
       .then((response: Response) => {
         this.setState({
           actions: response.actions,
+          isExtended: false
         })
       })
+  }
+
+  extendActionsHandler = async () => {
+    await get('get-recent-10-actions', {email: user().email})
+      .then((response: Response) => {
+        this.setState({
+          actions: response.actions,
+          isExtended: true
+        })
+      })
+  }
+
+  collapseActionsHandler = () => {
+    this.fetchRecentActions()
   }
 
   setSelectedDateToRange = () => {
@@ -152,38 +175,58 @@ class DashboardPage extends Component<props, state> {
     })
   }
 
-  fetchDoughnutChart = async () => {
-    let resp: ChartResponse;
-    await get('get-profit-percent')
-      .then((response: ChartResponse) => {
-        resp = response
-      })
-    console.log(resp)
-    if (resp.profitPercent != undefined) {
-      let result: ChartData = this.castResposeToDoughnutChartDataObject(resp)
-      this.setState({
-        profitPercent: result
-      })
-    }
+  fetchDoughnutCharts = async () => {
+    this.fetchProfitPercent()
+    this.fetchTop5AnnualCost()
+    this.fetchTop5MonthlyCost()
+    this.fetchTop5WeeklyCost()
+    this.fetchTop5OtherCost()
   }
 
-  castResposeToDoughnutChartDataObject = (rawData: ChartResponse): ChartData => {
-    let values = []
-    let labels = []
-    for (let data of rawData.profitPercent) {
-      values.push(Math.round(data[0] * 1e2) / 1e2)
-      labels.push(data[1])
-    }
-    let resultChartObject: ChartData = {
-      datasets: [
-        {
-          data: values,
-          backgroundColor: ["#FF6384", "#4BC0C0", "#FFCE56", "#E7E9ED", "#36A2EB"]
-        }
-      ],
-      labels: labels
-    }
-    return resultChartObject;
+  fetchProfitPercent = async () => {
+    await get('get-profit-percent')
+      .then((response: { profitPercent: Array<[number, string]> }) => {
+        console.log(response)
+        this.setState({
+          profitPercent: response.profitPercent
+        })
+      })
+  }
+
+  fetchTop5AnnualCost = async () => {
+    await get('get-top5-annual', {email: user().email})
+      .then((response: { costs: Array<[number, string]> }) => {
+        this.setState({
+          top5Annual: response.costs
+        })
+      })
+  }
+
+  fetchTop5WeeklyCost = async () => {
+    await get('get-top5-weekly', {email: user().email})
+      .then((response: { costs: Array<[number, string]> }) => {
+        this.setState({
+          top5Weekly: response.costs
+        })
+      })
+  }
+
+  fetchTop5MonthlyCost = async () => {
+    await get('get-top5-monthly', {email: user().email})
+      .then((response: { costs: Array<[number, string]> }) => {
+        this.setState({
+          top5Monthly: response.costs
+        })
+      })
+  }
+
+  fetchTop5OtherCost = async () => {
+    await get('get-top5-other', {email: user().email})
+      .then((response: { costs: Array<[number, string]> }) => {
+        this.setState({
+          top5Other: response.costs
+        })
+      })
   }
 
   renderTimeLineItems = (): React.ReactNode => {
@@ -208,6 +251,11 @@ class DashboardPage extends Component<props, state> {
   }
 
   render() {
+    const btnStyle = {fontSize: '1em', padding: '0px 8px', margin: 5}
+
+    const toggleActionsButton = !this.state.isExtended ?
+      <Button shape={'round'} type={'primary'} onClick={this.extendActionsHandler} style={btnStyle}><Icon type="down"/></Button> :
+      <Button shape={'round'} type={'primary'} onClick={this.collapseActionsHandler} style={btnStyle}><Icon type="up"/></Button>
 
     const chartOptions: Options = {
       legend: {
@@ -227,57 +275,113 @@ class DashboardPage extends Component<props, state> {
       }
     }
 
-    const doughnutOptions: Options = {
-      legend: {
-        display: true,
-        position: 'bottom'
-      },
-      title: {
-        display: true,
-        text: 'Top 5 product\'s profit portion'
-      }
+    const monthlyCharts = {
+      width: 500,
+      height: 300,
+      border: '1px solid #ccc',
+      borderRadius: 7,
+      paddingBottom: 0,
+      margin: 30,
+      backgroundColor: '#F2F2FF'
     }
-
-    const monthlyCharts = {width: 500, height: 300, border: '1px solid #ccc', borderRadius: 7, paddingBottom: 0, margin: 30, backgroundColor: '#F2F2FF'}
 
     const currentDate = new Date()
 
+    const widgetStyle = {
+      border: '1px solid #ccc',
+      borderRadius: 7,
+      paddingBottom: 0,
+      margin: 5,
+      maxHeight: 350,
+      backgroundColor: '#F2F2FF'
+    }
+
+    const costChartHeight = 300
+    const costChartWidth = 270
+
+
     return <div>
       <PageTitle title={'Dashboard'}/>
-
       <Row type={"flex"} justify={"space-around"} style={{marginBottom: 30}}>
-        <div style={{border: '1px solid #ccc', borderRadius: 7, padding: '30px 15px 0px 15px', maxWidth: '40%', backgroundColor: '#F2F2FF'}}>
+        <div style={{
+          border: '1px solid #ccc',
+          borderRadius: 7,
+          padding: '30px 15px 0px 15px',
+          maxWidth: '40%',
+          backgroundColor: '#F2F2FF'
+        }}>
           <Row type={"flex"} justify={"space-around"}>
             <h2 style={{borderBottom: '1px solid #ccc', width: '100%', marginBottom: 30}}>Recent actions</h2>
           </Row>
           <Timeline>
             {this.renderTimeLineItems()}
           </Timeline>
+          <Row type={"flex"} justify={"space-around"}>
+            {toggleActionsButton}
+          </Row>
         </div>
-        <div style={{border: '1px solid #ccc', borderRadius: 7, paddingBottom: 0, margin: 5, maxHeight: 380, backgroundColor: '#F2F2FF'}}>
-          <Doughnut data={this.state.profitPercent} height={355} width={290} options={doughnutOptions}/>
+        <div style={{
+          border: '1px solid #ccc',
+          borderRadius: 7,
+          paddingBottom: 0,
+          margin: 5,
+          maxHeight: 380,
+          backgroundColor: '#F2F2FF'
+        }}>
+          <RoundChart data={this.state.profitPercent}
+                      height={355}
+                      width={290}
+                      title={'Top 5 product\'s profit portion'}
+                      type={'DOUGHNUT'}
+          />
         </div>
-        <div style={{border: '1px solid #ccc', borderRadius: 7, paddingBottom: 0, margin: 5, maxHeight: 380, backgroundColor: '#F2F2FF'}}>
-          <Pie data={this.state.profitPercent} height={355} width={290} options={doughnutOptions}/>
+        <div style={{
+          border: '1px solid #ccc',
+          borderRadius: 7,
+          paddingBottom: 0,
+          margin: 5,
+          maxHeight: 380,
+          backgroundColor: '#F2F2FF'
+        }}>
+          <RoundChart data={this.state.profitPercent}
+                      height={355}
+                      width={290}
+                      title={"another chart"}
+                      type={'DOUGHNUT'}
+          />
         </div>
       </Row>
 
-        <Row type={"flex"} justify={"space-between"} style={{maxWidth: 200, marginBottom: 30}}>
-          <Button onClick={() => this.handleMonthChange(-1)}><Icon type="left"/></Button>
-          <div style={{
-            height: 32,
-            padding: '5px 10px 0px 10px',
-            border: '1px solid #ccc',
-            borderRadius: 4,
-            textAlign: 'center',
-            backgroundColor: '#fff'
-          }}>
-            {`${this.state.selectedMonth.getFullYear()}. ${this.state.selectedMonth.getMonth() + 1 < 9 ? '0' : ''}${this.state.selectedMonth.getMonth() + 1}`}
-          </div>
-          <Button onClick={() => this.handleMonthChange(1)} disabled={this.state.selectedMonth >= currentDate}><Icon
-            type="right"/></Button>
-          <div>{this.state.dateFrom.toLocaleDateString()} - {this.state.dateTo.toLocaleDateString()}</div>
-        </Row>
+      <Row type={"flex"} justify={"space-around"}>
+        <div style={widgetStyle}><RoundChart data={this.state.top5Annual} height={costChartHeight}
+                                             width={costChartWidth} type={'PIE'} title={'The 5 highest annual costs'}/>
+        </div>
+        <div style={widgetStyle}><RoundChart data={this.state.top5Monthly} height={costChartHeight}
+                                             width={costChartWidth} type={'PIE'} title={'The 5 highest monthly costs'}/>
+        </div>
+        <div style={widgetStyle}><RoundChart data={this.state.top5Weekly} height={costChartHeight}
+                                             width={costChartWidth} type={'PIE'} title={'The 5 highest weekly costs'}/>
+        </div>
+        <div style={widgetStyle}><RoundChart data={this.state.top5Other} height={costChartHeight} width={costChartWidth}
+                                             type={'PIE'} title={'The 5 highest other costs'}/></div>
+      </Row>
+
+      <Row type={"flex"} justify={"space-between"} style={{maxWidth: 200, marginBottom: 30}}>
+        <Button onClick={() => this.handleMonthChange(-1)}><Icon type="left"/></Button>
+        <div style={{
+          height: 32,
+          padding: '5px 10px 0px 10px',
+          border: '1px solid #ccc',
+          borderRadius: 4,
+          textAlign: 'center',
+          backgroundColor: '#fff'
+        }}>
+          {`${this.state.selectedMonth.getFullYear()}. ${this.state.selectedMonth.getMonth() + 1 < 9 ? '0' : ''}${this.state.selectedMonth.getMonth() + 1}`}
+        </div>
+        <Button onClick={() => this.handleMonthChange(1)} disabled={this.state.selectedMonth >= currentDate}><Icon
+          type="right"/></Button>
+        <div>{this.state.dateFrom.toLocaleDateString()} - {this.state.dateTo.toLocaleDateString()}</div>
+      </Row>
 
       <Row type={"flex"} justify={"space-around"}>
         <div style={monthlyCharts}>

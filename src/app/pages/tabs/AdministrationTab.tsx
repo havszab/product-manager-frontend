@@ -83,8 +83,8 @@ class AdministrationTab extends React.Component<props, state> {
     return (
       <div>
         <Row type={"flex"} justify={'space-around'}>
-          <ListCategories title={'Manage product categories'} categories={this.state.productCategories} />
-          <ListCategories title={'Manage unit categories'} categories={this.state.unitCategories} />
+          <ListCategories title={'Manage product categories'} categories={this.state.productCategories} categoryInstance={'PRODUCT'}/>
+          <ListCategories title={'Manage unit categories'} categories={this.state.unitCategories} categoryInstance={'UNIT'}/>
         </Row>
       </div>
     )

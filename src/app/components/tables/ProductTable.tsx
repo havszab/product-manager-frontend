@@ -8,6 +8,7 @@ interface ProductTableProps extends React.Props<any> {
   data: Array<Product>
   stockOperations?: boolean
   onSell?: (product:Product) => void
+  onSelect?: (products: Array<Product>) => void
 }
 
 type state = {
@@ -24,7 +25,7 @@ interface FilterItem {
 
 interface Response {
   statuses: Array<string>
-  productCategories: Array<ProductCategory>
+  productCategories: Array<ProductCategory>,
 }
 
 interface Product {
@@ -57,7 +58,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
       statuses: Array<string>(),
       productCategories: Array<ProductCategory>(),
       statusFilter: Array<FilterItem>(),
-      categoryFilter: Array<FilterItem>()
+      categoryFilter: Array<FilterItem>(),
     }
   }
 
@@ -76,7 +77,8 @@ class ProductTable extends React.Component<ProductTableProps, state> {
       for (let status of this.state.statuses) {
         statuses.push({
           label: status,
-          value: JSON.stringify({status: status, id: id})
+          value: JSON.stringify({status: status, id: id}),
+          disabled: status === 'IN_STOCK' && !this.props.stockOperations
         })
       }
     }
@@ -107,7 +109,6 @@ class ProductTable extends React.Component<ProductTableProps, state> {
     let filters: FilterItem[] = []
     if (this.state.productCategories) {
       for (let category of this.state.productCategories) {
-        console.log(this.state.productCategories)
         filters.push({
           text: category.productName,
           value: category.productName
@@ -155,6 +156,14 @@ class ProductTable extends React.Component<ProductTableProps, state> {
       )
     }:{}
 
+    const rowSelection = !this.props.stockOperations?  {
+      onChange: (selectedRowKeys: any, selectedRows: Array<Product>) => {
+        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
+        this.props.onSelect(selectedRows)
+      }
+    }: null
+
+
     const catFilters = this.state.categoryFilter
     const statusFilters = this.state.statusFilter
 
@@ -189,7 +198,9 @@ class ProductTable extends React.Component<ProductTableProps, state> {
                           defaultValue={[product.status]}
                           allowClear={false}
                           onChange={this.handleUnitCascaderChange}
-                          style={{width: 100}}/>
+                          style={{width: 100}}
+                          placeholder={'status'}
+         />
         }),
         filter: statusFilters,
         onFilter: (value: string, record: Product) => record.status.indexOf(value) === 0,
@@ -207,7 +218,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
 
     return (
       <div style={{marginTop: 10}}>
-        <Table rowKey={record => {return record.id.toString()}} dataSource={this.props.data} columns={columns} />
+        <Table rowSelection={rowSelection} rowKey={record => {return record.id.toString()}} dataSource={this.props.data} columns={columns} />
       </div>)
   }
 }

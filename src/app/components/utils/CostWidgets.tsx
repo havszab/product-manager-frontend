@@ -27,7 +27,7 @@ class CostWidgets extends React.Component<props, state> {
     for (let stat of sums) {
       if (stat[1] === 'ANNUAL') {
         stats.push(
-            <Card style={style}>
+            <Card style={style} key={1}>
               <Statistic
                 title={'Annual costs / year:'}
                 value={stat[0]}
@@ -39,7 +39,7 @@ class CostWidgets extends React.Component<props, state> {
         sum += stat[0]
       } else if (stat[1] === 'MONTHLY') {
         stats.push(
-            <Card style={style}>
+            <Card style={style} key={2}>
               <Statistic
                 title={'Monthly costs / year:'}
                 value={stat[0] * 12}
@@ -51,7 +51,7 @@ class CostWidgets extends React.Component<props, state> {
         sum += stat[0] * 12
       } else if (stat[1] === 'WEEKLY') {
         stats.push(
-            <Card style={style}>
+            <Card style={style} key={3}>
               <Statistic
                 title={'Weekly costs / year:'}
                 value={stat[0] * 52}
@@ -63,7 +63,7 @@ class CostWidgets extends React.Component<props, state> {
         sum += stat[0] * 52
       } else if (stat[1] === 'OTHER') {
         other =
-          <Card style={style}>
+          <Card style={style} key={4}>
             <Statistic
               title={'Other costs'}
               value={stat[0]}
@@ -74,7 +74,7 @@ class CostWidgets extends React.Component<props, state> {
       }
     }
     stats.push(
-        <Card style={style}>
+        <Card style={style} key={5}>
           <Statistic
             title={'Registered costs / year:'}
             value={sum}
