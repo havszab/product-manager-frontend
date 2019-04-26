@@ -128,7 +128,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
   }
 
   finishAcquisitionHandler = async () => {
-    if (this.state.selectedProducts.length <= 0) {
+    if (this.state.acquisition.products.length <= 0) {
       message.warning("Add items first!")
       return
     }

@@ -164,14 +164,14 @@ class ProductTable extends React.Component<ProductTableProps, state> {
     }: null
 
 
-    const catFilters = this.state.categoryFilter
+    const filters = this.state.categoryFilter
     const statusFilters = this.state.statusFilter
 
     const columns = [
       {
         title: i18n('product.tableData.product'),
         dataIndex: 'productCategory.productName',
-        filter: catFilters,
+        filters: filters,
         onFilter: (value: string, record: Product) => record.productCategory.productName.indexOf(value) === 0,
       },
       {
@@ -199,10 +199,9 @@ class ProductTable extends React.Component<ProductTableProps, state> {
                           allowClear={false}
                           onChange={this.handleUnitCascaderChange}
                           style={{width: 100}}
-                          placeholder={'status'}
          />
         }),
-        filter: statusFilters,
+        filters: statusFilters,
         onFilter: (value: string, record: Product) => record.status.indexOf(value) === 0,
       },
       {

@@ -16,8 +16,15 @@ class PageTitle extends React.Component<props, state> {
 
   render() {
     return <div>
-      <Row type="flex" justify="space-around" style={{ borderBottom: '1px #ccc solid', fontSize: '1.5em', marginBottom: 15 }}>
-        <h2>{this.props.title}</h2>
+      <Row type="flex" justify="space-around" style={{borderBottom: '1px #ccc solid', marginBottom: 15}}>
+        <h1 style={{
+          fontFamily: 'Arial Black',
+          color: '#1890ff',
+          fontSize: '3em',
+          textShadow: '-1px 0 black, 0 1px black'
+        }}>
+          {this.props.title.toUpperCase()}
+        </h1>
       </Row>
     </div>
   }

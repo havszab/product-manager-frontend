@@ -21,7 +21,10 @@ class CreateProductCategory extends React.Component<CreateProductCategoryProps, 
   handleSubmit = (e: any): void => {
     e.preventDefault()
     this.props.form.validateFields(async (err, values) => {
-      console.log(values)
+      if (!values.name) {
+        message.warning("Add type first!")
+        return
+      }
       await post('add-product-category', values)
         .then(response => {
           message.success(response)

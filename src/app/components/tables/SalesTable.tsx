@@ -68,7 +68,6 @@ class SalesTable extends React.Component<props, state> {
     let filters: FilterItem[] = []
     if (this.state.productCategories) {
       for (let category of this.state.productCategories) {
-        console.log(this.state.productCategories)
         filters.push({
           text: category.productName,
           value: category.productName

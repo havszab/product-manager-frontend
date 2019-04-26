@@ -19,8 +19,11 @@ class CreateUnitCategory extends React.Component<CreateUnitCategoryProps, {}> {
 
   handleSubmit = (e: any): void => {
     e.preventDefault()
-    this.props.form.validateFields(async (err, values) => {
-      console.log(values)
+    this.props.form.validateFields(async (err, values: {name: string}) => {
+      if (!values.name) {
+        message.warning("Add type first!")
+        return
+      }
       await post('add-unit-category', values)
         .then(response => {
           message.success(response)
