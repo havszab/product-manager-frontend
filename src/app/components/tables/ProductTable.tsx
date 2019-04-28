@@ -8,7 +8,7 @@ import Icon from "antd/lib/icon";
 interface ProductTableProps extends React.Props<any> {
   data: Array<Product>
   stockOperations?: boolean
-  onSell?: (product:Product) => void
+  onSell?: (product: Product) => void
   onSelect?: (products: Array<Product>) => void
 }
 
@@ -72,7 +72,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
     })
   }
 
-  populateStatuses = (id:number) : CascaderOptionType[] => {
+  populateStatuses = (id: number): CascaderOptionType[] => {
     let statuses: CascaderOptionType[] = []
     if (this.state.statuses.length !== 0) {
       for (let status of this.state.statuses) {
@@ -88,11 +88,18 @@ class ProductTable extends React.Component<ProductTableProps, state> {
 
   fetchStatuses = async () => {
     await get('get-all-status')
-      .then((response: Response) => {
-        this.setState({
-          statuses: response.statuses,
-          statusFilter: this.getStatusFilters()
-        })
+      .then((response: { success: boolean, statuses: Array<string> }) => {
+        if (response.success) {
+          this.setState({
+            statuses: response.statuses,
+            statusFilter: this.getStatusFilters()
+          })
+        } else {
+          message.error('Could not load product statuses!')
+        }
+      })
+      .catch(err => {
+        message.error('Could not load product statuses! Reason: ' + err)
       })
   }
 
@@ -152,24 +159,24 @@ class ProductTable extends React.Component<ProductTableProps, state> {
       render: (text: string, product: Product) => (
         this.props.data.length >= 1
           ? (
-              <a onClick={() => this.props.onSell(product)}>Sell</a>
-          ):{}
+            <a onClick={() => this.props.onSell(product)}>Sell</a>
+          ) : {}
       )
-    }:{
+    } : {
       title: 'Edit',
       render: (text: string, product: Product) => (
-      this.props.data.length >= 1 ? (
-        <a><Icon type={'edit'}/></a>
-      ) : {}
+        this.props.data.length >= 1 ? (
+          <a><Icon type={'edit'}/></a>
+        ) : {}
       )
     }
 
-    const rowSelection = !this.props.stockOperations?  {
+    const rowSelection = !this.props.stockOperations ? {
       onChange: (selectedRowKeys: any, selectedRows: Array<Product>) => {
         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
         this.props.onSelect(selectedRows)
       }
-    }: null
+    } : null
 
 
     const filters = this.state.categoryFilter
@@ -201,13 +208,13 @@ class ProductTable extends React.Component<ProductTableProps, state> {
       {
         title: i18n('product.tableData.status'),
         dataIndex: 'status',
-        render: ((value: string, product: Product):React.ReactNode => {
-         return <Cascader options={this.populateStatuses(product.id)}
-                          defaultValue={[product.status]}
-                          allowClear={false}
-                          onChange={this.handleUnitCascaderChange}
-                          style={{width: 100}}
-         />
+        render: ((value: string, product: Product): React.ReactNode => {
+          return <Cascader options={this.populateStatuses(product.id)}
+                           defaultValue={[product.status]}
+                           allowClear={false}
+                           onChange={this.handleUnitCascaderChange}
+                           style={{width: 100}}
+          />
         }),
         filters: statusFilters,
         onFilter: (value: string, record: Product) => record.status.indexOf(value) === 0,
@@ -225,7 +232,9 @@ class ProductTable extends React.Component<ProductTableProps, state> {
 
     return (
       <div style={{marginTop: 10}}>
-        <Table rowSelection={rowSelection} rowKey={record => {return record.id.toString()}} dataSource={this.props.data} columns={columns} />
+        <Table rowSelection={rowSelection} rowKey={record => {
+          return record.id.toString()
+        }} dataSource={this.props.data} columns={columns}/>
       </div>)
   }
 }
