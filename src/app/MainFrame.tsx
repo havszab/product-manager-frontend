@@ -125,10 +125,9 @@ export default class MainFrame extends React.Component<MainFrameProps, { redirec
                 </Sider>
                 <Layout style={{padding: '0 24px 24px', marginLeft: marginLeft, transition: '0.5s'}}>
                     <Row type="flex" justify="space-between" style={{margin: 20}}>
-                        <Button type="primary" shape={'circle'} onClick={this.toggleCollapsed} style={{marginTop: 16, marginBottom: 5, position: 'fixed', zIndex: 100}}>
+                        <Button type="primary" shape={'circle'} onClick={this.toggleCollapsed} style={{marginTop: 16, marginBottom: 5, zIndex: 100}}>
                             <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}/>
                         </Button>
-                        <div style={{width: '20%'}}/>
                         {userEmail}
                         <LanguageSelector/>
                     </Row>

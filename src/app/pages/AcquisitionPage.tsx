@@ -91,10 +91,17 @@ export default class AcquisitionPage extends React.Component<Props, State> {
 
   fetchAcquisition = async () => {
     await get('get-acquisition', {email: user().email})
-      .then((response: Response) => {
-        this.setState({
-          acquisition: response.acquisition
-        })
+      .then((response: { success: boolean, acquisition: Acquisition }) => {
+        if (response.success) {
+          this.setState({
+            acquisition: response.acquisition
+          })
+        } else {
+            message.error('Could not receive data from server!')
+        }
+      })
+      .catch(err => {
+        message.error('Could not load data. Message: ' + err)
       })
     this.getTotalPrice()
   }
@@ -215,7 +222,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
             <Button type={"primary"} style={{marginTop: 5, width: '100%'}}
                     onClick={this.finishAcquisitionWithSelectedItems}>Move <span
               style={{fontWeight: 'bold', padding: '0px 3px', fontSize: '1.2em'}}>selected</span> to stock</Button>
-            <Button type={"primary"} style={{marginTop: 5, width: '100%'}}
+            <Button style={{marginTop: 5, width: '100%'}}
                     onClick={this.finishAcquisitionHandler}>Move <span
               style={{fontWeight: 'bold', padding: '0px 3px', fontSize: '1.2em'}}>all</span> to stock</Button>
           </div>

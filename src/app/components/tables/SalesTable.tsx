@@ -74,7 +74,6 @@ class SalesTable extends React.Component<props, state> {
         })
       }
     }
-    console.log(filters)
     return filters
   }
 

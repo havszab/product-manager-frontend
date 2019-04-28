@@ -3,6 +3,7 @@ import i18n from "../../libs/i18n";
 import {message, Table} from "antd";
 import {get, post} from "../../libs/utils/request";
 import Cascader, {CascaderOptionType} from "antd/es/cascader";
+import Icon from "antd/lib/icon";
 
 interface ProductTableProps extends React.Props<any> {
   data: Array<Product>
@@ -154,7 +155,14 @@ class ProductTable extends React.Component<ProductTableProps, state> {
               <a onClick={() => this.props.onSell(product)}>Sell</a>
           ):{}
       )
-    }:{}
+    }:{
+      title: 'Edit',
+      render: (text: string, product: Product) => (
+      this.props.data.length >= 1 ? (
+        <a><Icon type={'edit'}/></a>
+      ) : {}
+      )
+    }
 
     const rowSelection = !this.props.stockOperations?  {
       onChange: (selectedRowKeys: any, selectedRows: Array<Product>) => {

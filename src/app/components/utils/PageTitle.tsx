@@ -20,7 +20,7 @@ class PageTitle extends React.Component<props, state> {
         <h1 style={{
           fontFamily: 'Arial Black',
           color: '#1890ff',
-          fontSize: '3em',
+          fontSize: '2.5em',
           textShadow: '-1px 0 black, 0 1px black'
         }}>
           {this.props.title.toUpperCase()}
