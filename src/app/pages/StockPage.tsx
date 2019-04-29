@@ -116,7 +116,7 @@ class StockPage extends React.Component<StockPageProps, state> {
 
     return <div>
       <PageTitle title={'Products in stock'}/>
-      <ProductTable data={this.state.stock.products} stockOperations={true} onSell={this.handleSell}/>
+      <ProductTable data={this.state.stock.products} stockOperations={true} onSuccess={this.fetchStock} onSell={this.handleSell}/>
       {modalOnSell}
     </div>
   }

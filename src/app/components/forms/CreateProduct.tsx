@@ -6,6 +6,7 @@ import i18n from "../../libs/i18n";
 import {post} from "../../libs/utils/request";
 import {user} from "../../libs/utils/user";
 import Tooltip from "antd/lib/tooltip";
+import {element} from "prop-types";
 
 
 interface CreateProductProps extends React.Props<any> {
@@ -14,7 +15,30 @@ interface CreateProductProps extends React.Props<any> {
   unitCategories?: Array<Category>
   onSuccess?: () => void
   onCancel: () => void
+  itemToEdit?: Product
 }
+
+interface Product {
+  id: number
+  description?: string
+  itemPrice: number
+  unitPrice: number
+  quantity: number
+  status: string
+  productCategory: ProductCategory,
+  unitCategory: UnitCategory
+}
+
+interface ProductCategory {
+  id: number
+  productName: string
+}
+
+interface UnitCategory {
+  id: number
+  unitName: string
+}
+
 
 interface Option {
   label: string
@@ -34,6 +58,7 @@ interface SaveRequestBody {
   quantity: number
   unit: string
   description?: string
+  id?: number
 }
 
 interface State {
@@ -49,6 +74,13 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
   }
 
   async componentDidMount(): Promise<void> {
+    if (this.props.itemToEdit) {
+      this.props.form.setFieldsValue(this.props.itemToEdit)
+      this.setState({
+        selectedProd: this.props.itemToEdit.productCategory,
+        selectedUnit: this.props.itemToEdit.unitCategory
+      })
+    }
   }
 
   mapCategoriesToOptions = (categories: Array<Category>): Array<Option> => {
@@ -70,20 +102,38 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
     this.props.form.validateFields(async (err, values) => {
       let body: SaveRequestBody = values
       body.email = user().email
+      body.price = values.itemPrice
       body.name = this.state.selectedProd.productName
       body.unit = this.state.selectedUnit.unitName
-      await post('save', body)
-        .then(response => {
-          message.success(response)
-          this.props.onSuccess()
-          this.props.form.resetFields()
+      console.log(body)
+      if (!this.props.itemToEdit) {
+      await post('add-item', body)
+        .then((response: { success: boolean, message: string }) => {
+          if (response.success) {
+            message.success(response.message)
+            this.props.onSuccess()
+            this.props.form.resetFields()
+          } else message.error(response.message)
         })
         .catch(e => {
-          message.error(e)
+          message.error("Could not add item to acquisition! Reason: " + e)
         })
+      } else {
+        body.id = this.props.itemToEdit.id
+        await post('edit-item', body)
+          .then((response: { success: boolean, message: string }) => {
+            if (response.success) {
+              message.success(response.message)
+              this.props.onSuccess()
+              this.props.form.resetFields()
+            } else message.error(response.message)
+          })
+          .catch(e => {
+            message.error("Could not edit item! Reason: " + e)
+          })
+      }
     })
   }
-
 
   handleProdCascaderChange = (value: string[], selectedOptions: Option[]) => {
     const category: Category = JSON.parse(selectedOptions[0].value)
@@ -118,7 +168,10 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
       <div style={rowStyle}>
         <Row type="flex" justify="space-between">
           <div style={cascaderStyle}>
-            <Cascader options={prodCatOptions} showSearch={{filter}} onChange={this.handleProdCascaderChange}
+            <Cascader options={prodCatOptions}
+                      key={"casc1"}
+                      showSearch={{filter}}
+                      onChange={this.handleProdCascaderChange}
                       placeholder={'Select product'}/>
           </div>
           {addFormItem({
@@ -130,11 +183,13 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
             errorMessage: 'This field is required'
           })}
           <div style={cascaderStyle}>
-            <Cascader options={unitCatOptions} showSearch={{filter}} onChange={this.handleUnitCascaderChange}
+            <Cascader options={unitCatOptions}
+                      showSearch={{filter}}
+                      onChange={this.handleUnitCascaderChange}
                       placeholder={'Select unit'}/>
           </div>
           {addFormItem({
-            key: 'price',
+            key: 'itemPrice',
             required: true,
             getFieldDecorator,
             type: 'number',
@@ -146,7 +201,8 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
               type="save"/></Button>
           </Tooltip>
           <Tooltip placement="topLeft" title="Cancel">
-            <Button shape={'round'} style={buttonStyle} type={"danger"} onClick={this.props.onCancel}><Icon type="rollback"/></Button>
+            <Button shape={'round'} style={buttonStyle} type={"danger"} onClick={this.props.onCancel}><Icon
+              type="rollback"/></Button>
           </Tooltip>
         </Row>
       </div>

@@ -1,15 +1,16 @@
 import * as React from "react";
 import i18n from "../../libs/i18n";
-import {message, Table} from "antd";
+import {message, Table, Cascader, Icon} from "antd";
 import {get, post} from "../../libs/utils/request";
-import Cascader, {CascaderOptionType} from "antd/es/cascader";
-import Icon from "antd/lib/icon";
+import {CascaderOptionType} from "antd/es/cascader";
 
 interface ProductTableProps extends React.Props<any> {
   data: Array<Product>
   stockOperations?: boolean
   onSell?: (product: Product) => void
+  onEdit?: (product: Product) => void
   onSelect?: (products: Array<Product>) => void
+  onSuccess?: () => void
 }
 
 type state = {
@@ -17,6 +18,7 @@ type state = {
   productCategories?: Array<ProductCategory>
   statusFilter: Array<FilterItem>
   categoryFilter: Array<FilterItem>
+  statusEditId?: number
 }
 
 interface FilterItem {
@@ -60,6 +62,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
       productCategories: Array<ProductCategory>(),
       statusFilter: Array<FilterItem>(),
       categoryFilter: Array<FilterItem>(),
+      statusEditId: -1
     }
   }
 
@@ -94,9 +97,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
             statuses: response.statuses,
             statusFilter: this.getStatusFilters()
           })
-        } else {
-          message.error('Could not load product statuses!')
-        }
+        } else message.error('Could not load product statuses!')
       })
       .catch(err => {
         message.error('Could not load product statuses! Reason: ' + err)
@@ -139,15 +140,28 @@ class ProductTable extends React.Component<ProductTableProps, state> {
     return filters
   }
 
+  activateStatusEditor = (id: number) => {
+    this.setState({
+      statusEditId: id
+    })
+  }
+
   handleUnitCascaderChange = async (value: string[], selectedOptions: CascaderOptionType[]) => {
     const status = JSON.parse(selectedOptions[0].value)
+    console.log(status)
     await post('set-product-status', status)
-      .then(response => {
-        message.success(response)
+      .then((response: { success: boolean, message: string }) => {
+        if (response.success) {
+          message.success(response.message)
+        } else message.error(response.message)
       })
       .catch(err => {
-        message.error(err)
+        message.error('Status change failed! Reason: ' + err)
       })
+    this.setState({
+      statusEditId: -1
+    })
+    this.props.onSuccess()
   }
 
 
@@ -166,7 +180,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
       title: 'Edit',
       render: (text: string, product: Product) => (
         this.props.data.length >= 1 ? (
-          <a><Icon type={'edit'}/></a>
+          <a onClick={() => this.props.onEdit(product)}><Icon type={'edit'}/></a>
         ) : {}
       )
     }
@@ -209,12 +223,16 @@ class ProductTable extends React.Component<ProductTableProps, state> {
         title: i18n('product.tableData.status'),
         dataIndex: 'status',
         render: ((value: string, product: Product): React.ReactNode => {
-          return <Cascader options={this.populateStatuses(product.id)}
-                           defaultValue={[product.status]}
-                           allowClear={false}
-                           onChange={this.handleUnitCascaderChange}
-                           style={{width: 100}}
-          />
+          return this.state.statusEditId === product.id ?
+            <div onDoubleClick={() => this.activateStatusEditor(-1)}>
+            <Cascader options={this.populateStatuses(product.id)}
+                      defaultValue={[product.status]}
+                      allowClear={false}
+                      onChange={this.handleUnitCascaderChange}
+                      size={'small'}
+                      style={{width: 100}}
+
+            /></div> : <div onClick={() => this.activateStatusEditor(product.id)}>{product.status}</div>
         }),
         filters: statusFilters,
         onFilter: (value: string, record: Product) => record.status.indexOf(value) === 0,

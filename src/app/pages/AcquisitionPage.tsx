@@ -1,17 +1,16 @@
 import * as React from "react"
 import {Row, Button, message} from 'antd'
 import {get, post} from "../libs/utils/request"
-import ProductTable from "../components/tables/ProductTable";
-import CreateProductCategory from "../components/forms/CreateProductCategory";
-import CreateUnitCategory from "../components/forms/CreateUnitCategory";
-import CreateProduct from "../components/forms/CreateProduct";
-import {user} from "../libs/utils/user";
-import PageTitle from "../components/utils/PageTitle";
-import Tooltip from "antd/lib/tooltip";
-import Icon from "antd/lib/icon";
+import ProductTable from "../components/tables/ProductTable"
+import CreateProductCategory from "../components/forms/CreateProductCategory"
+import CreateUnitCategory from "../components/forms/CreateUnitCategory"
+import CreateProduct from "../components/forms/CreateProduct"
+import {user} from "../libs/utils/user"
+import PageTitle from "../components/utils/PageTitle"
+import Tooltip from "antd/lib/tooltip"
+import Icon from "antd/lib/icon"
 
 interface Props extends React.Props<any> {
-
 }
 
 interface Acquisition {
@@ -60,6 +59,7 @@ type State = {
   isCreating: boolean
   isEditing: boolean
   selectedProducts: Array<Product>
+  itemToEdit: Product
 }
 
 
@@ -75,7 +75,17 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       },
       isCreating: false,
       isEditing: false,
-      selectedProducts: Array<Product>()
+      selectedProducts: Array<Product>(),
+      itemToEdit: new class implements Product {
+        description: string;
+        id: number;
+        itemPrice: number;
+        productCategory: ProductCategory;
+        quantity: number;
+        status: string;
+        unitCategory: UnitCategory;
+        unitPrice: number;
+      }
     }
   }
 
@@ -94,10 +104,12 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       .then((response: { success: boolean, acquisition: Acquisition }) => {
         if (response.success) {
           this.setState({
-            acquisition: response.acquisition
+            acquisition: response.acquisition,
+            isEditing: false,
+            isCreating: false
           })
         } else {
-            message.error('Could not receive data from server!')
+          message.error('Could not receive data from server!')
         }
       })
       .catch(err => {
@@ -140,8 +152,9 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       return
     }
     await post('finish-acquisition', {email: user().email})
-      .then(response => {
-        message.success(response)
+      .then((response: { success: boolean, message: string }) => {
+        if (response.success) message.success(response.message)
+        else message.error(response.message)
         this.fetchAll()
       })
       .catch(err => {
@@ -160,6 +173,9 @@ export default class AcquisitionPage extends React.Component<Props, State> {
         else message.error(message)
         this.fetchAll()
       })
+      .catch(err => {
+        message.error(err)
+      })
   }
 
   removeSelectedItemsFromAcquisition = async () => {
@@ -173,18 +189,30 @@ export default class AcquisitionPage extends React.Component<Props, State> {
         else message.error(message)
         this.fetchAll()
       })
+      .catch(err => {
+        message.error(err)
+      })
   }
-
 
   addItemHandler = () => {
     this.setState({
-      isCreating: true
+      isCreating: true,
+      isEditing: false
+    })
+  }
+
+  onEditHandler = (item: Product) => {
+    this.setState({
+      isEditing: true,
+      itemToEdit: item,
+      isCreating: false
     })
   }
 
   addItemCancelHandler = () => {
     this.setState({
-      isCreating: false
+      isCreating: false,
+      isEditing: false
     })
   }
 
@@ -204,14 +232,26 @@ export default class AcquisitionPage extends React.Component<Props, State> {
                      onSuccess={this.fetchAcquisition}
                      onCancel={this.addItemCancelHandler}/> :
       <Tooltip placement="topLeft" title="Add new item">
-        <Button shape={'round'} onClick={this.addItemHandler} type={'primary'}
+        <Button shape={'round'}
+                onClick={this.addItemHandler}
+                type={'primary'}
+                disabled={this.state.isEditing}
                 style={{fontSize: '1em', paddingRight: 8, paddingLeft: 8, margin: 5}}><Icon type="plus"/></Button>
       </Tooltip>
+
+    const editItemForm = this.state.isEditing ?
+      <CreateProduct productCategories={this.state.productCategories}
+                     unitCategories={this.state.unitCategories}
+                     //onSuccess={this.fetchAcquisition}
+                     onCancel={this.addItemCancelHandler}
+                     itemToEdit={this.state.itemToEdit}
+      /> : null
     return (
       <div>
         <PageTitle title={'Current acquisition'}/>
         {addItemForm}
-        <ProductTable data={this.state.acquisition.products} onSelect={this.addSelectedItems}/>
+        {editItemForm}
+        <ProductTable data={this.state.acquisition.products} onSuccess={this.fetchAcquisition} onSelect={this.addSelectedItems} onEdit={this.onEditHandler}/>
         <Row type="flex" justify="space-around">
           <CreateProductCategory onSuccess={this.fetchProductCategories}/>
           <CreateUnitCategory onSuccess={this.fetchUnitCategories}/>

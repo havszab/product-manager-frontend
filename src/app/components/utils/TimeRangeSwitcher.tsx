@@ -34,6 +34,9 @@ class TimeRangeSwitcher extends React.Component<props, state> {
     let startDate = moment().month(prevState.selectedDate.getMonth()).startOf("month").toDate()
     let endDate = moment().month(prevState.selectedDate.getMonth()).endOf("month").toDate()
 
+    startDate.setFullYear(this.state.selectedDate.getFullYear())
+    endDate.setFullYear(this.state.selectedDate.getFullYear())
+
     await this.setState({
       dateFrom: startDate,
       dateTo: endDate
@@ -45,6 +48,7 @@ class TimeRangeSwitcher extends React.Component<props, state> {
   handleMonthChange = (num: number) => {
     const prevState = {...this.state}
     let date: Date = prevState.selectedDate
+
     date.setMonth(this.state.selectedDate.getMonth() + num)
     this.setState({
       selectedDate: date
