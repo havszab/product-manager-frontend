@@ -1,12 +1,17 @@
 import React from "react";
-import {Card, Row, Avatar, Icon} from "antd";
+import {Card, Row, Avatar, Icon, Popconfirm} from "antd";
+import EmployeeForm from "../forms/EmployeeForm";
 
 type props = {
   employee: Employee
+  onSuccess: () => void
 }
-type state = {}
+type state = {
+  isEditing?: boolean
+}
 
 interface Employee {
+  id: number
   email: string
   firstName: string
   lastName: string
@@ -17,7 +22,16 @@ interface Employee {
 }
 
 class EmployeeCard extends React.Component<props, state> {
-  state = {}
+  state = {
+    isEditing: false
+  }
+
+  setIsEditing = (isEditing: boolean, isSuccess?: boolean) => {
+    this.setState({
+      isEditing: isEditing
+    })
+    if (isSuccess) this.props.onSuccess()
+  }
 
   render() {
 
@@ -25,8 +39,8 @@ class EmployeeCard extends React.Component<props, state> {
 
     const infoColumnStyle = {width: 180, margin: 10}
 
-    return <div>
-      <Card style={{width: 450, marginTop: 16}} actions={[<Icon type="edit"/>, <Icon type="close"/>]}>
+    const employeeCard = !this.state.isEditing ? (
+      <Card style={{width: 450, marginTop: 16}} actions={[<Icon type="edit" onClick={() => this.setIsEditing(true)}/>, <Popconfirm title={'Do you want to remove employee?'}><Icon type="delete"/></Popconfirm>]}>
         <Row type={"flex"} justify={"space-between"} style={{borderBottom: '1px solid #ccc'}}>
           <Avatar size={64} shape={'square'} icon="user"/>
           <div style={{width: 250, marginTop: 20, marginBottom: 20, fontSize: '1.4em', fontWeight: 'bold'}}>
@@ -42,6 +56,10 @@ class EmployeeCard extends React.Component<props, state> {
           <div style={infoColumnStyle}><Icon type="dollar"/> {employee.salary.toLocaleString()} HUF</div>
         </Row>
       </Card>
+    ) : <EmployeeForm employee={employee} onSuccess={() => this.setIsEditing(false, true)} onCancel={() => this.setIsEditing(false)}/>
+
+    return <div>
+      {employeeCard}
     </div>
   }
 }

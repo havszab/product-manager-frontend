@@ -1,8 +1,10 @@
 import React from "react";
 import {Avatar, Card, Icon, Row, Tooltip, Button} from "antd";
+import InvestmentForm from "../forms/InvestmentForm";
 
 type props = {
   investment: Investment
+  onSuccess?: () => void
 }
 
 
@@ -14,10 +16,21 @@ interface Investment {
   acquisitionDate: Date
 }
 
-type state = {}
+type state = {
+  isEditing: boolean
+}
 
 class InvestmentCard extends React.Component<props, state> {
-  state = {}
+  state = {
+    isEditing: false
+  }
+
+  setIsEditing = (isEditing: boolean, isSuccess?: boolean) => {
+    this.setState({
+      isEditing: isEditing
+    })
+    if (isSuccess) this.props.onSuccess()
+  }
 
   render() {
 
@@ -28,7 +41,7 @@ class InvestmentCard extends React.Component<props, state> {
     const iconPrefixStyle = {paddingRight: 4}
     const buttonStyle ={fontWeight: 'bold' as 'bold', padding: '0px 7px', margin: 3, fontSize: '1.2em'}
 
-    return <div>
+    const investmentCard = !this.state.isEditing ? (
       <Card style={{width: 500, minHeight: 550, marginTop: 16}}>
         <Row type={"flex"} justify={"space-between"} style={{borderBottom: '1px solid #ccc'}}>
           <Avatar size={64} shape={'square'} icon="car"/>
@@ -37,7 +50,7 @@ class InvestmentCard extends React.Component<props, state> {
           </div>
           <div>
             <Tooltip title={'Edit investment details'}>
-              <Button type={"primary"} shape={'round'} style={buttonStyle}><Icon type="edit"/></Button>
+              <Button type={"primary"} shape={'round'} style={buttonStyle} onClick={() => this.setIsEditing(true)}><Icon type="edit"/></Button>
             </Tooltip>
             <Tooltip title={'Sell investment'}>
               <Button type={"primary"} shape={'round'} style={buttonStyle}><Icon type="dollar"/></Button>
@@ -64,6 +77,11 @@ class InvestmentCard extends React.Component<props, state> {
           </div>
         </Row>
       </Card>
+    ) : <InvestmentForm investment={investment} onSuccess={() => this.setIsEditing(false, true)} onCancel={() => this.setIsEditing(false)}/>
+
+
+    return <div>
+      {investmentCard}
     </div>
 
   }

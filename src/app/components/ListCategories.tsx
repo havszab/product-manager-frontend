@@ -94,7 +94,7 @@ class ListCategories extends React.Component<props, state> {
           item.id != this.state.editingId ? <List.Item key={item.title} actions={[
             <div onClick={() => this.editCategoryHandler(item.id, item.title)}><Icon type={'edit'} /></div>,
               <Popconfirm title="Category will be deleted!" onConfirm={() => this.deleteConfirmHandler(item.id)} onCancel={() => this.deleteCancelHandler} okText="Agree" cancelText="Cancel">
-                <div><Icon type={'close'} /></div>
+                <div><Icon type={'delete'} /></div>
               </Popconfirm>]}>
             <List.Item.Meta title={item.title}/>
           </List.Item> :

@@ -1,14 +1,17 @@
 import React from "react";
-import {Card, Icon, message, Row} from "antd";
+import {Card, Dropdown, Icon, message, Popconfirm, Menu, Row} from "antd";
 import {post} from "../../libs/utils/request";
 import {user} from "../../libs/utils/user";
 import {openNotification} from "../../libs/utils/notification";
+import CostForm from "../forms/CostForm";
 
 type props = {
   cost: Cost
   onSuccess: () => void
 }
-type state = {}
+type state = {
+  isEditing: boolean
+}
 
 interface Cost {
   id: number
@@ -22,7 +25,9 @@ const RED = '#f5222d'
 const GREEN = '#52c41a'
 
 class CostCard extends React.Component<props, state> {
-  state = {}
+  state = {
+    isEditing: false
+  }
 
   handleCostPaid = async (id: number) => {
     await post('mark-cost-as-paid', {id: id, email: user().email})
@@ -35,6 +40,14 @@ class CostCard extends React.Component<props, state> {
         message.error(err)
       })
   }
+
+  setIsEditing = (isEditing: boolean, isSuccess?: boolean) => {
+    this.setState({
+      isEditing: isEditing
+    })
+    if (isSuccess) this.props.onSuccess()
+  }
+
 
   getBorderColor = (): String => {
     if (this.props.cost.payedLastDate === null) return RED
@@ -58,9 +71,16 @@ class CostCard extends React.Component<props, state> {
     const cellStyle = {margin: 5, padding: 5, border: '1px solid #f5222d', borderRadius: 5, backgroundColor: "#E7E9ED"}
     const borderColor = this.getBorderColor()
 
-    return <div style={{border: `2px solid ${borderColor}`, margin: 10, opacity: borderColor === RED? 1:0.4}}>
+    const options = (
+      <Menu>
+        <Menu.Item key="1" onClick={() => this.setIsEditing(true)}><Icon type="edit" />Edit</Menu.Item>
+        <Menu.Item key="2"><Icon type="delete" />Delete</Menu.Item>
+      </Menu>
+    )
+
+    const costCard = !this.state.isEditing ? (
       <Card actions={[<div onClick={() => this.handleCostPaid(cost.id)}>
-        <Icon type="barcode"/> Mark as paid</div>, <div><Icon type="edit"/> Edit</div>]}
+        <Icon type="barcode"/> Mark as paid</div>, <div onClick={()=>this.setIsEditing(true)}><Dropdown overlay={options}><Icon type="ellipsis" /></Dropdown></div>,]}
             style={{
               border: '1px solid #f5222d',
               minWidth: 250,
@@ -96,7 +116,9 @@ class CostCard extends React.Component<props, state> {
             </div>
           </Row>
         </div>
-      </Card>
+      </Card> ) : <CostForm  cost={cost} onSuccess={() => this.setIsEditing(false, true)} onCancel={() => this.setIsEditing(false)}/>
+    return <div style={{margin: 10, opacity: borderColor === RED? 1:0.4}}>
+      {costCard}
     </div>
   }
 }

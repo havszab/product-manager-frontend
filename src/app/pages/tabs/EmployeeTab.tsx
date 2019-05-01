@@ -52,7 +52,7 @@ class EmployeeTab extends React.Component<props, state> {
   renderEmployees = (): React.ReactNode => {
     let employees = []
     for (let emp of this.state.employees) {
-      employees.push(<EmployeeCard employee={emp} key={emp.id}/>)
+      employees.push(<EmployeeCard onSuccess={() => this.isModalVisibleSwitchHandler(false, true)} employee={emp} key={emp.id}/>)
     }
     return employees
   }

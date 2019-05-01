@@ -11,10 +11,19 @@ type props = {
   form: WrappedFormUtils
   onSuccess: () => void
   onCancel: () => void
+  cost?: Cost
 }
 type state = {
   types: Array<string>
   selectedType: string
+}
+
+interface Cost {
+  id: number
+  name: string
+  cost: number
+  payedLastDate: Date
+  type: string
 }
 
 interface FormData {
@@ -35,6 +44,7 @@ class CostForm extends React.Component<props, state> {
 
   componentDidMount(): void {
     this.fetchCostTypes()
+    if (this.props.cost) this.props.form.setFieldsValue(this.props.cost)
   }
 
   fetchCostTypes = async () => {
@@ -74,6 +84,7 @@ class CostForm extends React.Component<props, state> {
       requestBody.email = user().email
       requestBody.type = this.state.selectedType
       console.log(requestBody)
+      if (!this.props.cost) {
       await post('add-cost', requestBody)
         .then((response: {success: boolean, message: string}) => {
           if (response.success) message.success(response.message)
@@ -83,6 +94,18 @@ class CostForm extends React.Component<props, state> {
         .catch(err => {
           message.error(err)
         })
+      } else {
+        requestBody.id = this.props.cost.id
+        await post('edit-cost', requestBody)
+          .then((response: {success: boolean, message: string}) => {
+            if (response.success) message.success(response.message)
+            else message.error(response.message)
+            this.props.onSuccess()
+          })
+          .catch(err => {
+            message.error(err)
+          })
+      }
     })
   }
 
@@ -94,7 +117,7 @@ class CostForm extends React.Component<props, state> {
     const cellStyle = {margin: 5, padding: 5, width: '100%', border: '1px solid #f5222d', borderRadius: 5, backgroundColor: "#E7E9ED"}
 
     return (
-      <div style={{maxWidth: 220}}>
+      <div style={{width: 250}}>
         <Form onSubmit={this.handleSubmit}>
           <Card actions={[<div><button type={"submit"} style={{border: 'none'}}><Tooltip title={'Save cost'}><Icon type="save"/></Tooltip></button></div>, <div onClick={this.props.onCancel}><Tooltip title={'Cancel creation'}><Icon type="rollback"/></Tooltip></div>]} style={{
             border: '1px solid #f5222d',
@@ -116,7 +139,7 @@ class CostForm extends React.Component<props, state> {
             </Row>
             <Row>
               <div style={cellStyle}><Icon type="retweet"/> Frequency
-                <Cascader options={options} onChange={this.handleCascaderChange}/>
+                <Cascader options={options} defaultValue={this.props.cost ? [this.props.cost.type] : ['']} onChange={this.handleCascaderChange}/>
               </div>
             </Row>
             <Row>

@@ -7,12 +7,25 @@ import {post} from "../../libs/utils/request";
 
 type props = {
   form: WrappedFormUtils
+  employee?: Employee
   onSuccess: () => void
   onCancel: () => void
 }
 type state = {}
 
 interface FormData {
+  email: string
+  id: number
+  firstName: string
+  lastName: string
+  phone: string
+  position: string
+  salary: number
+  ownerEmail: string
+}
+
+interface Employee {
+  id: number
   email: string
   firstName: string
   lastName: string
@@ -25,17 +38,30 @@ interface FormData {
 class EmployeeForm extends React.Component<props, state> {
   state = {}
 
+  componentDidMount(): void {
+    if (this.props.employee) this.props.form.setFieldsValue(this.props.employee)
+  }
+
   handleSubmit = (e: any): void => {
     e.preventDefault()
     this.props.form.validateFields(async (err, values) => {
       const requestBody: FormData = values
       requestBody.ownerEmail = user().email
       console.log(requestBody)
+      if (!this.props.employee) {
       await post('save-employee', requestBody)
         .then(response => {
           message.success(response)
           this.props.onSuccess()
         })
+      } else {
+        requestBody.id = this.props.employee.id
+        await post('edit-employee', requestBody)
+          .then(response => {
+            message.success(response)
+            this.props.onSuccess()
+          })
+      }
     })
   }
 
