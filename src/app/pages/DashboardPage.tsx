@@ -329,7 +329,7 @@ class DashboardPage extends Component<props, state> {
     const costChartWidth = 270
 
     const colorSet1 = ["#FF6384", "#4BC0C0", "#FFCE56", "#E7E9ED", "#36A2EB"]
-    const blueColorSet = ['#1ec0ff', '#a3daff', '#0080ff', '#03a6ff']
+    const blueColorSet = ['#1ec0ff', '#a3daff', '#0080ff', '#03a6ff', '#00dffc']
     const darkBlueColorSet = ['#005f6b', '#00dffc', '#008c9e', '#343838']
     const colorfulColorSet = ['#FFBC42', "#8F2D56", "#218380", "#D81159", "#36A2EB"]
 

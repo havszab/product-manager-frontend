@@ -5,6 +5,7 @@ import {ChangeEvent} from "react";
 import Button from "antd/lib/button";
 import {user} from "../../libs/utils/user";
 import {post} from "../../libs/utils/request";
+import {openNotification} from "../../libs/utils/notification";
 
 
 interface ItemSellProps extends React.Props <any> {
@@ -82,10 +83,11 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
       email: user().email
     }
     await post('sell-item', requestBody)
-      .then(res => {
-        message.success(`${requestBody.quantToSell} ${this.props.product.productCategory.productName} sold!`)
+      .then((res: {success: boolean, message: string  }) => {
+        if (res.success) openNotification("success", "Item sold!", res.message)
+        else message.error(res.message)
       }).catch(err => {
-        message.error('Error occurred while selling product')
+        message.error('Error occurred while selling product. Error description: ' + err)
       })
     this.props.onSubmit()
   }
@@ -156,10 +158,6 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
             <div style={headerCol}>Value</div>
             <div style={colStyle}>{this.props.product.unitPrice * this.state.quantToSell} HUF</div>
           </Row>
-          {/*<Row type={"flex"} justify={"space-between"}>
-            <div style={headerCol}>Profit per unit</div>
-            <div style={colStyle}>{this.state.profit / this.state.quantToSell} HUF</div>
-          </Row>*/}
           <Row type={"flex"} justify={"space-between"}>
             <div style={headerCol}>Income</div>
             <div style={colStyle}>{income.toLocaleString()} HUF</div>

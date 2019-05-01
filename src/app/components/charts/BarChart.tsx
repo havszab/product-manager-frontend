@@ -64,10 +64,12 @@ class BarChart extends React.Component<props, state> {
     let lineValues = []
     let labels = []
     let bgs = []
+    let bgHover = []
     for (let data of rawData) {
       values.push(Math.round(data[0] * 1e2) / 1e2)
       labels.push(new Date(data[1]).toLocaleDateString())
       bgs.push(data[0] < 0 ? 'rgb(255,34,45, 1)' : 'rgb(24,144,255, 0.4)')
+      bgHover.push(data[0] < 0 ? 'rgb(255,34,45, 1)' : 'rgb(24,144,255, 0.8)')
     }
     if (this.props.secondData) {
       for (let data of this.props.secondData) {
@@ -85,7 +87,8 @@ class BarChart extends React.Component<props, state> {
             label: 'Amount',
             backgroundColor: bgs,
             borderColor: 'rgb(24,144,255)',
-            borderWidth: 1
+            borderWidth: 1,
+            hoverBackgroundColor: 'rgb(24,144,255, 0.8)'
           },
           {
             data:lineValues,
@@ -103,7 +106,8 @@ class BarChart extends React.Component<props, state> {
             label: 'Amount',
             backgroundColor: bgs,
             borderColor: 'rgb(24,144,255)',
-            borderWidth: 1
+            borderWidth: 1,
+            hoverBackgroundColor: 'rgb(24,144,255, 0.8)'
           }
         ],
         labels: labels

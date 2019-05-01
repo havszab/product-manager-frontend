@@ -1,6 +1,6 @@
 import React from "react";
 import Form, {WrappedFormUtils} from "antd/lib/form/Form";
-import {Card, Input, Icon, message} from "antd";
+import {Card, Input, Icon, message, Tooltip} from "antd";
 import Row from "antd/lib/grid/row";
 import {get, post} from "../../libs/utils/request";
 import Cascader from "antd/es/cascader";
@@ -75,9 +75,13 @@ class CostForm extends React.Component<props, state> {
       requestBody.type = this.state.selectedType
       console.log(requestBody)
       await post('add-cost', requestBody)
-        .then(response => {
-          message.success(response)
+        .then((response: {success: boolean, message: string}) => {
+          if (response.success) message.success(response.message)
+          else message.error(response.message)
           this.props.onSuccess()
+        })
+        .catch(err => {
+          message.error(err)
         })
     })
   }
@@ -92,7 +96,7 @@ class CostForm extends React.Component<props, state> {
     return (
       <div style={{maxWidth: 220}}>
         <Form onSubmit={this.handleSubmit}>
-          <Card actions={[<div><button type={"submit"} style={{border: 'none'}}><Icon type="save"/></button></div>, <div onClick={this.props.onCancel}><Icon type="rollback"/></div>]} style={{
+          <Card actions={[<div><button type={"submit"} style={{border: 'none'}}><Tooltip title={'Save cost'}><Icon type="save"/></Tooltip></button></div>, <div onClick={this.props.onCancel}><Tooltip title={'Cancel creation'}><Icon type="rollback"/></Tooltip></div>]} style={{
             border: '1px solid #f5222d',
             minWidth: 180,
             minHeight: 220,
@@ -131,7 +135,7 @@ class CostForm extends React.Component<props, state> {
                 <div></div>
               </Row>
               <Row>
-                <div><Icon type="calendar"/></div>
+                <div><Icon type="calendar"/>{new Date().toLocaleDateString()}</div>
               </Row>
             </div>
           </Card>

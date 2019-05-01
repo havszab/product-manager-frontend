@@ -1,6 +1,7 @@
 import React from "react";
 import Row from "antd/lib/grid/row";
 import {Card, Statistic} from "antd";
+import Icon from "antd/lib/icon";
 
 type props = {
   sums: Array<[number, string]>
@@ -24,6 +25,12 @@ class CostWidgets extends React.Component<props, state> {
     let {sums} = this.props
     const style = {width: 220, height: 100, margin: 5}
     let other: React.ReactNode;
+    if (sums.length === 0) {
+      sums.push([0, 'ANNUAL'])
+      sums.push([0, 'MONTHLY'])
+      sums.push([0, 'WEEKLY'])
+      sums.push([0, 'OTHER'])
+    }
     for (let stat of sums) {
       if (stat[1] === 'ANNUAL') {
         stats.push(

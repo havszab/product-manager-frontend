@@ -142,13 +142,12 @@ class SalesTable extends React.Component<props, state> {
         sorter: (a: Product, b: Product) => {
           let date1 = new Date(a.sellingDate)
           let date2 = new Date(b.sellingDate)
-          return date1.getDate() - date2.getDate()
+          return date1.getTime() - date2.getTime()
         }
       }
     ]
 
     return <div>
-      <PageTitle title={'SALES HISTORY'}/>
       <Table rowKey={record => {return record.id.toString()}} dataSource={this.props.data} columns={columns} bordered={true}/>
     </div>
   }

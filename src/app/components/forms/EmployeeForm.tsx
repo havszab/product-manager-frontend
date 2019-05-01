@@ -1,6 +1,6 @@
 import React from "react";
 import Form, {WrappedFormUtils} from "antd/lib/form/Form";
-import {Card, Input, Avatar, Icon, message} from "antd";
+import {Card, Input, Avatar, Icon, message, Tooltip} from "antd";
 import Row from "antd/lib/grid/row";
 import {user} from "../../libs/utils/user";
 import {post} from "../../libs/utils/request";
@@ -46,7 +46,7 @@ class EmployeeForm extends React.Component<props, state> {
       <div>
         <Form onSubmit={this.handleSubmit}>
           <Card style={{width: 450, marginTop: 16}}
-                actions={[<button type={"submit"} style={{border: 'none'}}><Icon type="save"/></button>, <Icon onClick={this.props.onCancel} type="rollback"/>]}>
+                actions={[<button type={"submit"} style={{border: 'none'}}><Tooltip title={'Save employee'}><Icon type="save"/></Tooltip></button>, <Tooltip title={'Cancel creation'}><Icon onClick={this.props.onCancel} type="rollback"/></Tooltip>]}>
 
             <Row type={"flex"} justify={"space-between"}>
               <Avatar shape={'square'} size={64} icon="user"/>

@@ -2,6 +2,7 @@ import React from "react";
 import {Card, Icon, message, Row} from "antd";
 import {post} from "../../libs/utils/request";
 import {user} from "../../libs/utils/user";
+import {openNotification} from "../../libs/utils/notification";
 
 type props = {
   cost: Cost
@@ -25,12 +26,15 @@ class CostCard extends React.Component<props, state> {
 
   handleCostPaid = async (id: number) => {
     await post('mark-cost-as-paid', {id: id, email: user().email})
-      .then(response => {
-        message.success(response)
+      .then((response: {success: boolean, message: string}) => {
+        if (response.success) openNotification("success", "Cost paid!", response.message)
+        else message.error(response.message)
         this.props.onSuccess()
       })
+      .catch(err => {
+        message.error(err)
+      })
   }
-
 
   getBorderColor = (): String => {
     if (this.props.cost.payedLastDate === null) return RED

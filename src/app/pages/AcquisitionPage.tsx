@@ -9,6 +9,7 @@ import {user} from "../libs/utils/user"
 import PageTitle from "../components/utils/PageTitle"
 import Tooltip from "antd/lib/tooltip"
 import Icon from "antd/lib/icon"
+import {openNotification} from "../libs/utils/notification";
 
 interface Props extends React.Props<any> {
 }
@@ -153,7 +154,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
     }
     await post('finish-acquisition', {email: user().email})
       .then((response: { success: boolean, message: string }) => {
-        if (response.success) message.success(response.message)
+        if (response.success) openNotification('success', 'Items moved to stock!', response.message + ' You can find these items under the stock menu.')
         else message.error(response.message)
         this.fetchAll()
       })
@@ -169,7 +170,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
     }
     await post('finish-selected-items', {email: user().email, products: this.state.selectedProducts})
       .then((response: { success: boolean, message: string }) => {
-        if (response.success) message.success(response.message)
+        if (response.success) openNotification('success', 'Items moved to stock!', response.message+' You can find these items under the stock menu.')
         else message.error(message)
         this.fetchAll()
       })
@@ -236,7 +237,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
                 onClick={this.addItemHandler}
                 type={'primary'}
                 disabled={this.state.isEditing}
-                style={{fontSize: '1em', paddingRight: 8, paddingLeft: 8, margin: 5}}><Icon type="plus"/></Button>
+                style={{fontSize: '1em', paddingRight: 8, paddingLeft: 8, paddingTop: 2, margin: 5}}><Icon type="plus"/></Button>
       </Tooltip>
 
     const editItemForm = this.state.isEditing ?

@@ -68,12 +68,12 @@ class TimeRangeSwitcher extends React.Component<props, state> {
     }
 
     const wrapperRowStyle = {maxWidth: 250, marginBottom: 20, position: 'fixed' as 'fixed', border: '1px solid #ccc',
-      borderRadius: 4, backgroundColor: '#fff', padding: '10px 8px 5px 8px', top: '0.5%', left: '60%', cursor: 'pointer'}
+      borderRadius: 4, backgroundColor: '#fff', padding: '10px 8px 5px 8px', top: '0.5%', left: '60%', cursor: 'pointer', zIndex: 100}
 
     return (
       <div>
         <Draggable>
-        <Row type={"flex"} justify={"space-around"} style={wrapperRowStyle}>
+        <Row type={"flex"} justify={"space-around"} style={wrapperRowStyle} >
 
           <Button onClick={() => this.handleMonthChange(-1)}>
             <Icon type="left"/>
