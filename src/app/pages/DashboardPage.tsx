@@ -12,6 +12,7 @@ import Tabs from "antd/lib/tabs";
 import TimeRangeSwitcher from "../components/utils/TimeRangeSwitcher";
 import moment = require("moment");
 import BarChart from "../components/charts/BarChart";
+import AnnualDashboardTab from "./tabs/AnnualDashboardTab";
 
 const TabPane = Tabs.TabPane;
 
@@ -452,6 +453,10 @@ class DashboardPage extends Component<props, state> {
               <Bar data={this.state.profitOfCats} options={chartOptions} height={300} width={window.innerWidth * 0.8}/>
             </div>
           </Row>
+        </TabPane>
+
+        <TabPane tab={<div><Icon type="rise"/>Annual view</div>} key="3">
+          <AnnualDashboardTab/>
         </TabPane>
       </Tabs>
 

@@ -1,6 +1,5 @@
 import React from "react";
 import {Bar, Doughnut, Pie, Polar, Radar} from "react-chartjs-2";
-import {array} from "prop-types";
 
 type props = {
   data: Array<[number, string]>
@@ -8,7 +7,7 @@ type props = {
   height: number
   width: number
   type: string
-  colors: Array<string>
+  colors?: Array<string>
 }
 type state = {
   data: ChartData
@@ -48,9 +47,17 @@ interface Options {
   title?: {
     display?: boolean,
     text?: string
-  }
+  },
+  tooltipTemplate: {
+  },
+  scaleLabel: {}
 }
 
+const allColors = ["#FF6384", "#4BC0C0", "#FFCE56",
+  "#36A2EB", '#1ec0ff', '#a3daff', '#0080ff',
+  '#03a6ff', '#00dffc', '#005f6b', '#00dffc',
+  '#008c9e', '#343838', '#FFBC42', "#8F2D56",
+  "#218380", "#D81159", "#E7E9ED", "#36A2EB"]
 
 class Chart extends React.Component<props, state> {
   state = {
@@ -65,28 +72,18 @@ class Chart extends React.Component<props, state> {
     let labels = []
     for (let data of rawData) {
       values.push(Math.round(data[0] * 1e2) / 1e2)
-      labels.push(data[1][0] == '2' ? data[1].slice(0,10) : data[1])
+      labels.push(data[1][0] == '2' ? data[1].slice(0, 10) : data[1])
     }
     let resultChartObject: ChartData = {
       datasets: [
         {
           data: values,
-          backgroundColor: this.props.colors.length >= values.length ? this.props.colors : this.generateColors()
+          backgroundColor: this.props.colors ? this.props.colors : allColors
         }
       ],
       labels: labels
     }
     return resultChartObject;
-  }
-
-  generateColors = ():Array<string> => {
-    const colors = {...this.props.colors}
-
-    while (colors.length !> this.props.data.length) {
-      colors.concat(colors)
-    }
-
-    return colors
   }
 
   render() {
@@ -99,27 +96,29 @@ class Chart extends React.Component<props, state> {
       title: {
         display: true,
         text: this.props.title
-      }
+      },
+      scaleLabel: "<%=parseInt(value).toLocaleString()%>",
+      tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%=value.toLocaleString()%>"
     }
 
     let chart;
-    if(this.props.type === 'PIE') {
+    if (this.props.type === 'PIE') {
       chart = <Pie data={this.castResponseToDoughnutChartDataObject(this.props.data)}
-                options={options}
-                height={this.props.height}
-                width={this.props.width}
+                   options={options}
+                   height={this.props.height}
+                   width={this.props.width}
       />
     } else if (this.props.type === 'DOUGHNUT') {
       chart = <Doughnut data={this.castResponseToDoughnutChartDataObject(this.props.data)}
-                options={options}
-                height={this.props.height}
-                width={this.props.width}
-      />
-    } else if (this.props.type === 'POLAR') {
-      chart = <Polar data={this.castResponseToDoughnutChartDataObject(this.props.data)}
                         options={options}
                         height={this.props.height}
                         width={this.props.width}
+      />
+    } else if (this.props.type === 'POLAR') {
+      chart = <Polar data={this.castResponseToDoughnutChartDataObject(this.props.data)}
+                     options={options}
+                     height={this.props.height}
+                     width={this.props.width}
       />
     } else if (this.props.type === 'BAR') {
       chart = <Bar data={this.castResponseToDoughnutChartDataObject(this.props.data)}

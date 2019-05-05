@@ -61,13 +61,13 @@ class TimeRangeSwitcher extends React.Component<props, state> {
     const currentMonthWidgetStyle = {
       height: 32,
       padding: '5px 10px 0px 10px',
-      border: '1px solid #ccc',
+      border: '1px solid #1890ff',
       borderRadius: 4,
       textAlign: 'center' as 'center',
       backgroundColor: '#fff'
     }
 
-    const wrapperRowStyle = {maxWidth: 250, marginBottom: 20, position: 'fixed' as 'fixed', border: '1px solid #ccc',
+    const wrapperRowStyle = {maxWidth: 250, marginBottom: 20, position: 'fixed' as 'fixed', border: '1px solid #1890ff',
       borderRadius: 4, backgroundColor: '#fff', padding: '10px 8px 5px 8px', top: '0.5%', left: '60%', cursor: 'pointer', zIndex: 100}
 
     return (
@@ -75,7 +75,7 @@ class TimeRangeSwitcher extends React.Component<props, state> {
         <Draggable>
         <Row type={"flex"} justify={"space-around"} style={wrapperRowStyle} >
 
-          <Button onClick={() => this.handleMonthChange(-1)}>
+          <Button type={'primary'} onClick={() => this.handleMonthChange(-1)}>
             <Icon type="left"/>
           </Button>
 
@@ -83,7 +83,7 @@ class TimeRangeSwitcher extends React.Component<props, state> {
             {`${this.state.selectedDate.getFullYear()}. ${monthNames[this.state.selectedDate.getMonth()]}`}
           </div>
 
-          <Button onClick={() => this.handleMonthChange(1)}
+          <Button type={'primary'} onClick={() => this.handleMonthChange(1)}
                   disabled={this.state.selectedDate.getMonth() >= new Date().getMonth() && this.state.selectedDate.getFullYear() === new Date().getFullYear()}>
             <Icon type="right"/>
           </Button>
