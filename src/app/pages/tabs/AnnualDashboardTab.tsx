@@ -3,7 +3,6 @@ import {Button, Card, Col, Icon, message, Row, Statistic, Table, Tooltip} from "
 import {get} from "../../libs/utils/request";
 import {user} from "../../libs/utils/user";
 import Chart from "../../components/charts/Chart";
-import Draggable from "react-draggable";
 
 type props = {}
 type state = {
@@ -50,7 +49,7 @@ class AnnualDashboardTab extends React.Component<props, state> {
 
   isBtnDisabled = (): boolean => {
     const prevState = {...this.state}
-    return prevState.selectedYear === new Date().getFullYear()
+    return prevState.selectedYear >= new Date().getFullYear()
   }
 
   mapCostsToChartData = (): Array<[number, string]> => {
@@ -252,26 +251,42 @@ class AnnualDashboardTab extends React.Component<props, state> {
       }
     ]
 
-    const btnStyle = {fontSize: '1em', paddingRight: 6, paddingLeft: 6, paddingTop: 2, margin: 5}
-
-    const rightArrow = this.isBtnDisabled() ? <Icon type="right-circle"/> : <Icon type="right-circle" theme="twoTone"/>
+    const leftBtnStyle = {
+      fontSize: '3em',
+      margin: 5,
+      paddingBottom: 55,
+      position: 'fixed' as 'fixed',
+      color: '#1890ff',
+      left: '10%',
+      top: '50%'
+    }
+    const rightBtnStyle = {
+      fontSize: '3em',
+      margin: 5,
+      paddingBottom: 55,
+      position: 'fixed' as 'fixed',
+      color: !this.isBtnDisabled ? '#ccc' : '#1890ff',
+      right: '3%',
+      top: '50%'
+    }
 
     return (
       <div>
         <Row type={'flex'} justify={'space-around'}>
           <Row type={'flex'} justify={'space-around'}
-               style={{width: 200,
+               style={{
+                 width: 100,
                  border: '1px solid #1890ff',
                  borderRadius: 30,
                  padding: 5,
                  margin: 10,
-                 backgroundColor: 'rgb(24,144,255, 0.4)',
-                 zIndex: 150}}>
-            <Button shape={'round'} style={btnStyle} onClick={() => this.changeSelectedYear(-1)}><Icon
-              type="left-circle"
-              theme="twoTone"/></Button>
+                 backgroundColor: 'rgb(24,144,255, 0.4)'
+               }}>
+            <Button style={leftBtnStyle} size={'large'} onClick={() => this.changeSelectedYear(-1)}>
+              <Icon type="left"/>
+            </Button>
             <div style={{
-              padding: '6px 5px 2px 5px',
+              padding: '6px 10px 2px 10px',
               border: '1px solid #1890ff',
               borderRadius: 4,
               margin: 3,
@@ -279,8 +294,10 @@ class AnnualDashboardTab extends React.Component<props, state> {
               fontSize: '1.2em',
               backgroundColor: '#fff'
             }}>{this.state.selectedYear}</div>
-            <Button shape={'round'} style={btnStyle} onClick={() => this.changeSelectedYear(1)}
-                    disabled={this.isBtnDisabled()}>{rightArrow}</Button>
+            <Button style={rightBtnStyle} size={'large'} onClick={() => this.changeSelectedYear(1)}
+                    disabled={this.isBtnDisabled()}>
+              <Icon type={'right'}/>
+            </Button>
           </Row>
         </Row>
 
@@ -381,17 +398,24 @@ class AnnualDashboardTab extends React.Component<props, state> {
                align={'middle'}
                style={{border: '1px solid #1890ff', paddingBottom: 10, borderRadius: 4, margin: 10, width: '80%'}}>
 
-            <Col span={8}>
-              <Chart title={`Cost amounts payed in ${this.state.selectedYear}`} data={this.mapCostsToChartData()}
-                     height={200} width={200} type={'PIE'}/>
-            </Col>
-            <Col span={8}>
-              <Chart title={`Ratio of product costs in ${this.state.selectedYear}`} data={this.getProdCostGrossProfitData()}
+            <Col span={9} offset={2}>
+              <Chart title={`Ratio of product costs in ${this.state.selectedYear}`}
+                     data={this.getProdCostGrossProfitData()}
                      height={200} width={200} type={'DOUGHNUT'}/>
             </Col>
-            <Col span={8}>
-              <Chart title={`Ratio of accounting costs in ${this.state.selectedYear}`} data={this.getAccountingChartData()}
-                     height={200} width={200} type={'DOUGHNUT'} colors={['rgb(255,34,45, 1)', 'rgb(255,34,45, 0.6)', '#3f8600']}/>
+            <Col span={10} offset={1}>
+              <Chart title={`Ratio of accounting costs in ${this.state.selectedYear}`}
+                     data={this.getAccountingChartData()}
+                     height={200} width={200} type={'DOUGHNUT'}
+                     colors={['rgb(255,34,45, 1)', 'rgb(255,34,45, 0.6)', '#3f8600']}/>
+            </Col>
+          </Row>
+          <Row gutter={16}
+               align={'middle'}
+               style={{border: '1px solid #1890ff', paddingBottom: 10, borderRadius: 4, margin: 10, width: '80%'}}>
+            <Col span={10} offset={1}>
+              <Chart title={`Cost amounts payed in ${this.state.selectedYear}`} data={this.mapCostsToChartData()}
+                     height={200} width={200} type={'PIE'}/>
             </Col>
           </Row>
         </Row>

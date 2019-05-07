@@ -2,8 +2,8 @@ import React from "react";
 import {Bar} from "react-chartjs-2";
 
 type props = {
-  data: Array<[number, Date]>
-  secondData?: Array<[number, Date]>
+  data: Array<[number, string]>
+  secondData?: Array<[number, string]>
   title?: string
   height: number
   width: number
@@ -59,7 +59,7 @@ class BarChart extends React.Component<props, state> {
     }
   }
 
-  castResponseToChartDataObject = (rawData: Array<[number, Date]>): ChartData => {
+  castResponseToChartDataObject = (rawData: Array<[number, string]>): ChartData => {
     let values = []
     let lineValues = []
     let labels = []
@@ -67,15 +67,13 @@ class BarChart extends React.Component<props, state> {
     let bgHover = []
     for (let data of rawData) {
       values.push(Math.round(data[0] * 1e2) / 1e2)
-      labels.push(new Date(data[1]).toLocaleDateString())
+      labels.push(data[1])
       bgs.push(data[0] < 0 ? 'rgb(255,34,45, 1)' : 'rgb(24,144,255, 0.4)')
       bgHover.push(data[0] < 0 ? 'rgb(255,34,45, 1)' : 'rgb(24,144,255, 0.8)')
     }
     if (this.props.secondData) {
       for (let data of this.props.secondData) {
         lineValues.push(Math.round(data[0] * 1e2) / 1e2)
-        //labels.push(new Date(data[1]).toLocaleDateString())
-        //bgs.push(data[0] < 0 ? 'rgb(255,34,45, 1)' : 'rgb(24,144,255, 0.4)')
       }
     }
 

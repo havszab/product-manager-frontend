@@ -1,5 +1,5 @@
 import React from "react";
-import {Bar, Doughnut, Pie, Polar, Radar} from "react-chartjs-2";
+import {Bar, Doughnut, Line, Pie, Polar, Radar} from "react-chartjs-2";
 
 type props = {
   data: Array<[number, string]>
@@ -8,6 +8,7 @@ type props = {
   width: number
   type: string
   colors?: Array<string>
+  label?: string
 }
 type state = {
   data: ChartData
@@ -48,8 +49,7 @@ interface Options {
     display?: boolean,
     text?: string
   },
-  tooltipTemplate: {
-  },
+  tooltipTemplate: {},
   scaleLabel: {}
 }
 
@@ -64,7 +64,10 @@ class Chart extends React.Component<props, state> {
     data: new class implements ChartData {
       datasets: [{ _meta?: {}; data: number[]; backgroundColor?: string[]; borderColor?: string; borderWidth?: number; hoverBackgroundColor?: string; hoverBorderColor?: string; label?: string }];
       labels: any[];
-    }
+    },
+  }
+
+  componentDidMount(): void {
   }
 
   castResponseToDoughnutChartDataObject = (rawData: Array<[number, string]>): ChartData => {
@@ -78,6 +81,7 @@ class Chart extends React.Component<props, state> {
       datasets: [
         {
           data: values,
+          label: this.props.label,
           backgroundColor: this.props.colors ? this.props.colors : allColors
         }
       ],
@@ -125,6 +129,12 @@ class Chart extends React.Component<props, state> {
                    options={options}
                    height={this.props.height}
                    width={this.props.width}
+      />
+    } else if (this.props.type === 'LINE') {
+      chart = <Line data={this.castResponseToDoughnutChartDataObject(this.props.data)}
+                    options={options}
+                    height={this.props.height}
+                    width={this.props.width}
       />
     }
 
