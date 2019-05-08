@@ -43,7 +43,7 @@ class CreateProductCategory extends React.Component<CreateProductCategoryProps, 
 
     return <Form onSubmit={this.handleSubmit}>
       <div style={rowStyle}>
-        <div style={{width: 200}}>
+        <div style={{width: '100%'}}>
           {addFormItem({
             key: 'name',
             required: true,

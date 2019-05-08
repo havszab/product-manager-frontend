@@ -239,14 +239,9 @@ class OverviewTab extends React.Component<props, state> {
 
     return (
       <div>
-        <Row type={"flex"} justify={"space-around"} style={{marginBottom: 30}}>
-          <div style={{
-            border: '1px solid #ccc',
-            borderRadius: 7,
-            padding: '30px 15px 0px 15px',
-            maxWidth: '40%',
-            backgroundColor: '#F2F2FF'
-          }}>
+        <Row type={"flex"} justify={"space-around"} style={{marginBottom: 30}} gutter={16}>
+          <Col span={10}>
+          <Card>
             <Row type={"flex"} justify={"space-around"}>
               <h2 style={{borderBottom: '1px solid #ccc', width: '100%', marginBottom: 30}}>Recent actions</h2>
             </Row>
@@ -256,26 +251,22 @@ class OverviewTab extends React.Component<props, state> {
             <Row type={"flex"} justify={"space-around"}>
               {toggleActionsButton}
             </Row>
-          </div>
-
-          <div style={{
-            border: '1px solid #ccc',
-            borderRadius: 7,
-            paddingBottom: 0,
-            margin: 5,
-            maxHeight: 400,
-            backgroundColor: '#F2F2FF'
-          }}>
+          </Card>
+          </Col>
+<Col span={14}>
+          <Card >
             <Chart data={this.state.incomesOfYears}
                    height={400}
                    width={600}
                    title={'Incomes of years'}
                    type={'BAR'}
-                   label={'Income [HUF]'}
+                   label={'Income [million HUF]'}
                    colors={this.getColors('#52c41a', this.state.incomesOfYears.length)}
+                   toMillion={true}
             />
 
-          </div>
+          </Card>
+</Col>
         </Row>
 
 
@@ -303,7 +294,8 @@ class OverviewTab extends React.Component<props, state> {
                        title={'Gross profits earned yearly'}
                        type={'BAR'}
                        colors={this.getColors("#FFCE56", this.state.profitsOfYears.length)}
-                       label={'Profit [HUF]'}
+                       label={'Profit [million HUF]'}
+                       toMillion={true}
                 />
               </Card>
             </div>
@@ -322,7 +314,7 @@ class OverviewTab extends React.Component<props, state> {
                   value={this.state.soldProductsCount.toLocaleString()}
                   precision={0}
                   valueStyle={{color: '#3f8600'}}
-                  prefix={<Icon type="barcode"/>}
+                  prefix={<Icon type="sync"/>}
                 />
               </Card>
 

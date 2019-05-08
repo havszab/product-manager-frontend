@@ -6,8 +6,6 @@ import i18n from "../../libs/i18n";
 import {post} from "../../libs/utils/request";
 import {user} from "../../libs/utils/user";
 import Tooltip from "antd/lib/tooltip";
-import {element} from "prop-types";
-
 
 interface CreateProductProps extends React.Props<any> {
   form: WrappedFormUtils

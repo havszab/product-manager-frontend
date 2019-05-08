@@ -9,6 +9,7 @@ type props = {
   type: string
   colors?: Array<string>
   label?: string
+  toMillion?: boolean
 }
 type state = {
   data: ChartData
@@ -74,7 +75,7 @@ class Chart extends React.Component<props, state> {
     let values = []
     let labels = []
     for (let data of rawData) {
-      values.push(Math.round(data[0] * 1e2) / 1e2)
+      values.push( this.props.toMillion ? Math.round((data[0] * 1e2)  / 1000000) / 1e2 : Math.round((data[0] * 1e2) ) / 1e2)
       labels.push(data[1][0] == '2' ? data[1].slice(0, 10) : data[1])
     }
     let resultChartObject: ChartData = {

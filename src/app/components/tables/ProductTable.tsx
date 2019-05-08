@@ -168,7 +168,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
   render() {
     const currency = 'HUF'
 
-    const sellColumn = this.props.stockOperations ? {
+    const utilCol = this.props.stockOperations ? {
       title: 'Sell',
       render: (text: string, product: Product) => (
         this.props.data.length >= 1
@@ -245,7 +245,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
         ),
         sorter: (a: Product, b: Product) => a.itemPrice - b.itemPrice
       },
-      sellColumn
+      utilCol
     ]
 
     return (

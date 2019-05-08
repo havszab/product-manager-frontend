@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Input, message, Slider} from 'antd'
+import {Icon, Input, message, Slider} from 'antd'
 import Row from "antd/lib/grid/row";
 import {ChangeEvent} from "react";
 import Button from "antd/lib/button";
@@ -22,7 +22,7 @@ interface Product {
   quantity: number
   status: string
   productCategory: ProductCategory,
-  unitCategory: UnitCategory
+  unitCategory: UnitCategory,
 }
 
 interface ProductCategory {
@@ -42,6 +42,7 @@ type state = {
   profit: number
   profitPerUnit: number
   remainingInStock: number
+  isLoading: boolean
 }
 
 
@@ -55,7 +56,8 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
       priceToSell: 0,
       profit: 0,
       profitPerUnit: 0,
-      remainingInStock: 0
+      remainingInStock: 0,
+      isLoading: false
     }
   }
 
@@ -82,6 +84,9 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
         this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell : 0),
       email: user().email
     }
+    this.setState({
+      isLoading: true
+    })
     await post('sell-item', requestBody)
       .then((res: {success: boolean, message: string  }) => {
         if (res.success) openNotification("success", "Item sold!", res.message)
@@ -89,6 +94,9 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
       }).catch(err => {
         message.error('Error occurred while selling product. Error description: ' + err)
       })
+      .then(() => this.setState({
+        isLoading: false
+      }))
     this.props.onSubmit()
   }
 
@@ -108,6 +116,11 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
 
     const income = !isNaN(this.state.priceToSell) ?
       this.state.priceToSell : 0
+
+    const sellBtn = this.state.isLoading
+      ? <Button type={"primary"} style={{minWidth: '30%'}} disabled={true} onClick={this.productSellHandler}><Icon type="loading" /></Button>
+      : <Button type={"primary"} style={{minWidth: '30%'}} onClick={this.productSellHandler}>Sell</Button>
+
 
     return (
       <div>
@@ -169,7 +182,7 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
         </div>
          <Row type={"flex"} justify={"space-around"}>
            <Button type={"danger"} onClick={this.props.onCancel} style={{minWidth: '30%'}}>Cancel</Button>
-           <Button type={"primary"} style={{minWidth: '30%'}} onClick={this.productSellHandler}>Sell</Button>
+           {sellBtn}
          </Row>
       </div>
 

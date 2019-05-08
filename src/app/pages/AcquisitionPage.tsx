@@ -1,5 +1,5 @@
 import * as React from "react"
-import {Row, Button, message} from 'antd'
+import {Row, Button, message, Col} from 'antd'
 import {get, post} from "../libs/utils/request"
 import ProductTable from "../components/tables/ProductTable"
 import CreateProductCategory from "../components/forms/CreateProductCategory"
@@ -61,6 +61,7 @@ type State = {
   isEditing: boolean
   selectedProducts: Array<Product>
   itemToEdit: Product
+  isLoading: boolean
 }
 
 
@@ -86,7 +87,8 @@ export default class AcquisitionPage extends React.Component<Props, State> {
         status: string;
         unitCategory: UnitCategory;
         unitPrice: number;
-      }
+      },
+      isLoading: false
     }
   }
 
@@ -101,6 +103,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
   }
 
   fetchAcquisition = async () => {
+    this.setLoading(true)
     await get('get-acquisition', {email: user().email})
       .then((response: { success: boolean, acquisition: Acquisition }) => {
         if (response.success) {
@@ -116,25 +119,31 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       .catch(err => {
         message.error('Could not load data. Message: ' + err)
       })
+      .then(() => this.setLoading(false))
     this.getTotalPrice()
   }
 
   fetchProductCategories = async () => {
+    this.setLoading(true)
     await post('get-product-categories')
       .then((response: Response) => {
         this.setState({
           productCategories: response.productCategories
         })
       })
+      .then(() => this.setLoading(false))
+
   }
 
   fetchUnitCategories = async () => {
+    this.setLoading(true)
     await post('get-unit-categories')
       .then((response: Response) => {
         this.setState({
           unitCategories: response.unitCategories
         })
       })
+      .then(() => this.setLoading(false))
   }
 
   getTotalPrice = (): void => {
@@ -152,6 +161,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       message.warning("Add items first!")
       return
     }
+    this.setLoading(true)
     await post('finish-acquisition', {email: user().email})
       .then((response: { success: boolean, message: string }) => {
         if (response.success) openNotification('success', 'Items moved to stock!', response.message + ' You can find these items under the stock menu.')
@@ -161,6 +171,13 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       .catch(err => {
         message.error(err)
       })
+      .then(() => this.setLoading(false))
+  }
+
+  setLoading = (isLoading: boolean) => {
+    this.setState({
+      isLoading: isLoading
+    })
   }
 
   finishAcquisitionWithSelectedItems = async () => {
@@ -168,15 +185,17 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       message.warning("Select items first!")
       return
     }
+    this.setLoading(true)
     await post('finish-selected-items', {email: user().email, products: this.state.selectedProducts})
       .then((response: { success: boolean, message: string }) => {
-        if (response.success) openNotification('success', 'Items moved to stock!', response.message+' You can find these items under the stock menu.')
+        if (response.success) openNotification('success', 'Items moved to stock!', response.message + ' You can find these items under the stock menu.')
         else message.error(message)
         this.fetchAll()
       })
       .catch(err => {
         message.error(err)
       })
+      .then(() => this.setLoading(false))
   }
 
   removeSelectedItemsFromAcquisition = async () => {
@@ -184,6 +203,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       message.warning("Select items first!")
       return
     }
+    this.setLoading(true)
     await post('remove-selected-items', {email: user().email, products: this.state.selectedProducts})
       .then((response: { success: boolean, message: string }) => {
         if (response.success) message.success(response.message)
@@ -193,6 +213,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       .catch(err => {
         message.error(err)
       })
+      .then(() => this.setLoading(false))
   }
 
   addItemHandler = () => {
@@ -243,30 +264,52 @@ export default class AcquisitionPage extends React.Component<Props, State> {
     const editItemForm = this.state.isEditing ?
       <CreateProduct productCategories={this.state.productCategories}
                      unitCategories={this.state.unitCategories}
-                     //onSuccess={this.fetchAcquisition}
+                     onSuccess={this.fetchAcquisition}
                      onCancel={this.addItemCancelHandler}
                      itemToEdit={this.state.itemToEdit}
       /> : null
+
     return (
       <div>
         <PageTitle title={'Current acquisition'}/>
         {addItemForm}
         {editItemForm}
-        <ProductTable data={this.state.acquisition.products} onSuccess={this.fetchAcquisition} onSelect={this.addSelectedItems} onEdit={this.onEditHandler}/>
+        <ProductTable data={this.state.acquisition.products} onSuccess={this.fetchAcquisition}
+                      onSelect={this.addSelectedItems} onEdit={this.onEditHandler}/>
         <Row type="flex" justify="space-around">
+          <Col span={5}>
           <CreateProductCategory onSuccess={this.fetchProductCategories}/>
+          </Col>
+          <Col span={5}>
           <CreateUnitCategory onSuccess={this.fetchUnitCategories}/>
-          <div style={{margin: 5, border: '1px solid #ccc', borderRadius: 7, padding: '10px 15px'}}>
+          </Col>
+          <Col span={12} style={{margin: 5, border: '1px solid #ccc', borderRadius: 7, padding: '10px 15px'}}>
             <h2 style={{borderBottom: '1px solid #ccc'}}>Total: {total} HUF</h2>
-            <Button type={"danger"} style={{marginTop: 5, width: '100%'}}
-                    onClick={this.removeSelectedItemsFromAcquisition}>Remove selected items</Button>
-            <Button type={"primary"} style={{marginTop: 5, width: '100%'}}
-                    onClick={this.finishAcquisitionWithSelectedItems}>Move <span
-              style={{fontWeight: 'bold', padding: '0px 3px', fontSize: '1.2em'}}>selected</span> to stock</Button>
+            <Button type={"danger"}
+                    style={{marginTop: 5, width: '100%'}}
+                    onClick={this.removeSelectedItemsFromAcquisition}
+                    disabled={this.state.isLoading}>
+              {!this.state.isLoading ?
+              <div>Remove selected items</div> :
+              <div><Icon type="loading"/></div>}
+            </Button>
+            <Button type={"primary"}
+                    style={{marginTop: 5, width: '100%'}}
+                    onClick={this.finishAcquisitionWithSelectedItems}
+                    disabled={this.state.isLoading}>
+              {!this.state.isLoading ?
+                <div>Move <span
+                  style={{fontWeight: 'bold', padding: '0px 3px', minWidth: 250, fontSize: '1.2em'}}>selected</span> to
+                  stock</div> : <div><Icon type="loading"/></div>}
+            </Button>
             <Button style={{marginTop: 5, width: '100%'}}
-                    onClick={this.finishAcquisitionHandler}>Move <span
-              style={{fontWeight: 'bold', padding: '0px 3px', fontSize: '1.2em'}}>all</span> to stock</Button>
-          </div>
+                    onClick={this.finishAcquisitionHandler}
+                    disabled={this.state.isLoading}>
+              {!this.state.isLoading ?
+                <div>Move <span style={{fontWeight: 'bold', padding: '0px 3px', fontSize: '1.2em'}}>all</span> to
+                  stock</div> : <div><Icon type="loading"/></div>}
+            </Button>
+          </Col>
         </Row>
       </div>)
 

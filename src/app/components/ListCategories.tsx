@@ -10,9 +10,9 @@ type props = {
   categories: Array<Category>
   title: string
   categoryInstance: string //'PRODUCT' || 'UNIT'
+  isExtended: boolean
 }
 type state = {
-  isExtended: boolean
   editingId: number
 }
 
@@ -24,7 +24,6 @@ interface Category {
 class ListCategories extends React.Component<props, state> {
   state = {
     editingId: -1,
-    isExtended: false
   }
 
   getListData = (): Array<{}> => {
@@ -59,12 +58,6 @@ class ListCategories extends React.Component<props, state> {
     }
   }
 
-  isExtendedSwitcher = (isExtended: boolean) => {
-    this.setState({
-      isExtended: isExtended
-    })
-  }
-
   closeEditHandler = () => {
     this.setState({
       editingId: -1
@@ -94,13 +87,7 @@ class ListCategories extends React.Component<props, state> {
 
     const listData = this.getListData()
 
-    const btnStyle = {fontSize: '1em', paddingRight: 6, paddingLeft: 6, paddingTop: 2, margin: 5}
-
-    const expandButton = this.state.isExtended ?
-      <Button type={'primary'} shape={"round"} style={btnStyle} onClick={() => this.isExtendedSwitcher(false)}><Icon type={'up-circle'}/></Button> :
-      <Button type={'primary'} shape={"round"} style={btnStyle} onClick={() => this.isExtendedSwitcher(true)}><Icon type={'down-circle'}/></Button>
-
-    const list = this.state.isExtended ? (
+    const list = this.props.isExtended ? (
       <List dataSource={listData} renderItem={(item: { title: string, id: number }) => (
         item.id != this.state.editingId ? <List.Item key={item.title} actions={[
             <div onClick={() => this.editCategoryHandler(item.id, item.title)}><Icon type={'edit'}/></div>,
@@ -129,10 +116,9 @@ class ListCategories extends React.Component<props, state> {
     ) : null
 
     return (
-      <div style={{padding: 10, border: '1px solid #ccc', fontSize: '1.3em', width: '30%'}}>
+      <div style={{padding: 10, border: '1px solid #ccc', fontSize: '1.3em'}}>
         <Row type={'flex'} justify={"space-around"}>
           <h3>{this.props.title}</h3>
-          {expandButton}
         </Row>
         {list}
       </div>

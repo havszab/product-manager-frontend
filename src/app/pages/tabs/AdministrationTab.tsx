@@ -2,11 +2,13 @@ import React from "react";
 import {post} from "../../libs/utils/request";
 import ListCategories from "../../components/ListCategories";
 import Row from "antd/lib/grid/row";
+import {Button, Col, Icon} from "antd";
 
 type props = {}
 type state = {
   productCategories?: Array<Category>
   unitCategories?: Array<Category>
+  isExtended: boolean
 }
 
 interface Category {
@@ -27,7 +29,8 @@ interface UnitCategory {
 class AdministrationTab extends React.Component<props, state> {
   state = {
     productCategories: Array<Category>(),
-    unitCategories: Array<Category>()
+    unitCategories: Array<Category>(),
+    isExtended: false
   }
 
   componentDidMount(): void {
@@ -68,6 +71,12 @@ class AdministrationTab extends React.Component<props, state> {
     return categories;
   }
 
+  isExtendedSwitcher = (isExtended: boolean) => {
+    this.setState({
+      isExtended: isExtended
+    })
+  }
+
   mapUnitCategoryToCategory = (unitCats: Array<UnitCategory>): Array<Category> => {
     let categories = Array<Category>()
     for (let unitCat of unitCats) {
@@ -80,11 +89,26 @@ class AdministrationTab extends React.Component<props, state> {
   }
 
   render() {
+
+    const btnStyle = {fontSize: '1em', paddingRight: 6, paddingLeft: 6, paddingTop: 2, margin: 5}
+
+    const expandButton = this.state.isExtended ?
+      <Button type={'primary'} shape={"round"} style={btnStyle} onClick={() => this.isExtendedSwitcher(false)}><Icon type={'up-circle'}/></Button> :
+      <Button type={'primary'} shape={"round"} style={btnStyle} onClick={() => this.isExtendedSwitcher(true)}><Icon type={'down-circle'}/></Button>
+
+
     return (
       <div>
         <Row type={"flex"} justify={'space-around'}>
-          <ListCategories title={'Manage product categories'} categories={this.state.productCategories} categoryInstance={'PRODUCT'}/>
-          <ListCategories title={'Manage unit categories'} categories={this.state.unitCategories} categoryInstance={'UNIT'}/>
+          <Col span={8} >
+          <ListCategories title={'Manage product categories'} isExtended={this.state.isExtended} categories={this.state.productCategories} categoryInstance={'PRODUCT'}/>
+          </Col>
+          <Col span={2}>
+          {expandButton}
+          </Col>
+          <Col span={8}>
+          <ListCategories title={'Manage unit categories'} isExtended={this.state.isExtended} categories={this.state.unitCategories} categoryInstance={'UNIT'}/>
+          </Col>
         </Row>
       </div>
     )
