@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa9dda26-f5ff-4013-b0f8-031525e645a6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/pages/tabs/MonthlyDashboardTab.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/pages/tabs/OverviewTab.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/charts/BarChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/charts/BarChart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/charts/Chart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/charts/Chart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/DashboardPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/DashboardPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/tabs/AnnualDashboardTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/tabs/AnnualDashboardTab.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/MainFrame.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/MainFrame.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/forms/ItemSellForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/forms/ItemSellForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/StockPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/StockPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/tabs/OverviewTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/tabs/OverviewTab.tsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,10 +20,46 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/components/utils/PageTitle.tsx">
+        <entry file="file://$PROJECT_DIR$/src/app/pages/tabs/AdministrationTab.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="26" />
+            <state relative-caret-position="235">
+              <caret line="102" column="24" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/components/ListCategories.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="116">
+              <caret line="72" column="56" lean-forward="true" selection-start-line="72" selection-start-column="56" selection-end-line="72" selection-end-column="56" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/pages/tabs/OverviewTab.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="221" column="86" selection-start-line="221" selection-start-column="86" selection-end-line="221" selection-end-column="86" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/components/forms/ItemSellForm.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="94" column="40" lean-forward="true" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -34,77 +68,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/components/charts/Chart.tsx">
+        <entry file="file://$PROJECT_DIR$/src/app/pages/StockPage.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+            <state relative-caret-position="280">
+              <caret line="117" column="16" lean-forward="true" selection-start-line="117" selection-start-column="16" selection-end-line="117" selection-end-column="16" />
               <folding>
-                <element signature="e#0#26#0" expanded="true" />
-                <element signature="n#!!block;n#ChartData#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/components/charts/BarChart.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="75" column="56" selection-start-line="75" selection-start-column="56" selection-end-line="75" selection-end-column="56" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-                <element signature="n#!!block;n#Options#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/pages/DashboardPage.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
-              <folding>
-                <element signature="n#!!block;n#Options#0" />
+                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/app/pages/tabs/OverviewTab.tsx">
+        <entry file="file://$PROJECT_DIR$/src/app/MainFrame.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="316" column="91" selection-start-line="316" selection-start-column="91" selection-end-line="316" selection-end-column="91" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/pages/tabs/MonthlyDashboardTab.tsx">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/pages/tabs/AnnualDashboardTab.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="17" column="25" selection-start-line="17" selection-end-line="18" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/pages/AcquisitionPage.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3420">
-              <caret line="239" column="16" selection-start-line="239" selection-start-column="16" selection-end-line="239" selection-end-column="99" />
+            <state relative-caret-position="241">
+              <caret line="111" column="108" selection-start-line="111" selection-start-column="108" selection-end-line="111" selection-end-column="108" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -149,22 +128,13 @@
         <option value="$PROJECT_DIR$/src/app/components/EmployeeCard.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/ProductTable.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/forms/CostForm.ts" />
-        <option value="$PROJECT_DIR$/src/app/App.css" />
-        <option value="$PROJECT_DIR$/src/app/pages/tabs/AdministrationTab.tsx" />
         <option value="$PROJECT_DIR$/src/app/libs/utils/request.ts" />
-        <option value="$PROJECT_DIR$/src/app/components/forms/CreateUnitCategory.tsx" />
-        <option value="$PROJECT_DIR$/src/app/components/forms/CreateProductCategory.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/utils/PageTitle.tsx" />
-        <option value="$PROJECT_DIR$/src/app/MainFrame.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/charts/RoundChart.tsx" />
-        <option value="$PROJECT_DIR$/src/app/components/forms/CreateProduct.tsx" />
-        <option value="$PROJECT_DIR$/src/app/pages/StockPage.tsx" />
         <option value="$PROJECT_DIR$/src/app/libs/utils/notification.ts" />
-        <option value="$PROJECT_DIR$/src/app/components/forms/ItemSellForm.tsx" />
         <option value="$PROJECT_DIR$/src/app/pages/SalesPage.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/tables/SalesTable.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/utils/CostWidgets.tsx" />
-        <option value="$PROJECT_DIR$/src/app/pages/AcquisitionPage.tsx" />
         <option value="$PROJECT_DIR$/src/app/libs/i18n/en.json" />
         <option value="$PROJECT_DIR$/src/app/pages/tabs/CostTab.ts" />
         <option value="$PROJECT_DIR$/src/app/libs/utils/AddButton.tsx" />
@@ -178,16 +148,25 @@
         <option value="$PROJECT_DIR$/src/app/components/cards/EmployeeCard.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/cards/CostCard.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/forms/CostForm.tsx" />
-        <option value="$PROJECT_DIR$/src/app/components/ListCategories.tsx" />
-        <option value="$PROJECT_DIR$/src/app/components/tables/ProductTable.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/utils/TimeRangeSwitcher.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/charts/GreenRedBar.tsx" />
-        <option value="$PROJECT_DIR$/src/app/components/charts/Chart.tsx" />
         <option value="$PROJECT_DIR$/src/app/pages/tabs/AnnualDashboardTab.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/charts/BarChart.tsx" />
         <option value="$PROJECT_DIR$/src/app/pages/tabs/MonthlyDashboardTab.tsx" />
         <option value="$PROJECT_DIR$/src/app/pages/DashboardPage.tsx" />
+        <option value="$PROJECT_DIR$/src/app/App.css" />
+        <option value="$PROJECT_DIR$/src/app/components/charts/Chart.tsx" />
+        <option value="$PROJECT_DIR$/src/app/components/forms/CreateProduct.tsx" />
+        <option value="$PROJECT_DIR$/src/app/components/tables/ProductTable.tsx" />
+        <option value="$PROJECT_DIR$/src/app/pages/AcquisitionPage.tsx" />
+        <option value="$PROJECT_DIR$/src/app/components/forms/CreateProductCategory.tsx" />
+        <option value="$PROJECT_DIR$/src/app/components/forms/CreateUnitCategory.tsx" />
+        <option value="$PROJECT_DIR$/src/app/pages/tabs/AdministrationTab.tsx" />
+        <option value="$PROJECT_DIR$/src/app/components/ListCategories.tsx" />
         <option value="$PROJECT_DIR$/src/app/pages/tabs/OverviewTab.tsx" />
+        <option value="$PROJECT_DIR$/src/app/components/forms/ItemSellForm.tsx" />
+        <option value="$PROJECT_DIR$/src/app/pages/StockPage.tsx" />
+        <option value="$PROJECT_DIR$/src/app/MainFrame.tsx" />
       </list>
     </option>
   </component>
@@ -410,7 +389,7 @@
       <workItem from="1557039931662" duration="10188000" />
       <workItem from="1557125352891" duration="9688000" />
       <workItem from="1557154394422" duration="711000" />
-      <workItem from="1557212837850" duration="2107000" />
+      <workItem from="1557212837850" duration="10066000" />
     </task>
     <task id="LOCAL-00001" summary="acquisition page implemented">
       <created>1555061470467</created>
@@ -510,23 +489,37 @@
       <option name="project" value="LOCAL" />
       <updated>1557044644944</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="overview statistics done">
+      <created>1557229406885</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1557229406885</updated>
+    </task>
+    <task id="LOCAL-00016" summary="category list refactor, loading on acq impl">
+      <created>1557304575945</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1557304575945</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="285412000" />
+    <option name="totallyTimeSpent" value="293371000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8621974" visible="true" weight="0.2573471" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8621974" visible="true" weight="0.2573471" />
       <window_info id="Structure" order="1" sideWeight="0.1378026" side_tool="true" visible="true" weight="0.2573471" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26438355" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.26438355" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -630,7 +623,9 @@
     <MESSAGE value="admin tabs divided into tab components" />
     <MESSAGE value="admin page components are editable" />
     <MESSAGE value="percentage charts added" />
-    <option name="LAST_COMMIT_MESSAGE" value="percentage charts added" />
+    <MESSAGE value="overview statistics done" />
+    <MESSAGE value="category list refactor, loading on acq impl" />
+    <option name="LAST_COMMIT_MESSAGE" value="category list refactor, loading on acq impl" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/app/pages/IndexPage.tsx">
@@ -670,13 +665,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/components/Employee.ts" />
     <entry file="file://$PROJECT_DIR$/src/app/components/forms/CostForm.ts" />
-    <entry file="file://$PROJECT_DIR$/src/app/App.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/Routes.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
@@ -704,41 +692,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/forms/CreateUnitCategory.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/constants.ts">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/forms/CreateProductCategory.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/forms/CreateProduct.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="113" column="34" lean-forward="true" selection-start-line="113" selection-start-column="34" selection-end-line="113" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-            <element signature="n#!!block;n#Product#0" />
-            <element signature="n#!!block;n#ProductCategory#0" />
-            <element signature="n#!!block;n#UnitCategory#0" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/libs/utils/user.ts">
       <provider selected="true" editor-type-id="text-editor">
@@ -751,16 +706,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/StockPage.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1770">
-          <caret line="118" column="102" selection-start-line="118" selection-start-column="102" selection-end-line="118" selection-end-column="102" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -804,32 +749,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/MainFrame.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="130" selection-start-line="130" selection-end-line="130" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/pages/LoginPage.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="89" selection-start-line="89" selection-end-line="96" selection-end-column="30" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/tabs/AdministrationTab.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="89" column="5" lean-forward="true" selection-start-line="89" selection-start-column="5" selection-end-line="89" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -952,40 +877,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/tables/ProductTable.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3735">
-          <caret line="253" column="35" lean-forward="true" selection-start-line="253" selection-end-line="254" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/components/charts/GreenRedBar.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="464">
           <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/forms/ItemSellForm.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="106" column="58" lean-forward="true" selection-start-line="106" selection-start-column="58" selection-end-line="106" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/ListCategories.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1365">
-          <caret line="96" column="69" selection-start-line="96" selection-end-line="97" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -995,38 +890,6 @@
           <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="26" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/charts/Chart.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-            <element signature="n#!!block;n#ChartData#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/charts/BarChart.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="75" column="56" selection-start-line="75" selection-start-column="56" selection-end-line="75" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-            <element signature="n#!!block;n#Options#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/DashboardPage.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
-          <folding>
-            <element signature="n#!!block;n#Options#0" />
           </folding>
         </state>
       </provider>
@@ -1044,22 +907,154 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/App.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="49" column="1" lean-forward="true" selection-start-line="49" selection-start-column="1" selection-end-line="49" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/charts/BarChart.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="75" column="56" selection-start-line="75" selection-start-column="56" selection-end-line="75" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="n#!!block;n#Options#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pages/DashboardPage.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1076">
+          <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
+          <folding>
+            <element signature="n#!!block;n#Options#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/charts/Chart.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="945">
+          <caret line="77" column="116" lean-forward="true" selection-start-line="77" selection-start-column="116" selection-end-line="77" selection-end-column="116" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="n#!!block;n#ChartData#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/forms/CreateProductCategory.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="45" column="33" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/pages/AcquisitionPage.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3420">
-          <caret line="239" column="16" selection-start-line="239" selection-start-column="16" selection-end-line="239" selection-end-column="99" />
+        <state relative-caret-position="425">
+          <caret line="294" column="12" selection-start-line="294" selection-start-column="12" selection-end-line="294" selection-end-column="12" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/tabs/OverviewTab.tsx">
+    <entry file="file://$PROJECT_DIR$/src/app/components/forms/CreateUnitCategory.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="316" column="91" selection-start-line="316" selection-start-column="91" selection-end-line="316" selection-end-column="91" />
+        <state relative-caret-position="373">
+          <caret line="46" column="24" lean-forward="true" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/tables/ProductTable.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2408">
+          <caret line="169" selection-start-line="169" selection-end-line="169" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/forms/CreateProduct.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12">
+          <caret line="7" column="39" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+            <element signature="n#!!block;n#Product#0" />
+            <element signature="n#!!block;n#ProductCategory#0" />
+            <element signature="n#!!block;n#UnitCategory#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pages/tabs/AdministrationTab.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="102" column="24" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/ListCategories.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="72" column="56" lean-forward="true" selection-start-line="72" selection-start-column="56" selection-end-line="72" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pages/tabs/OverviewTab.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="221" column="86" selection-start-line="221" selection-start-column="86" selection-end-line="221" selection-end-column="86" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/forms/ItemSellForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="94" column="40" lean-forward="true" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pages/StockPage.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="117" column="16" lean-forward="true" selection-start-line="117" selection-start-column="16" selection-end-line="117" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/MainFrame.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="111" column="108" selection-start-line="111" selection-start-column="108" selection-end-line="111" selection-end-column="108" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
           </folding>
         </state>
       </provider>

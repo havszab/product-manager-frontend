@@ -109,7 +109,7 @@ export default class MainFrame extends React.Component<MainFrameProps, { redirec
 
                             <Menu.Item key={5} style={{ marginBottom: '8px' }}>
                                 <Link to="/admin">
-                                    <Icon type={'team'} style={menuIconStyle}/><span>{i18n('menuItems.employees')} & admin</span>
+                                    <Icon type="usergroup-add" style={menuIconStyle}/><span>Admin & settings</span>
                                 </Link>
                             </Menu.Item>
 

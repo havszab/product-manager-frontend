@@ -61,14 +61,14 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
     }
   }
 
-  sliderChangeHandler = (value:number) => {
+  sliderChangeHandler = (value: number) => {
     this.setState({
       quantToSell: value
     })
   }
 
-  priceInputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    let price : number = parseInt(event.target.value)
+  priceInputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    let price: number = parseInt(event.target.value)
     this.setState({
       priceToSell: price
     })
@@ -84,11 +84,16 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
         this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell : 0),
       email: user().email
     }
+    debugger
+    if (requestBody.income == 0 && requestBody.quantToSell == 0) {
+      message.warning('Please provide selling conditions!')
+      return
+    }
     this.setState({
       isLoading: true
     })
     await post('sell-item', requestBody)
-      .then((res: {success: boolean, message: string  }) => {
+      .then((res: { success: boolean, message: string }) => {
         if (res.success) openNotification("success", "Item sold!", res.message)
         else message.error(res.message)
       }).catch(err => {
@@ -107,24 +112,32 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
     const colStyle = {width: '50%'}
     const headerCol = {borderRight: '1px solid #ccc', width: '48%', marginRight: '2%'}
     const stockInfoStyle = {borderRadius: 7, border: '1px solid #ccc', margin: '10px 20px', padding: 5}
-    const titleStyle = {borderBottom: '1px #ccc solid', backgroundColor: '#f5f5f5', borderTop: '1px solid #ccc', paddingTop: 12, margin: 5}
+    const titleStyle = {
+      borderBottom: '1px #ccc solid',
+      backgroundColor: '#f5f5f5',
+      borderTop: '1px solid #ccc',
+      paddingTop: 12,
+      margin: 5
+    }
 
-    const profit =  !isNaN(this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell) ?
+    const profit = !isNaN(this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell) ?
       this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell : 0
 
-    const fontColor = profit >  0 ? {width: '50%', color: '#52c41a'} : {width: '50%', color: '#f5222d'}
+    const fontColor = profit > 0 ? {width: '50%', color: '#52c41a'} : {width: '50%', color: '#f5222d'}
 
     const income = !isNaN(this.state.priceToSell) ?
       this.state.priceToSell : 0
 
     const sellBtn = this.state.isLoading
-      ? <Button type={"primary"} style={{minWidth: '30%'}} disabled={true} onClick={this.productSellHandler}><Icon type="loading" /></Button>
+      ? <Button type={"primary"} style={{minWidth: '30%'}} disabled={true} onClick={this.productSellHandler}><Icon
+        type="loading"/></Button>
       : <Button type={"primary"} style={{minWidth: '30%'}} onClick={this.productSellHandler}>Sell</Button>
 
 
     return (
       <div>
-        <Row type={"flex"} justify={"space-around"} style={titleStyle}><h3>Selling {product.productCategory.productName}</h3></Row>
+        <Row type={"flex"} justify={"space-around"} style={titleStyle}>
+          <h3>Selling {product.productCategory.productName}</h3></Row>
         <div style={stockInfoStyle}>
           <Row type={"flex"} justify={"space-between"}>
             <div style={headerCol}>Value</div>
@@ -148,23 +161,24 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
 
 
         <Row type={"flex"} justify={"space-around"}>
-            <span style={{marginTop: 5}}>0</span>
-            <Slider min={0}
-                    max={product.quantity}
-                    style={{width: '60%'}}
-                    dots={product.quantity <= 5}
-                    onChange={this.sliderChangeHandler}/>
-            <span style={{marginTop: 5}}>{product.quantity}</span>
+          <span style={{marginTop: 5}}>0</span>
+          <Slider min={0}
+                  max={product.quantity}
+                  style={{width: '60%'}}
+                  dots={product.quantity <= 5}
+                  onChange={this.sliderChangeHandler}/>
+          <span style={{marginTop: 5}}>{product.quantity}</span>
         </Row>
 
         <Row type={"flex"} justify={"space-around"}>
-          <Input type={'number'} style={{width: '60%'}} min={0} onChange={this.priceInputChangeHandler} placeholder={'Price'}/>
+          <Input type={'number'} style={{width: '60%'}} min={0} onChange={this.priceInputChangeHandler}
+                 placeholder={'Price'}/>
         </Row>
 
         <Row type={"flex"} justify={"space-around"} style={titleStyle}><h3>Offered item's details</h3></Row>
         <div style={stockInfoStyle}>
           <Row type={"flex"} justify={"space-between"}>
-            <div style={headerCol}>Quantity </div>
+            <div style={headerCol}>Quantity</div>
             <div style={colStyle}>{this.state.quantToSell} {this.props.product.unitCategory.unitName}</div>
           </Row>
           <Row type={"flex"} justify={"space-between"}>
@@ -180,10 +194,10 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
             <div style={fontColor}>{profit.toLocaleString()} HUF</div>
           </Row>
         </div>
-         <Row type={"flex"} justify={"space-around"}>
-           <Button type={"danger"} onClick={this.props.onCancel} style={{minWidth: '30%'}}>Cancel</Button>
-           {sellBtn}
-         </Row>
+        <Row type={"flex"} justify={"space-around"}>
+          <Button type={"danger"} onClick={this.props.onCancel} style={{minWidth: '30%'}}>Cancel</Button>
+          {sellBtn}
+        </Row>
       </div>
 
     )

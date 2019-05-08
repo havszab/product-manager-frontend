@@ -219,17 +219,8 @@ class OverviewTab extends React.Component<props, state> {
     const btnStyle = {fontSize: '1em', padding: '0px 8px', margin: 5}
 
     const toggleActionsButton = !this.state.isExtended ?
-      <Button shape={'round'} type={'primary'} onClick={this.extendActionsHandler} style={btnStyle}><Icon type="down"/></Button> :
+      <Button shape={'round'} type={'primary'} disabled={this.state.actions.length < 5} onClick={this.extendActionsHandler} style={btnStyle}><Icon type="down"/></Button> :
       <Button shape={'round'} type={'primary'} onClick={this.collapseActionsHandler} style={btnStyle}><Icon type="up"/></Button>
-
-    const widgetStyle = {
-      border: '1px solid #ccc',
-      borderRadius: 7,
-      paddingBottom: 0,
-      //margin: 5,
-      //maxHeight: 350,
-      backgroundColor: '#F2F2FF'
-    }
 
     const costChartHeight = 300
     const costChartWidth = 250
@@ -241,32 +232,32 @@ class OverviewTab extends React.Component<props, state> {
       <div>
         <Row type={"flex"} justify={"space-around"} style={{marginBottom: 30}} gutter={16}>
           <Col span={10}>
-          <Card>
-            <Row type={"flex"} justify={"space-around"}>
-              <h2 style={{borderBottom: '1px solid #ccc', width: '100%', marginBottom: 30}}>Recent actions</h2>
-            </Row>
-            <Timeline>
-              {this.renderTimeLineItems()}
-            </Timeline>
-            <Row type={"flex"} justify={"space-around"}>
-              {toggleActionsButton}
-            </Row>
-          </Card>
+            <Card>
+              <Row type={"flex"} justify={"space-around"}>
+                <h2 style={{borderBottom: '1px solid #ccc', width: '100%', marginBottom: 30}}>Recent actions</h2>
+              </Row>
+              <Timeline>
+                {this.renderTimeLineItems()}
+              </Timeline>
+              <Row type={"flex"} justify={"space-around"}>
+                {toggleActionsButton}
+              </Row>
+            </Card>
           </Col>
-<Col span={14}>
-          <Card >
-            <Chart data={this.state.incomesOfYears}
-                   height={400}
-                   width={600}
-                   title={'Incomes of years'}
-                   type={'BAR'}
-                   label={'Income [million HUF]'}
-                   colors={this.getColors('#52c41a', this.state.incomesOfYears.length)}
-                   toMillion={true}
-            />
+          <Col span={14}>
+            <Card>
+              <Chart data={this.state.incomesOfYears}
+                     height={400}
+                     width={600}
+                     title={'Incomes of years'}
+                     type={'BAR'}
+                     label={'Income [million HUF]'}
+                     colors={this.getColors('#52c41a', this.state.incomesOfYears.length)}
+                     toMillion={true}
+              />
 
-          </Card>
-</Col>
+            </Card>
+          </Col>
         </Row>
 
 

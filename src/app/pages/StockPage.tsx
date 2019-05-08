@@ -107,7 +107,8 @@ class StockPage extends React.Component<StockPageProps, state> {
       <Modal visible={this.state.isModalVisible}
              footer={null}
              centered={true}
-             onCancel={this.modalCancelHandler}>
+             onCancel={this.modalCancelHandler}
+             closable={false}>
         <ItemSell product={this.state.prodToSell}
                   onCancel={this.modalCancelHandler}
                   onSubmit={this.onSellFormSubmitHandler}/>
