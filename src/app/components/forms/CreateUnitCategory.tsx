@@ -4,6 +4,7 @@ import {WrappedFormUtils} from "antd/lib/form/Form";
 import addFormItem from "../../libs/forms/addFormItem";
 import {post} from "../../libs/utils/request";
 import {user} from "../../libs/utils/user";
+import i18n from "../../libs/i18n";
 
 
 interface CreateUnitCategoryProps extends React.Props<any> {
@@ -50,12 +51,12 @@ class CreateUnitCategory extends React.Component<CreateUnitCategoryProps, {}> {
             key: 'name',
             required: true,
             getFieldDecorator,
-            label: 'Unit category name',
+            label: i18n('acquisition.product.unitName'),
             errorMessage: 'This field is required'
           })}
         </div>
         <Row type="flex" justify="space-around" >
-        <Button type={"primary"} htmlType={"submit"} style={{width: '100%'}}>Add unit type</Button>
+        <Button type={"primary"} htmlType={"submit"} style={{width: '100%'}}>{i18n('acquisition.product.buttons.addUnitCategory')}</Button>
         </Row>
       </div>
     </Form>

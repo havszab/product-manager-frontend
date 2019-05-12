@@ -58,7 +58,9 @@
       "unitPrice" : "Unit Price",
       "itemPrice" : "Item price",
       "totalPrice" : "Total price",
-      "status" : "Status"
+      "status" : "Status",
+      "edit" : "Edit",
+      "sell" :"Sell"
     },
     "currentAcquisition" : "Current acquisition"
   },
@@ -68,8 +70,54 @@
     "acquisition" : "Acquisition",
     "store" : "Stock",
     "dashboard" : "Dashboard",
-    "employees" : "Employees",
+    "admin" : "Admin & settings",
     "sales" : "Sales",
     "logout" : "Logout"
+  },
+
+  "statusMessage" : {
+    "noData" : "Could not load data from server!",
+    "operationFailed" : "Your request can not be fulfilled at the moment!"
+  },
+
+  "notificationMessage" : {
+    "movedToStock": {
+      "title": "Items moved to stock!",
+      "msg": "Items successfully delivered to stock! You can manage them under the stock menu later."
+    },
+    "removed": "Selected items successfully removed!"
+  },
+
+  "operations" : {
+    "save" : "Save",
+    "cancel" : "Cancel"
+  },
+
+  "acquisition" : {
+    "title" : "Current acquisition",
+    "amount" : "Amount",
+    "selectItems" : "Select items first!",
+    "addItems" : "Add items first!",
+    "addNew" : "Add new item",
+    "itemAdded" : "Item successfully added!",
+    "itemEdited" : "Item successfully edited!",
+    "selectUnit" : "Select unit!",
+    "selectProduct" : "Select product!",
+    "buttons": {
+      "selected": "selected",
+      "all": "all",
+      "itemsToStock": "items to stock",
+      "itemToStock": "items to stock",
+      "move": "Move",
+      "remove": "Remove selected items"
+    },
+    "product": {
+      "categoryName": "Product",
+      "unitName": "Unit",
+      "buttons": {
+        "addProdCategory": "Add new product",
+        "addUnitCategory": "Add new unit"
+      }
+    }
   }
 }

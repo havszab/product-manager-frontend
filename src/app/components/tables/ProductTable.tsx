@@ -170,7 +170,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
     const currency = 'HUF'
 
     const utilCol = this.props.stockOperations ? {
-      title: 'Sell',
+      title:  i18n('product.tableData.sell'),
       render: (text: string, product: Product) => (
         this.props.data.length >= 1
           ? (
@@ -178,7 +178,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
           ) : {}
       )
     } : {
-      title: 'Edit',
+      title:  i18n('product.tableData.edit'),
       render: (text: string, product: Product) => (
         this.props.data.length >= 1 ? (
           <a onClick={() => this.props.onEdit(product)}><Icon type={'edit'}/></a>

@@ -10,6 +10,7 @@ import PageTitle from "../components/utils/PageTitle"
 import Tooltip from "antd/lib/tooltip"
 import Icon from "antd/lib/icon"
 import {openNotification} from "../libs/utils/notification";
+import i18n from "../libs/i18n";
 
 interface Props extends React.Props<any> {
 }
@@ -113,11 +114,11 @@ export default class AcquisitionPage extends React.Component<Props, State> {
             isCreating: false
           })
         } else {
-          message.error('Could not receive data from server!')
+          message.error(i18n('statusMessage.noData'))
         }
       })
       .catch(err => {
-        message.error('Could not load data. Message: ' + err)
+        message.error(i18n('statusMessage.noData') + ' Message: ' + err)
       })
     this.setLoading(false)
     this.getTotalPrice()
@@ -139,7 +140,6 @@ export default class AcquisitionPage extends React.Component<Props, State> {
     this.setLoading(true)
     await get('get-unit-categories', {email: user().email})
       .then((response: Response) => {
-        console.log("called")
         this.setState({
           unitCategories: response.unitCategories
         })
@@ -159,14 +159,14 @@ export default class AcquisitionPage extends React.Component<Props, State> {
 
   finishAcquisitionHandler = async () => {
     if (this.state.acquisition.products.length <= 0) {
-      message.warning("Add items first!")
+      message.warning(i18n('acquisition.addItems'))
       return
     }
     this.setLoading(true)
     await post('finish-acquisition', {email: user().email})
-      .then((response: { success: boolean, message: string }) => {
-        if (response.success) openNotification('success', 'Items moved to stock!', response.message + ' You can find these items under the stock menu.')
-        else message.error(response.message)
+      .then((response: { success: boolean}) => {
+        if (response.success) openNotification('success', i18n('notificationMessage.movedToStock.title'), i18n('notificationMessage.movedToStock.msg'))
+        else message.error(i18n('statusMessage.operationFailed'))
         this.fetchAll()
       })
       .catch(err => {
@@ -183,14 +183,14 @@ export default class AcquisitionPage extends React.Component<Props, State> {
 
   finishAcquisitionWithSelectedItems = async () => {
     if (this.state.selectedProducts.length <= 0) {
-      message.warning("Select items first!")
+      message.warning(i18n('acquisition.selectItems'))
       return
     }
     this.setLoading(true)
     await post('finish-selected-items', {email: user().email, products: this.state.selectedProducts})
-      .then((response: { success: boolean, message: string }) => {
-        if (response.success) openNotification('success', 'Items moved to stock!', response.message + ' You can find these items under the stock menu.')
-        else message.error(message)
+      .then((response: { success: boolean}) => {
+        if (response.success) openNotification('success', i18n('notificationMessage.movedToStock.title'), i18n('notificationMessage.movedToStock.msg'))
+        else message.error(i18n('statusMessage.operationFailed'))
         this.fetchAll()
       })
       .catch(err => {
@@ -201,14 +201,14 @@ export default class AcquisitionPage extends React.Component<Props, State> {
 
   removeSelectedItemsFromAcquisition = async () => {
     if (this.state.selectedProducts.length <= 0) {
-      message.warning("Select items first!")
+      message.warning(i18n('acquisition.selectItems'))
       return
     }
     this.setLoading(true)
     await post('remove-selected-items', {email: user().email, products: this.state.selectedProducts})
-      .then((response: { success: boolean, message: string }) => {
-        if (response.success) message.success(response.message)
-        else message.error(message)
+      .then((response: { success: boolean}) => {
+        if (response.success) message.success(i18n('notificationMessage.removed'))
+        else message.error(i18n('statusMessage.operationFailed'))
         this.fetchAll()
       })
       .catch(err => {
@@ -254,7 +254,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
                      unitCategories={this.state.unitCategories}
                      onSuccess={this.fetchAcquisition}
                      onCancel={this.addItemCancelHandler}/> :
-      <Tooltip placement="topLeft" title="Add new item">
+      <Tooltip placement="topLeft" title={i18n('acquisition.addNew')}>
         <Button shape={'round'}
                 onClick={this.addItemHandler}
                 type={'primary'}
@@ -272,7 +272,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
 
     return (
       <div>
-        <PageTitle title={'Current acquisition'}/>
+        <PageTitle title={i18n('acquisition.title')}/>
         {addItemForm}
         {editItemForm}
         <ProductTable data={this.state.acquisition.products} onSuccess={this.fetchAcquisition}
@@ -285,13 +285,13 @@ export default class AcquisitionPage extends React.Component<Props, State> {
             <CreateUnitCategory onSuccess={this.fetchUnitCategories}/>
           </Col>
           <Col span={12} style={{margin: 5, border: '1px solid #ccc', borderRadius: 7, padding: '10px 15px'}}>
-            <h2 style={{borderBottom: '1px solid #ccc'}}>Total: {total} HUF</h2>
+            <h2 style={{borderBottom: '1px solid #ccc'}}>{i18n('acquisition.amount')}: {total} HUF</h2>
             <Button type={"danger"}
                     style={{marginTop: 5, width: '100%'}}
                     onClick={this.removeSelectedItemsFromAcquisition}
                     disabled={this.state.isLoading}>
               {!this.state.isLoading ?
-                <div>Remove selected items</div> :
+                <div>{i18n('acquisition.buttons.remove')}</div> :
                 <div><Icon type="loading"/></div>}
             </Button>
             <Button type={"primary"}
@@ -299,16 +299,18 @@ export default class AcquisitionPage extends React.Component<Props, State> {
                     onClick={this.finishAcquisitionWithSelectedItems}
                     disabled={this.state.isLoading}>
               {!this.state.isLoading ?
-                <div>Move <span
-                  style={{fontWeight: 'bold', padding: '0px 3px', minWidth: 250, fontSize: '1.2em'}}>selected</span> to
-                  stock</div> : <div><Icon type="loading"/></div>}
+                <div>{i18n('acquisition.buttons.move')}<span
+                  style={{fontWeight: 'bold', padding: '0px 3px', minWidth: 250, fontSize: '1.2em'}}>{i18n('acquisition.buttons.selected')}</span>
+                  {" " + i18n('acquisition.buttons.itemsToStock')}
+                </div> : <div><Icon type="loading"/></div>}
             </Button>
             <Button style={{marginTop: 5, width: '100%'}}
                     onClick={this.finishAcquisitionHandler}
                     disabled={this.state.isLoading}>
               {!this.state.isLoading ?
-                <div>Move <span style={{fontWeight: 'bold', padding: '0px 3px', fontSize: '1.2em'}}>all</span> to
-                  stock</div> : <div><Icon type="loading"/></div>}
+                <div>{i18n('acquisition.buttons.move')}<span style={{fontWeight: 'bold', padding: '0px 3px', fontSize: '1.2em'}}>{i18n('acquisition.buttons.all')}</span>
+                  {" " + i18n('acquisition.buttons.itemToStock')}
+                </div> : <div><Icon type="loading"/></div>}
             </Button>
           </Col>
         </Row>

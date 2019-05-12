@@ -42,7 +42,7 @@ const availableTranslations: TranslationMap[] = [
     texts: {}
   },
 ]
-const defaultLanguage = 'en'
+const defaultLanguage = 'hu'
 
 let language = localStorage.getItem('language')
 if (!language) {

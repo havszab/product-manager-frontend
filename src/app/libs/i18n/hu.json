@@ -6,14 +6,12 @@
       "hide": "ELREJTÉS"
     }
   },
-
   "menu": {
     "companies": "Ügyfelek",
     "logs": "Logok",
     "reports": "Riportok",
     "logout": "Kijelentkezés"
   },
-
   "companies": {
     "listTitle": "Ügyfelek",
     "addNewCompany": "Új ügyfél hozzáadása",
@@ -23,7 +21,6 @@
       "address": "Cím"
     }
   },
-
   "login": {
     "title": "Jelentkezz be!",
     "subtitle": "Használd a kapott bejelentkezési adatokat",
@@ -35,32 +32,74 @@
       "submit": "Bejelentkezés"
     },
     "error": {
-      "badCredentials" : "Hibás email, vagy jelszó!"
+      "badCredentials": "Hibás email, vagy jelszó!"
     },
     "register": "Nem vagy még regisztrálva?",
     "registerHere": "Itt megteheted"
   },
-
-  "product" : {
+  "product": {
     "tableData": {
       "product": "Termék",
-      "quantity" : "Mennyiség",
+      "quantity": "Mennyiség",
       "unit": "Egység",
       "unitPrice": "Egységár",
       "itemPrice": "Tétel ára",
       "totalPrice": "Teljes összeg",
-      "status" : "Státusz"
+      "status": "Státusz",
+      "edit": "Szerkesztés",
+      "sell": "Eladás"
     },
-    "currentAcquisition" : "Aktuális beszerzés"
+    "currentAcquisition": "Aktuális beszerzés"
   },
-  "menuItems" : {
-    "menu" : "MENÜ",
-    "acquisition" : "Beszerzés",
-    "store" : "Raktár",
-    "dashboard" : "Kimutatás",
-    "employees" : "Alkalmazottak",
-    "sales" : "Eladások",
-    "logout" : "Kijelentkezés"
+  "menuItems": {
+    "menu": "MENÜ",
+    "acquisition": "Beszerzés",
+    "store": "Raktár",
+    "dashboard": "Kimutatás",
+    "admin": "Admin & beállítások",
+    "sales": "Eladások",
+    "logout": "Kijelentkezés"
+  },
+  "statusMessage": {
+    "noData": "Az adatok betöltése sikertelen!",
+    "operationFailed": "Nem sikerült végrehajtani a műveletet!"
+  },
+  "notificationMessage": {
+    "movedToStock": {
+      "title": "Tételek áthelyezve a raktárba!",
+      "msg": "A kiválasztott tételek sikeresen kiszállítva a raktárba. Ezeket a raktár menüpont alatt kezelheti ezentúl. "
+    },
+    "removed": "A kiválasztott tételek sikeresen eltávolítva a listáról."
+  },
+  "operations": {
+    "save": "Mentés",
+    "cancel": "Mégse"
+  },
+  "acquisition": {
+    "title": "Aktuális beszerzés",
+    "amount": "Összeg",
+    "selectItems": "Jelöljön ki tételeket!",
+    "addItems": "Adjon legalább egy tételt a beszerzéshez!",
+    "addNew": "Új tétel",
+    "itemAdded": "Tétel sikeresen hozzáadva!",
+    "itemEdited": "Tétel adatai sikeresen módosítva!",
+    "selectUnit": "Válasszon egységet!",
+    "selectProduct": "Válasszon terméket!",
+    "buttons": {
+      "selected": "Kiválasztott",
+      "all": "Összes",
+      "itemsToStock": "termékek áthelyezése a raktárba",
+      "itemToStock": "termék áthelyezése a raktárba",
+      "move": " ",
+      "remove": "Kiválasztott termékek eltávolítása"
+    },
+    "product": {
+      "categoryName": "Termék",
+      "unitName": "Egység",
+      "buttons": {
+        "addProdCategory": "Termék hozzáadása",
+        "addUnitCategory": "Egység hozzáadása"
+      }
+    }
   }
-
 }

@@ -5,6 +5,7 @@ import addFormItem from "../../libs/forms/addFormItem";
 import {Simulate} from "react-dom/test-utils";
 import {post} from "../../libs/utils/request";
 import {user} from "../../libs/utils/user";
+import i18n from "../../libs/i18n";
 
 
 interface CreateProductCategoryProps extends React.Props<any> {
@@ -50,12 +51,12 @@ class CreateProductCategory extends React.Component<CreateProductCategoryProps, 
             key: 'name',
             required: true,
             getFieldDecorator,
-            label: 'Product category name',
+            label: i18n('acquisition.product.categoryName'),
             errorMessage: 'This field is required'
           })}
         </div>
         <Row type="flex" justify="space-around">
-          <Button type={"primary"} style={{width: '100%'}} htmlType={"submit"}>Add product type</Button>
+          <Button type={"primary"} style={{width: '100%'}} htmlType={"submit"}>{i18n('acquisition.product.buttons.addProdCategory')}</Button>
         </Row>
       </div>
     </Form>

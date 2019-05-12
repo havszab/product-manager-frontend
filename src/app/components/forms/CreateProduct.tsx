@@ -106,28 +106,28 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
       console.log(body)
       if (!this.props.itemToEdit) {
       await post('add-item', body)
-        .then((response: { success: boolean, message: string }) => {
+        .then((response: { success: boolean}) => {
           if (response.success) {
-            message.success(response.message)
+            message.success(i18n('acquisition.itemAdded'))
             this.props.onSuccess()
             this.props.form.resetFields()
-          } else message.error(response.message)
+          } else message.error(i18n('statusMessage.operationFailed'))
         })
         .catch(e => {
-          message.error("Could not add item to acquisition! Reason: " + e)
+          message.error(e)
         })
       } else {
         body.id = this.props.itemToEdit.id
         await post('edit-item', body)
           .then((response: { success: boolean, message: string }) => {
             if (response.success) {
-              message.success(response.message)
+              message.success(i18n('acquisition.itemEdited'))
               this.props.onSuccess()
               this.props.form.resetFields()
-            } else message.error(response.message)
+            } else message.error(i18n('statusMessage.operationFailed'))
           })
           .catch(e => {
-            message.error("Could not edit item! Reason: " + e)
+            message.error(e)
           })
       }
     })
@@ -170,7 +170,7 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
                       key={"casc1"}
                       showSearch={{filter}}
                       onChange={this.handleProdCascaderChange}
-                      placeholder={'Select product'}/>
+                      placeholder={i18n('acquisition.selectProduct')}/>
           </div>
           {addFormItem({
             key: 'quantity',
@@ -184,7 +184,7 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
             <Cascader options={unitCatOptions}
                       showSearch={{filter}}
                       onChange={this.handleUnitCascaderChange}
-                      placeholder={'Select unit'}/>
+                      placeholder={i18n('acquisition.selectUnit')}/>
           </div>
           {addFormItem({
             key: 'itemPrice',
@@ -194,11 +194,11 @@ class CreateProduct extends React.Component<CreateProductProps, State> {
             placeholder: i18n('product.tableData.itemPrice'),
             errorMessage: 'This field is required'
           })}
-          <Tooltip placement="topLeft" title="Save item">
+          <Tooltip placement="topLeft" title={i18n('operations.save')}>
             <Button shape={'round'} style={buttonStyle} type={"primary"} htmlType={"submit"}><Icon
               type="save"/></Button>
           </Tooltip>
-          <Tooltip placement="topLeft" title="Cancel">
+          <Tooltip placement="topLeft" title={i18n('operations.cancel')}>
             <Button shape={'round'} style={buttonStyle} type={"danger"} onClick={this.props.onCancel}><Icon
               type="rollback"/></Button>
           </Tooltip>
