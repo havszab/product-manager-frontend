@@ -2,7 +2,7 @@
 import axios from 'axios'
 import eventbus from '../eventbus'
 
-export const baseUrl: string = "http://localhost:8080/"
+export const baseUrl: string = "http://localhost:9999/"
 //process.env.baseUrl
 
 

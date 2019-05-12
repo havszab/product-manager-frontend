@@ -98,8 +98,8 @@ export default class AcquisitionPage extends React.Component<Props, State> {
 
   fetchAll = async () => {
     await this.fetchAcquisition()
-    await this.fetchProductCategories()
-    await this.fetchUnitCategories()
+     this.fetchProductCategories()
+    this.fetchUnitCategories()
   }
 
   fetchAcquisition = async () => {
@@ -119,31 +119,32 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       .catch(err => {
         message.error('Could not load data. Message: ' + err)
       })
-      .then(() => this.setLoading(false))
+    this.setLoading(false)
     this.getTotalPrice()
   }
 
   fetchProductCategories = async () => {
     this.setLoading(true)
-    await post('get-product-categories')
+    await get('get-product-categories', {email: user().email})
       .then((response: Response) => {
         this.setState({
           productCategories: response.productCategories
         })
       })
-      .then(() => this.setLoading(false))
+      this.setLoading(false)
 
   }
 
   fetchUnitCategories = async () => {
     this.setLoading(true)
-    await post('get-unit-categories')
+    await get('get-unit-categories', {email: user().email})
       .then((response: Response) => {
+        console.log("called")
         this.setState({
           unitCategories: response.unitCategories
         })
       })
-      .then(() => this.setLoading(false))
+      this.setLoading(false)
   }
 
   getTotalPrice = (): void => {
@@ -171,7 +172,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       .catch(err => {
         message.error(err)
       })
-      .then(() => this.setLoading(false))
+      this.setLoading(false)
   }
 
   setLoading = (isLoading: boolean) => {
@@ -195,7 +196,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       .catch(err => {
         message.error(err)
       })
-      .then(() => this.setLoading(false))
+      this.setLoading(false)
   }
 
   removeSelectedItemsFromAcquisition = async () => {
@@ -213,7 +214,7 @@ export default class AcquisitionPage extends React.Component<Props, State> {
       .catch(err => {
         message.error(err)
       })
-      .then(() => this.setLoading(false))
+      this.setLoading(false)
   }
 
   addItemHandler = () => {
@@ -278,10 +279,10 @@ export default class AcquisitionPage extends React.Component<Props, State> {
                       onSelect={this.addSelectedItems} onEdit={this.onEditHandler}/>
         <Row type="flex" justify="space-around">
           <Col span={5}>
-          <CreateProductCategory onSuccess={this.fetchProductCategories}/>
+            <CreateProductCategory onSuccess={this.fetchProductCategories}/>
           </Col>
           <Col span={5}>
-          <CreateUnitCategory onSuccess={this.fetchUnitCategories}/>
+            <CreateUnitCategory onSuccess={this.fetchUnitCategories}/>
           </Col>
           <Col span={12} style={{margin: 5, border: '1px solid #ccc', borderRadius: 7, padding: '10px 15px'}}>
             <h2 style={{borderBottom: '1px solid #ccc'}}>Total: {total} HUF</h2>
@@ -290,8 +291,8 @@ export default class AcquisitionPage extends React.Component<Props, State> {
                     onClick={this.removeSelectedItemsFromAcquisition}
                     disabled={this.state.isLoading}>
               {!this.state.isLoading ?
-              <div>Remove selected items</div> :
-              <div><Icon type="loading"/></div>}
+                <div>Remove selected items</div> :
+                <div><Icon type="loading"/></div>}
             </Button>
             <Button type={"primary"}
                     style={{marginTop: 5, width: '100%'}}

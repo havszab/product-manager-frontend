@@ -1,8 +1,9 @@
 import React from "react";
-import {post} from "../../libs/utils/request";
+import {get, post} from "../../libs/utils/request";
 import ListCategories from "../../components/ListCategories";
 import Row from "antd/lib/grid/row";
 import {Button, Col, Icon} from "antd";
+import {user} from "../../libs/utils/user";
 
 type props = {}
 type state = {
@@ -43,7 +44,7 @@ class AdministrationTab extends React.Component<props, state> {
   }
 
   fetchProductCategories = async () => {
-    await post('get-product-categories')
+    await get('get-product-categories', {email: user().email})
       .then((response: {productCategories: Array<ProductCategory>}) => {
         this.setState({
           productCategories: this.mapProductCategoryToCategory(response.productCategories)
@@ -52,7 +53,7 @@ class AdministrationTab extends React.Component<props, state> {
   }
 
   fetchUnitCategories = async () => {
-    await post('get-unit-categories')
+    await get('get-unit-categories', {email: user().email})
       .then((response: {unitCategories: Array<UnitCategory>}) => {
         this.setState({
           unitCategories: this.mapUnitCategoryToCategory(response.unitCategories)

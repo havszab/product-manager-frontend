@@ -3,6 +3,7 @@ import {Form, Button, Row, message} from 'antd'
 import {WrappedFormUtils} from "antd/lib/form/Form";
 import addFormItem from "../../libs/forms/addFormItem";
 import {post} from "../../libs/utils/request";
+import {user} from "../../libs/utils/user";
 
 
 interface CreateUnitCategoryProps extends React.Props<any> {
@@ -19,11 +20,12 @@ class CreateUnitCategory extends React.Component<CreateUnitCategoryProps, {}> {
 
   handleSubmit = (e: any): void => {
     e.preventDefault()
-    this.props.form.validateFields(async (err, values: {name: string}) => {
+    this.props.form.validateFields(async (err, values: {email: string, name: string}) => {
       if (!values.name) {
         message.warning("Add type first!")
         return
       }
+      values.email = user().email
       await post('add-unit-category', values)
         .then(response => {
           message.success(response)

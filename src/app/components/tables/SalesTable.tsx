@@ -2,7 +2,8 @@ import * as React from "react";
 import {Table} from "antd";
 import i18n from "../../libs/i18n";
 import PageTitle from "../utils/PageTitle";
-import {post} from "../../libs/utils/request";
+import {get, post} from "../../libs/utils/request";
+import {user} from "../../libs/utils/user";
 
 type props = {
   data: Array<Product>
@@ -78,7 +79,7 @@ class SalesTable extends React.Component<props, state> {
   }
 
   fetchProductCategories = async () => {
-    await post('get-product-categories')
+    await get('get-product-categories', {email: user().email})
       .then((response: Response) => {
         this.setState({
           productCategories: response.productCategories

@@ -4,6 +4,7 @@ import {WrappedFormUtils} from "antd/lib/form/Form";
 import addFormItem from "../../libs/forms/addFormItem";
 import {Simulate} from "react-dom/test-utils";
 import {post} from "../../libs/utils/request";
+import {user} from "../../libs/utils/user";
 
 
 interface CreateProductCategoryProps extends React.Props<any> {
@@ -20,11 +21,12 @@ class CreateProductCategory extends React.Component<CreateProductCategoryProps, 
 
   handleSubmit = (e: any): void => {
     e.preventDefault()
-    this.props.form.validateFields(async (err, values) => {
+    this.props.form.validateFields(async (err, values: {email: string, name: string}) => {
       if (!values.name) {
         message.warning("Add type first!")
         return
       }
+      values.email = user().email
       await post('add-product-category', values)
         .then(response => {
           message.success(response)

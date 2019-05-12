@@ -127,10 +127,10 @@ class AnnualDashboardTab extends React.Component<props, state> {
     const prevState = {...this.state}
     const sum = prevState.productCosts + this.getGrossProfit()
     result.push([
-      prevState.productCosts / sum * 100, 'Product costs [%]'
+      prevState.productCosts / sum * 100, 'Cost of sales [%]'
     ])
     result.push([
-      this.getGrossProfit() / sum * 100, 'Gross profit [%]'
+      this.getGrossProfit() / sum * 100, 'Gross margin [%]'
     ])
     return result
   }
@@ -140,10 +140,10 @@ class AnnualDashboardTab extends React.Component<props, state> {
     const prevState = {...this.state}
     const sum = prevState.productCosts + prevState.indirectCosts + prevState.income - (prevState.productCosts + prevState.indirectCosts)
     result.push([
-      prevState.productCosts / sum * 100, 'Accounting cost: Product costs [%]'
+      prevState.productCosts / sum * 100, 'Accounting cost: Cost of sales [%]'
     ])
     result.push([
-      prevState.indirectCosts / sum * 100, 'Accounting cost: Indirect costs [%]'
+      prevState.indirectCosts / sum * 100, 'Accounting cost: Operating expenses [%]'
     ])
     result.push([
       (prevState.income - (prevState.productCosts + prevState.indirectCosts)) / sum * 100, 'Accounting profit [%]'
@@ -177,9 +177,9 @@ class AnnualDashboardTab extends React.Component<props, state> {
           <Card style={{margin: '5px 0px'}}>
             <Statistic
               title={
-                <div style={statisticHeaderStyle}><Tooltip title={'All the spent costs excluding product costs.'}>
+                <div style={statisticHeaderStyle}><Tooltip title={'All the expenses excluding cost of sales.'}>
                   <span><Icon type="info-circle" theme="twoTone" style={{fontSize: '0.7em', marginRight: 8}}/></span>
-                </Tooltip>Indirect costs</div>
+                </Tooltip>Operating expenses</div>
               }
               value={indirectCosts}
               precision={1}
@@ -197,7 +197,7 @@ class AnnualDashboardTab extends React.Component<props, state> {
           <Card style={{margin: '5px 0px'}}>
             <Statistic
               title={
-                <div style={statisticHeaderStyle}><Tooltip title={'Sum of indirect costs and product costs.'}>
+                <div style={statisticHeaderStyle}><Tooltip title={'Sum of operating expenses and cost of sales.'}>
                   <span><Icon type="info-circle" theme="twoTone" style={{fontSize: '0.7em', marginRight: 8}}/></span>
                 </Tooltip>Accounting costs</div>
               }
@@ -217,9 +217,9 @@ class AnnualDashboardTab extends React.Component<props, state> {
           <Card style={{margin: '5px 0px'}}>
             <Statistic
               title={
-                <div style={statisticHeaderStyle}><Tooltip title={'Gross profit - indirect costs'}>
+                <div style={statisticHeaderStyle}><Tooltip title={'Gross margin - operating expenses'}>
                   <span><Icon type="info-circle" theme="twoTone" style={{fontSize: '0.7em', marginRight: 8}}/></span>
-                </Tooltip>Accounting profit</div>
+                </Tooltip>Operating income</div>
               }
               value={this.getGrossProfit() - indirectCosts}
               precision={1}
@@ -313,7 +313,7 @@ class AnnualDashboardTab extends React.Component<props, state> {
                       <div style={statisticHeaderStyle}><Tooltip title={'Sum of the amount of sold products.'}>
                         <span><Icon type="info-circle" theme="twoTone"
                                     style={{fontSize: '0.7em', marginRight: 8}}/></span>
-                      </Tooltip>Income</div>
+                      </Tooltip>Net sales</div>
                     }
                     value={this.state.income}
                     precision={1}
@@ -335,7 +335,7 @@ class AnnualDashboardTab extends React.Component<props, state> {
                         title={'Sum of the costs spent for product acquisitions.'}>
                         <span><Icon type="info-circle" theme="twoTone"
                                     style={{fontSize: '0.7em', marginRight: 8}}/></span>
-                      </Tooltip>Product costs</div>
+                      </Tooltip>Cost of sales</div>
                     }
                     value={this.state.productCosts}
                     precision={1}
@@ -353,10 +353,10 @@ class AnnualDashboardTab extends React.Component<props, state> {
                 <Card>
                   <Statistic
                     title={
-                      <div style={statisticHeaderStyle}><Tooltip title={'Income - product costs.'}>
+                      <div style={statisticHeaderStyle}><Tooltip title={'Net sales - cost of sales.'}>
                         <span><Icon type="info-circle" theme="twoTone"
                                     style={{fontSize: '0.7em', marginRight: 8}}/></span>
-                      </Tooltip>Gross profit</div>
+                      </Tooltip>Gross margin</div>
                     }
                     value={this.getGrossProfit()}
                     precision={1}
@@ -399,12 +399,12 @@ class AnnualDashboardTab extends React.Component<props, state> {
                style={{border: '1px solid #1890ff', paddingBottom: 10, borderRadius: 4, margin: 10, width: '80%'}}>
 
             <Col span={9} offset={2}>
-              <Chart title={`Ratio of product costs in ${this.state.selectedYear}`}
+              <Chart title={`Ratio of cost of sales in ${this.state.selectedYear}`}
                      data={this.getProdCostGrossProfitData()}
                      height={200} width={200} type={'DOUGHNUT'}/>
             </Col>
             <Col span={10} offset={1}>
-              <Chart title={`Ratio of accounting costs in ${this.state.selectedYear}`}
+              <Chart title={`Ratio of operating expenses in ${this.state.selectedYear}`}
                      data={this.getAccountingChartData()}
                      height={200} width={200} type={'DOUGHNUT'}
                      colors={['rgb(255,34,45, 1)', 'rgb(255,34,45, 0.6)', '#3f8600']}/>
@@ -414,7 +414,7 @@ class AnnualDashboardTab extends React.Component<props, state> {
                align={'middle'}
                style={{border: '1px solid #1890ff', paddingBottom: 10, borderRadius: 4, margin: 10, width: '80%'}}>
             <Col span={10} offset={1}>
-              <Chart title={`Cost amounts payed in ${this.state.selectedYear}`} data={this.mapCostsToChartData()}
+              <Chart title={`Expenses in ${this.state.selectedYear}`} data={this.mapCostsToChartData()}
                      height={200} width={200} type={'PIE'}/>
             </Col>
           </Row>

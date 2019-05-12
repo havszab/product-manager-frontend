@@ -249,9 +249,9 @@ class OverviewTab extends React.Component<props, state> {
               <Chart data={this.state.incomesOfYears}
                      height={400}
                      width={600}
-                     title={'Incomes of years'}
+                     title={'Net sales of years'}
                      type={'BAR'}
-                     label={'Income [million HUF]'}
+                     label={'Net sales [million HUF]'}
                      colors={this.getColors('#52c41a', this.state.incomesOfYears.length)}
                      toMillion={true}
               />
@@ -282,10 +282,10 @@ class OverviewTab extends React.Component<props, state> {
                 <Chart data={this.state.profitsOfYears}
                        height={350}
                        width={500}
-                       title={'Gross profits earned yearly'}
+                       title={'Gross margin earned yearly'}
                        type={'BAR'}
                        colors={this.getColors("#FFCE56", this.state.profitsOfYears.length)}
-                       label={'Profit [million HUF]'}
+                       label={'Gross margin [million HUF]'}
                        toMillion={true}
                 />
               </Card>
@@ -329,7 +329,7 @@ class OverviewTab extends React.Component<props, state> {
                 <Statistic
                   title={
                     <div style={statisticHeaderStyle}><Tooltip
-                      title={'All the incomes earned from the first year to the last'}>
+                      title={'Sum of net sales from the first year to the last'}>
                         <span><Icon type="info-circle" theme="twoTone"
                                     style={{fontSize: '0.7em', marginRight: 8}}/></span>
                     </Tooltip>Historical income</div>
@@ -350,7 +350,7 @@ class OverviewTab extends React.Component<props, state> {
             <Card>
               <Chart data={this.state.top5Annual}
                      height={costChartHeight}
-                     width={costChartWidth} type={'PIE'} title={'The 5 highest annual costs'}
+                     width={costChartWidth} type={'PIE'} title={'The 5 highest annual expenses'}
                      colors={blueColorSet}
               />
             </Card>
@@ -359,7 +359,7 @@ class OverviewTab extends React.Component<props, state> {
             <Card>
               <Chart data={this.state.top5Monthly}
                      height={costChartHeight}
-                     width={costChartWidth} type={'PIE'} title={'The 5 highest monthly costs'}
+                     width={costChartWidth} type={'PIE'} title={'The 5 highest monthly expenses'}
                      colors={blueColorSet}
               />
             </Card>
@@ -368,7 +368,7 @@ class OverviewTab extends React.Component<props, state> {
             <Card>
               <Chart data={this.state.top5Weekly}
                      height={costChartHeight}
-                     width={costChartWidth} type={'PIE'} title={'The 5 highest weekly costs'}
+                     width={costChartWidth} type={'PIE'} title={'The 5 highest weekly expenses'}
                      colors={blueColorSet}
               />
             </Card>
@@ -377,7 +377,7 @@ class OverviewTab extends React.Component<props, state> {
             <Card>
               <Chart data={this.state.top5Other}
                      height={costChartHeight} width={costChartWidth}
-                     type={'PIE'} title={'The 5 highest other costs'}
+                     type={'PIE'} title={'The 5 highest other expenses'}
                      colors={blueColorSet}
               />
             </Card>

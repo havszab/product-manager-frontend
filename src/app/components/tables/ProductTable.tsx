@@ -3,6 +3,7 @@ import i18n from "../../libs/i18n";
 import {message, Table, Cascader, Icon} from "antd";
 import {get, post} from "../../libs/utils/request";
 import {CascaderOptionType} from "antd/es/cascader";
+import {user} from "../../libs/utils/user";
 
 interface ProductTableProps extends React.Props<any> {
   data: Array<Product>
@@ -105,7 +106,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
   }
 
   fetchProductCategories = async () => {
-    await post('get-product-categories')
+    await get('get-product-categories', {email: user().email})
       .then((response: Response) => {
         this.setState({
           productCategories: response.productCategories,

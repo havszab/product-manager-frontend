@@ -6,7 +6,6 @@ import {Link} from "react-router-dom"
 import i18n from "./libs/i18n"
 import LanguageSelector from "./components/utils/LanguageSelector";
 import {user} from "./libs/utils/user";
-import Badge from "antd/lib/badge";
 
 const {Content, Footer, Sider} = Layout;
 
