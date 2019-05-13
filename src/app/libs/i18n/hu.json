@@ -139,8 +139,9 @@
   },
   "dashboard": {
     "title": "Kimutatások",
+    "denomination": "Megnevezés",
     "income": "Bevétel",
-    "prodCosts": "Eladott áruk költsége",
+    "prodCosts": "Beszerzés költsége",
     "grossProfit": "Bruttó profit",
     "opCosts": "Közvetett költségek",
     "accCosts": "Számviteli költségek",
@@ -163,6 +164,17 @@
       "annualGP": {
         "title": "Bruttó profit éves alakulása",
         "label": "Összeg [millió HUF]"
+      },
+      "monthly": {
+        "titleInc": "Bevétel alakulása az egyes napokon",
+        "titleProfit": "Profit alakulása az egyes napokon",
+        "productProfit": "Profit összege termékek szerint",
+        "label": "Összeg [HUF]"
+      },
+      "annual": {
+        "prodCostRatio": "Termékbeszerzés aránya a bevételhez képest",
+        "opCostRatio": "Számviteli költségek a bevételhez képest",
+        "costs": "Kiadások"
       }
     }
   },
@@ -178,7 +190,13 @@
     "totalInc": {
       "title": "Összes bevétel",
       "info": "A vállalat működésének kezdete óta realizált bevétel"
-    }
+    },
+    "incomeInfo": "Tárgyévben, az eladott termékekből származó összeg",
+    "prodCostInfo": "Termékbeszerzésre költött összeg",
+    "grossProfitInfo" : "A bevétel és az árubeszerzés különbsége",
+    "opCostInfo": "Termékbeszerzésen felüli kölségek",
+    "accCostInfo": "Tárgyévi termékbeszerzés és folyóköltségek összege",
+    "accProfitInfo": "A bruttó profit és a közvetett költségek különbsége"
   },
   "tabs": {
     "overview": "Áttekintés",

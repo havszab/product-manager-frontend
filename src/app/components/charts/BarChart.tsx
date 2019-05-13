@@ -1,5 +1,6 @@
 import React from "react";
 import {Bar} from "react-chartjs-2";
+import i18n from '../../libs/i18n'
 
 type props = {
   data: Array<[number, string]>
@@ -82,7 +83,7 @@ class BarChart extends React.Component<props, state> {
         datasets: [
           {
             data: values,
-            label: 'Amount',
+            label: i18n('dashboard.charts.monthly.label'),
             backgroundColor: bgs,
             borderColor: 'rgb(24,144,255)',
             borderWidth: 1,
@@ -101,7 +102,7 @@ class BarChart extends React.Component<props, state> {
         datasets: [
           {
             data: values,
-            label: 'Amount',
+            label: i18n('dashboard.charts.monthly.label'),
             backgroundColor: bgs,
             borderColor: 'rgb(24,144,255)',
             borderWidth: 1,

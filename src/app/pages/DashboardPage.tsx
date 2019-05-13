@@ -316,7 +316,7 @@ class DashboardPage extends Component<props, state> {
       },
       title: {
         display: true,
-        text: 'Profit earned per product type'
+        text: i18n('dashboard.charts.monthly.productProfit')
       }
     }
 
@@ -355,7 +355,7 @@ class DashboardPage extends Component<props, state> {
                 height={300}
                 width={window.innerWidth * 0.8}
                 type={'BAR'}
-                title={'Profit earned per days'}/>
+                title={i18n('dashboard.charts.monthly.titleProfit')}/>
             </div>
           </Row>
           <Row type={"flex"} justify={"space-around"}>
@@ -366,12 +366,15 @@ class DashboardPage extends Component<props, state> {
                 height={300}
                 width={window.innerWidth * 0.8}
                 type={'BAR'}
-                title={'Income per days'}/>
+                title={i18n('dashboard.charts.monthly.titleInc')}/>
             </div>
           </Row>
           <Row type={"flex"} justify={"space-around"}>
             <div style={monthlyCharts}>
-              <Bar data={this.state.profitOfCats} options={chartOptions} height={300} width={window.innerWidth * 0.8}/>
+              <Bar data={this.state.profitOfCats}
+                   options={chartOptions}
+                   height={300}
+                   width={window.innerWidth * 0.8}/>
             </div>
           </Row>
         </TabPane>

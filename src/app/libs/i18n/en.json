@@ -159,6 +159,7 @@
   },
   "dashboard": {
     "title": "Dashboard",
+    "denomination": "Denomination",
     "income": "Income",
     "prodCosts": "Product costs",
     "grossProfit": "Gross profit",
@@ -183,6 +184,17 @@
       "annualGP": {
         "title": "Gross profit of years",
         "label": "Amount [million HUF]"
+      },
+      "monthly": {
+        "titleInc": "Income earned per day",
+        "titleProfit": "Profit earned per day",
+        "productProfit": "Profit earned per product",
+        "label": "Amount [HUF]"
+      },
+      "annual": {
+        "prodCostRatio": "Ratio of product costs",
+        "opCostRatio": "Ratio of accounting costs",
+        "costs": "Expenses"
       }
     }
   },
@@ -198,7 +210,13 @@
     "totalInc": {
       "title": "Total income",
       "info": "Sum of income since the beginnings"
-    }
+    },
+    "incomeInfo": "Amount derived from sold products",
+    "prodCostInfo": "Amount spent for product acquisition",
+    "grossProfitInfo" : "Income - prodduct costs",
+    "opCostInfo": "All the expenses excluding product acquisition costs",
+    "accCostInfo": "Sum of all expenses (product costs and operating expenses)",
+    "accProfitInfo": "Gross profit - operating costs"
   },
   "months": {
     "jan": "January",

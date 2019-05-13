@@ -10,6 +10,7 @@ type props = {
   colors?: Array<string>
   label?: string
   toMillion?: boolean
+  labelPosition?: string
 }
 type state = {
   data: ChartData
@@ -96,7 +97,7 @@ class Chart extends React.Component<props, state> {
     const options: Options = {
       legend: {
         display: true,
-        position: 'bottom'
+        position: this.props.labelPosition? this.props.labelPosition: 'bottom'
       },
       title: {
         display: true,
