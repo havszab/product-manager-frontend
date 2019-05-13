@@ -131,6 +131,7 @@ export const datePickerLocale = () => {
   }
 }
 
-export const setLanguage = (language: string) => {
-  localStorage.setItem('language', language)
+export const setLanguage = (lang: string) => {
+  localStorage.setItem('language', lang)
+  language = lang
 }

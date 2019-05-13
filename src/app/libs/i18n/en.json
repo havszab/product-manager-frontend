@@ -46,8 +46,15 @@
     "form" : {
       "submit" : "Login",
       "email" : "Email",
-      "password" : "Password"
+      "password" : "Password",
+      "required" : "This field is required"
     }
+  },
+
+  "form" : {
+    "required" : "This field is required",
+    "productRequired" : "Product required!",
+    "unitRequired" : "Unit required!"
   },
 
   "product" : {
@@ -62,6 +69,9 @@
       "edit" : "Edit",
       "sell" :"Sell"
     },
+    "value" : "Value",
+    "income" : "Income",
+    "profit" : "Profit",
     "currentAcquisition" : "Current acquisition"
   },
 
@@ -85,12 +95,19 @@
       "title": "Items moved to stock!",
       "msg": "Items successfully delivered to stock! You can manage them under the stock menu later."
     },
+    "itemSold" : {
+      "title": "Item sold",
+      "of" : " of ",
+      "sold" : "successfully sold for",
+      "for" : " "
+    },
     "removed": "Selected items successfully removed!"
   },
 
   "operations" : {
     "save" : "Save",
-    "cancel" : "Cancel"
+    "cancel" : "Cancel",
+    "reset": "Reset"
   },
 
   "acquisition" : {
@@ -118,6 +135,30 @@
         "addProdCategory": "Add new product",
         "addUnitCategory": "Add new unit"
       }
+    }
+  },
+  "stock" : {
+    "title": "Items in stock",
+    "form" : {
+      "data" : "Acquisition details",
+      "value" : "Acquisition value",
+      "inStock" : "In stock",
+      "unitPrice" : "Unit value",
+      "sellForm" : "Set quantity and price!",
+      "sellData" : "Selling details"
+    },
+    "sales" : {
+      "title": "Sales history",
+      "table" : {
+        "product": "Product",
+        "value": "Acquisition value",
+        "soldFor": "Sold for",
+        "soldOn": "Sold on"
+      }
+    },
+    "tabs"  : {
+      "overview" : "Overview",
+      "monthly" : "Monthly view"
     }
   }
 }

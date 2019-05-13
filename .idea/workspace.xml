@@ -3,15 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="fa9dda26-f5ff-4013-b0f8-031525e645a6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/MainFrame.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/MainFrame.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/forms/CreateProduct.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/forms/CreateProduct.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/forms/CreateProductCategory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/forms/CreateProductCategory.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/forms/CreateUnitCategory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/forms/CreateUnitCategory.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/forms/ItemSellForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/forms/ItemSellForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/tables/ProductTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/tables/ProductTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/tables/SalesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/tables/SalesTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/utils/LanguageSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/utils/LanguageSelector.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/libs/i18n/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/libs/i18n/en.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/libs/i18n/hu.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/libs/i18n/hu.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/libs/i18n/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/libs/i18n/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/AcquisitionPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/AcquisitionPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/SalesPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/SalesPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/StockPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/StockPage.tsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,26 +25,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.51512533">
+    <splitter split-orientation="horizontal" split-proportion="0.46088594">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/app/libs/i18n/hu.json">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="173">
-                  <caret line="77" column="17" lean-forward="true" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/app/pages/AcquisitionPage.tsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-188">
-                  <caret line="191" column="64" selection-start-line="191" selection-start-column="64" selection-end-line="191" selection-end-column="64" />
-                  <folding>
-                    <element signature="e#0#30#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="-217">
+                  <caret line="92" column="25" selection-start-line="92" selection-start-column="25" selection-end-line="92" selection-end-column="25" />
                 </state>
               </provider>
             </entry>
@@ -50,8 +40,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/app/libs/i18n/en.json">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="518">
-                  <caret line="118" column="41" selection-start-line="118" selection-start-column="41" selection-end-line="118" selection-end-column="41" />
+                <state relative-caret-position="-231">
+                  <caret line="109" column="19" selection-start-line="109" selection-start-column="19" selection-end-line="109" selection-end-column="19" />
                 </state>
               </provider>
             </entry>
@@ -59,34 +49,10 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/app/libs/i18n/index.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-802">
-                  <caret line="43" column="1" lean-forward="true" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
+                <state relative-caret-position="205">
+                  <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
                   <folding>
                     <element signature="e#0#28#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/app/MainFrame.tsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="452">
-                  <caret line="139" column="27" selection-start-line="139" selection-start-column="27" selection-end-line="139" selection-end-column="27" />
-                  <folding>
-                    <element signature="e#0#30#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/app/components/utils/LanguageSelector.tsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-                  <folding>
-                    <element signature="e#0#30#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -97,51 +63,15 @@
       <split-second>
         <leaf>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/app/pages/AcquisitionPage.tsx">
+            <entry file="file://$PROJECT_DIR$/src/app/pages/SalesPage.tsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1036">
-                  <caret line="142" selection-start-line="142" selection-end-line="142" />
-                  <folding>
-                    <element signature="e#0#30#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/app/components/forms/CreateProduct.tsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="474">
-                  <caret line="203" column="20" lean-forward="true" selection-start-line="203" selection-start-column="20" selection-end-line="203" selection-end-column="20" />
+                <state relative-caret-position="443">
+                  <caret line="155" column="69" selection-start-line="155" selection-start-column="69" selection-end-line="155" selection-end-column="69" />
                   <folding>
                     <element signature="e#0#31#0" expanded="true" />
-                    <element signature="n#!!block;n#Product#0" />
+                    <element signature="n#!!block;n#Response#0" />
                     <element signature="n#!!block;n#ProductCategory#0" />
                     <element signature="n#!!block;n#UnitCategory#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/app/components/forms/CreateUnitCategory.tsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="430">
-                  <caret line="53" column="37" selection-start-line="53" selection-start-column="37" selection-end-line="53" selection-end-column="37" />
-                  <folding>
-                    <element signature="e#0#31#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/app/components/forms/CreateProductCategory.tsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="480">
-                  <caret line="58" column="98" selection-start-line="58" selection-start-column="98" selection-end-line="58" selection-end-column="98" />
-                  <folding>
-                    <element signature="e#0#31#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -175,7 +105,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/app/pages/LoginPage.tsx" />
         <option value="$PROJECT_DIR$/src/app/pages/SalesPage.ts" />
         <option value="$PROJECT_DIR$/src/app/components/PageTitle.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/SalesTable.tsx" />
@@ -188,7 +117,6 @@
         <option value="$PROJECT_DIR$/src/app/components/utils/PageTitle.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/charts/RoundChart.tsx" />
         <option value="$PROJECT_DIR$/src/app/libs/utils/notification.ts" />
-        <option value="$PROJECT_DIR$/src/app/pages/SalesPage.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/utils/CostWidgets.tsx" />
         <option value="$PROJECT_DIR$/src/app/pages/tabs/CostTab.ts" />
         <option value="$PROJECT_DIR$/src/app/libs/utils/AddButton.tsx" />
@@ -210,22 +138,24 @@
         <option value="$PROJECT_DIR$/src/app/App.css" />
         <option value="$PROJECT_DIR$/src/app/components/charts/Chart.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/ListCategories.tsx" />
-        <option value="$PROJECT_DIR$/src/app/components/forms/ItemSellForm.tsx" />
-        <option value="$PROJECT_DIR$/src/app/pages/StockPage.tsx" />
         <option value="$PROJECT_DIR$/src/app/pages/tabs/OverviewTab.tsx" />
         <option value="$PROJECT_DIR$/src/app/pages/tabs/AnnualDashboardTab.tsx" />
-        <option value="$PROJECT_DIR$/src/app/components/tables/SalesTable.tsx" />
         <option value="$PROJECT_DIR$/src/app/pages/tabs/AdministrationTab.tsx" />
         <option value="$PROJECT_DIR$/src/app/libs/utils/request.ts" />
         <option value="$PROJECT_DIR$/src/app/MainFrame.tsx" />
-        <option value="$PROJECT_DIR$/src/app/components/tables/ProductTable.tsx" />
         <option value="$PROJECT_DIR$/src/app/components/forms/CreateProduct.tsx" />
+        <option value="$PROJECT_DIR$/src/app/pages/AcquisitionPage.tsx" />
+        <option value="$PROJECT_DIR$/src/app/components/utils/LanguageSelector.tsx" />
+        <option value="$PROJECT_DIR$/src/app/components/forms/CreateUnitCategory.tsx" />
+        <option value="$PROJECT_DIR$/src/app/components/forms/CreateProductCategory.tsx" />
+        <option value="$PROJECT_DIR$/src/app/pages/StockPage.tsx" />
+        <option value="$PROJECT_DIR$/src/app/components/tables/ProductTable.tsx" />
+        <option value="$PROJECT_DIR$/src/app/components/forms/ItemSellForm.tsx" />
+        <option value="$PROJECT_DIR$/src/app/libs/i18n/index.ts" />
         <option value="$PROJECT_DIR$/src/app/libs/i18n/en.json" />
         <option value="$PROJECT_DIR$/src/app/libs/i18n/hu.json" />
-        <option value="$PROJECT_DIR$/src/app/components/forms/CreateProductCategory.tsx" />
-        <option value="$PROJECT_DIR$/src/app/components/forms/CreateUnitCategory.tsx" />
-        <option value="$PROJECT_DIR$/src/app/pages/AcquisitionPage.tsx" />
-        <option value="$PROJECT_DIR$/src/app/libs/i18n/index.ts" />
+        <option value="$PROJECT_DIR$/src/app/components/tables/SalesTable.tsx" />
+        <option value="$PROJECT_DIR$/src/app/pages/SalesPage.tsx" />
       </list>
     </option>
   </component>
@@ -286,6 +216,14 @@
               <item name="product-manager-frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="product-manager-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="product-manager-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="libs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -322,6 +260,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.TypeScript" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
@@ -411,7 +350,7 @@
       <workItem from="1557212837850" duration="15185000" />
       <workItem from="1557386530023" duration="693000" />
       <workItem from="1557471069638" duration="272000" />
-      <workItem from="1557564159561" duration="6634000" />
+      <workItem from="1557564159561" duration="12745000" />
     </task>
     <task id="LOCAL-00001" summary="acquisition page implemented">
       <created>1555061470467</created>
@@ -539,17 +478,24 @@
       <option name="project" value="LOCAL" />
       <updated>1557677951850</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="acquisition page translation">
+      <created>1557687108685</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1557687108685</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="306089000" />
+    <option name="totallyTimeSpent" value="312200000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8621974" visible="true" weight="0.08101668" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8621974" visible="true" weight="0.15726767" />
       <window_info id="Structure" order="1" sideWeight="0.1378026" side_tool="true" weight="0.2573471" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -663,7 +609,8 @@
     <MESSAGE value="category list refactor, loading on acq impl" />
     <MESSAGE value="sell input validation" />
     <MESSAGE value="after demo commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="after demo commit" />
+    <MESSAGE value="acquisition page translation" />
+    <option name="LAST_COMMIT_MESSAGE" value="acquisition page translation" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/webpack/dev.config.js">
@@ -710,19 +657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/SalesPage.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="141" column="7" selection-start-line="141" selection-start-column="7" selection-end-line="141" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-            <element signature="n#!!block;n#Response#0" />
-            <element signature="n#!!block;n#ProductCategory#0" />
-            <element signature="n#!!block;n#UnitCategory#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -913,26 +847,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/forms/ItemSellForm.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="94" column="40" lean-forward="true" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/StockPage.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="117" column="16" lean-forward="true" selection-start-line="117" selection-start-column="16" selection-end-line="117" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/pages/tabs/AnnualDashboardTab.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
@@ -949,16 +863,6 @@
           <caret line="379" column="70" selection-start-line="379" selection-start-column="70" selection-end-line="379" selection-end-column="70" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/tables/SalesTable.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1140">
-          <caret line="81" column="60" selection-start-line="81" selection-start-column="60" selection-end-line="81" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1003,23 +907,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/tables/ProductTable.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="179" column="9" lean-forward="true" selection-start-line="179" selection-start-column="9" selection-end-line="179" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/libs/i18n/en.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="118" column="41" selection-start-line="118" selection-start-column="41" selection-end-line="118" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/components/forms/CreateProduct.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="474">
@@ -1033,27 +920,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/libs/i18n/hu.json">
+    <entry file="file://$PROJECT_DIR$/src/app/MainFrame.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="77" column="17" lean-forward="true" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
+        <state relative-caret-position="268">
+          <caret line="130" selection-start-line="130" selection-end-line="130" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/utils/LanguageSelector.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/components/forms/CreateProductCategory.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="58" column="98" selection-start-line="58" selection-start-column="98" selection-end-line="58" selection-end-column="98" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-322">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/components/forms/CreateUnitCategory.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="53" column="37" selection-start-line="53" selection-start-column="37" selection-end-line="53" selection-end-column="37" />
+        <state relative-caret-position="185">
+          <caret line="27" column="7" lean-forward="true" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -1070,32 +967,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/tables/ProductTable.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="178" column="7" lean-forward="true" selection-start-line="178" selection-start-column="7" selection-end-line="178" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/forms/ItemSellForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="100" column="64" selection-start-line="100" selection-start-column="64" selection-end-line="100" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/libs/i18n/index.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-802">
-          <caret line="43" column="1" lean-forward="true" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
+        <state relative-caret-position="205">
+          <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/MainFrame.tsx">
+    <entry file="file://$PROJECT_DIR$/src/app/pages/StockPage.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="139" column="27" selection-start-line="139" selection-start-column="27" selection-end-line="139" selection-end-column="27" />
+        <state relative-caret-position="563">
+          <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
           <folding>
-            <element signature="e#0#30#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/utils/LanguageSelector.tsx">
+    <entry file="file://$PROJECT_DIR$/src/app/libs/i18n/en.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+        <state relative-caret-position="-231">
+          <caret line="109" column="19" selection-start-line="109" selection-start-column="19" selection-end-line="109" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/libs/i18n/hu.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-217">
+          <caret line="92" column="25" selection-start-line="92" selection-start-column="25" selection-end-line="92" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/tables/SalesTable.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-260">
+          <caret line="101" column="8" selection-start-line="101" selection-start-column="8" selection-end-line="101" selection-end-column="8" />
           <folding>
-            <element signature="e#0#30#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pages/SalesPage.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="155" column="69" selection-start-line="155" selection-start-column="69" selection-end-line="155" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+            <element signature="n#!!block;n#Response#0" />
+            <element signature="n#!!block;n#ProductCategory#0" />
+            <element signature="n#!!block;n#UnitCategory#0" />
           </folding>
         </state>
       </provider>

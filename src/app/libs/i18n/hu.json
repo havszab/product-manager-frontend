@@ -37,6 +37,13 @@
     "register": "Nem vagy még regisztrálva?",
     "registerHere": "Itt megteheted"
   },
+
+  "form" : {
+    "required" : "A mező kitöltése kötelező",
+    "productRequired" : "Adjon meg terméket!",
+    "unitRequired" : "Adjon meg egységet!"
+  },
+
   "product": {
     "tableData": {
       "product": "Termék",
@@ -49,6 +56,9 @@
       "edit": "Szerkesztés",
       "sell": "Eladás"
     },
+    "value" : "Érték",
+    "income" : "Bevétel",
+    "profit" : "Profit",
     "currentAcquisition": "Aktuális beszerzés"
   },
   "menuItems": {
@@ -69,11 +79,18 @@
       "title": "Tételek áthelyezve a raktárba!",
       "msg": "A kiválasztott tételek sikeresen kiszállítva a raktárba. Ezeket a raktár menüpont alatt kezelheti ezentúl. "
     },
+    "itemSold" : {
+      "title": "Tétel eladva",
+      "of" : " ",
+      "sold" : "sikeresen eladva",
+      "for" : "-ért"
+    },
     "removed": "A kiválasztott tételek sikeresen eltávolítva a listáról."
   },
   "operations": {
     "save": "Mentés",
-    "cancel": "Mégse"
+    "cancel": "Mégse",
+    "reset": "Visszaállít"
   },
   "acquisition": {
     "title": "Aktuális beszerzés",
@@ -101,5 +118,29 @@
         "addUnitCategory": "Egység hozzáadása"
       }
     }
+  },
+  "stock" : {
+    "title": "Raktárkészlet",
+    "form" : {
+      "data" : "Beszerzési adatok",
+      "value" : "Beszerzési érték",
+      "inStock" : "Raktáron",
+      "unitPrice" : "Beszerzési egységár",
+      "sellForm" : "Adja meg az eladási mennyiséget és árat!",
+      "sellData" : "Eladási adatok"
+    }
+  },
+  "sales" : {
+    "title": "Jegyzett eladások",
+    "table" : {
+      "product": "Termék",
+      "value": "Beszési érték",
+      "soldFor": "Eladási ár",
+      "soldOn": "Eladás dátuma"
+    }
+  },
+  "tabs"  : {
+    "overview" : "Áttekintés",
+    "monthly" : "Havi nézet"
   }
 }

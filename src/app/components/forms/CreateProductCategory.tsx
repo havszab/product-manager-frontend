@@ -2,7 +2,6 @@ import * as React from "react";
 import {Form, Button, Row, message} from 'antd'
 import {WrappedFormUtils} from "antd/lib/form/Form";
 import addFormItem from "../../libs/forms/addFormItem";
-import {Simulate} from "react-dom/test-utils";
 import {post} from "../../libs/utils/request";
 import {user} from "../../libs/utils/user";
 import i18n from "../../libs/i18n";
@@ -24,7 +23,7 @@ class CreateProductCategory extends React.Component<CreateProductCategoryProps, 
     e.preventDefault()
     this.props.form.validateFields(async (err, values: {email: string, name: string}) => {
       if (!values.name) {
-        message.warning("Add type first!")
+        message.warning(i18n('form.productRequired'))
         return
       }
       values.email = user().email
@@ -52,7 +51,7 @@ class CreateProductCategory extends React.Component<CreateProductCategoryProps, 
             required: true,
             getFieldDecorator,
             label: i18n('acquisition.product.categoryName'),
-            errorMessage: 'This field is required'
+            errorMessage: i18n('form.required')
           })}
         </div>
         <Row type="flex" justify="space-around">

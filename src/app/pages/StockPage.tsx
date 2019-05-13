@@ -5,6 +5,7 @@ import {user} from "../libs/utils/user";
 import {Modal} from 'antd'
 import ItemSell from "../components/forms/ItemSellForm";
 import PageTitle from "../components/utils/PageTitle";
+import i18n from '../libs/i18n'
 
 interface StockPageProps extends React.Props <any> {
 }
@@ -116,7 +117,7 @@ class StockPage extends React.Component<StockPageProps, state> {
 
 
     return <div>
-      <PageTitle title={'Products in stock'}/>
+      <PageTitle title={i18n('stock.title')}/>
       <ProductTable data={this.state.stock.products} stockOperations={true} onSuccess={this.fetchStock} onSell={this.handleSell}/>
       {modalOnSell}
     </div>

@@ -1,11 +1,12 @@
-import * as React from "react";
+import * as React from "react"
 import {Icon, Input, message, Slider} from 'antd'
-import Row from "antd/lib/grid/row";
-import {ChangeEvent} from "react";
-import Button from "antd/lib/button";
-import {user} from "../../libs/utils/user";
-import {post} from "../../libs/utils/request";
-import {openNotification} from "../../libs/utils/notification";
+import Row from "antd/lib/grid/row"
+import {ChangeEvent} from "react"
+import Button from "antd/lib/button"
+import {user} from "../../libs/utils/user"
+import {post} from "../../libs/utils/request"
+import {openNotification} from "../../libs/utils/notification"
+import i18n from '../../libs/i18n'
 
 
 interface ItemSellProps extends React.Props <any> {
@@ -84,7 +85,6 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
         this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell : 0),
       email: user().email
     }
-    debugger
     if (requestBody.income == 0 && requestBody.quantToSell == 0) {
       message.warning('Please provide selling conditions!')
       return
@@ -94,10 +94,16 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
     })
     await post('sell-item', requestBody)
       .then((res: { success: boolean, message: string }) => {
-        if (res.success) openNotification("success", "Item sold!", res.message)
+        if (res.success) openNotification("success", "Item sold!",
+          requestBody.quantToSell + ' ' +
+          this.props.product.unitCategory.unitName +
+          i18n('notificationMessage.itemSold.of') + ' ' +
+          this.props.product.productCategory.productName + ' ' +
+          i18n('notificationMessage.itemSold.sold') + ' ' + requestBody.income + ' HUF' +
+          i18n('notificationMessage.itemSold.for'))
         else message.error(res.message)
       }).catch(err => {
-        message.error('Error occurred while selling product. Error description: ' + err)
+        message.error(err)
       })
       .then(() => this.setState({
         isLoading: false
@@ -131,33 +137,30 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
     const sellBtn = this.state.isLoading
       ? <Button type={"primary"} style={{minWidth: '30%'}} disabled={true} onClick={this.productSellHandler}><Icon
         type="loading"/></Button>
-      : <Button type={"primary"} style={{minWidth: '30%'}} onClick={this.productSellHandler}>Sell</Button>
+      : <Button type={"primary"} style={{minWidth: '30%'}}
+                onClick={this.productSellHandler}>{i18n('product.tableData.sell')}</Button>
 
 
     return (
       <div>
         <Row type={"flex"} justify={"space-around"} style={titleStyle}>
-          <h3>Selling {product.productCategory.productName}</h3></Row>
+          <h3>{i18n('stock.form.data')}: {product.productCategory.productName}</h3></Row>
         <div style={stockInfoStyle}>
           <Row type={"flex"} justify={"space-between"}>
-            <div style={headerCol}>Value</div>
+            <div style={headerCol}>{i18n('stock.form.value')}</div>
             <div style={colStyle}>{product.itemPrice.toLocaleString()} HUF</div>
           </Row>
           <Row type={"flex"} justify={"space-between"}>
-            <div style={headerCol}>Currently in stock</div>
+            <div style={headerCol}>{i18n('stock.form.inStock')}</div>
             <div style={colStyle}>{product.quantity} {product.unitCategory.unitName}</div>
           </Row>
           <Row type={"flex"} justify={"space-between"}>
-            <div style={headerCol}>Value per unit</div>
+            <div style={headerCol}>{i18n('stock.form.unitPrice')}</div>
             <div style={colStyle}>{Math.floor(product.unitPrice)} HUF/{product.unitCategory.unitName}</div>
-          </Row>
-          <Row type={"flex"} justify={"space-between"}>
-            <div style={headerCol}>Stock value</div>
-            <div style={colStyle}>{product.itemPrice} HUF</div>
           </Row>
         </div>
 
-        <Row type={"flex"} justify={"space-around"} style={titleStyle}><h3>Set quantity and price</h3></Row>
+        <Row type={"flex"} justify={"space-around"} style={titleStyle}><h3>{i18n('stock.form.sellForm')}</h3></Row>
 
 
         <Row type={"flex"} justify={"space-around"}>
@@ -175,27 +178,28 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
                  placeholder={'Price'}/>
         </Row>
 
-        <Row type={"flex"} justify={"space-around"} style={titleStyle}><h3>Offered item's details</h3></Row>
+        <Row type={"flex"} justify={"space-around"} style={titleStyle}><h3>{i18n('stock.form.sellData')}</h3></Row>
         <div style={stockInfoStyle}>
           <Row type={"flex"} justify={"space-between"}>
-            <div style={headerCol}>Quantity</div>
+            <div style={headerCol}>{i18n('product.tableData.quantity')}</div>
             <div style={colStyle}>{this.state.quantToSell} {this.props.product.unitCategory.unitName}</div>
           </Row>
           <Row type={"flex"} justify={"space-between"}>
-            <div style={headerCol}>Value</div>
+            <div style={headerCol}>{i18n('product.value')}</div>
             <div style={colStyle}>{this.props.product.unitPrice * this.state.quantToSell} HUF</div>
           </Row>
           <Row type={"flex"} justify={"space-between"}>
-            <div style={headerCol}>Income</div>
+            <div style={headerCol}>{i18n('product.income')}</div>
             <div style={colStyle}>{income.toLocaleString()} HUF</div>
           </Row>
           <Row type={"flex"} justify={"space-between"}>
-            <div style={headerCol}>Profit</div>
+            <div style={headerCol}>{i18n('product.profit')}</div>
             <div style={fontColor}>{profit.toLocaleString()} HUF</div>
           </Row>
         </div>
         <Row type={"flex"} justify={"space-around"}>
-          <Button type={"danger"} onClick={this.props.onCancel} style={{minWidth: '30%'}}>Cancel</Button>
+          <Button type={"danger"} onClick={this.props.onCancel}
+                  style={{minWidth: '30%'}}>{i18n('operations.cancel')}</Button>
           {sellBtn}
         </Row>
       </div>
@@ -205,4 +209,4 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
   }
 }
 
-export default ItemSellForm;
+export default ItemSellForm

@@ -95,10 +95,11 @@ class SalesTable extends React.Component<props, state> {
 
     const columns = [
       {
-        title: 'Product',
+        title: i18n('sales.table.product'),
         dataIndex: 'productCategory.productName',
         filters: filters,
         onFilter: (value: string, record: Product) => record.productCategory.productName.indexOf(value) === 0,
+
       },
       {
         title: i18n('product.tableData.quantity'),
@@ -109,7 +110,7 @@ class SalesTable extends React.Component<props, state> {
         sorter: (a: Product, b: Product) => a.quantity - b.quantity
       },
       {
-        title: 'Purchase value',
+        title: i18n('sales.table.value'),
         dataIndex: 'itemPrice',
         render: (value: string, product: Product) => (
           `${product.itemPrice.toLocaleString()} ${currency}`
@@ -118,7 +119,7 @@ class SalesTable extends React.Component<props, state> {
 
       },
       {
-        title: 'Sold for ',
+        title: i18n('sales.table.soldFor'),
         dataIndex: 'sellingPrice',
         render: (value: string, product: Product) => (
           `${product.sellingPrice.toLocaleString()} ${currency}`
@@ -126,7 +127,7 @@ class SalesTable extends React.Component<props, state> {
         sorter: (a: Product, b: Product) => a.sellingPrice - b.sellingPrice
       },
       {
-        title: 'Profit',
+        title: i18n('product.profit'),
         dataIndex: 'profit',
         render: (value: string, product: Product) => {
           return <div
@@ -135,7 +136,7 @@ class SalesTable extends React.Component<props, state> {
         sorter: (a: Product, b: Product) => a.profit - b.profit
       },
       {
-        title: 'Sold on ',
+        title: i18n('sales.table.soldOn'),
         dataIndex: 'sellingDate',
         render: (value: string, product: Product) => (
           `${new Date(product.sellingDate).toLocaleDateString()}`

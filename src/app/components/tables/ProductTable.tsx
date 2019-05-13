@@ -174,7 +174,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
       render: (text: string, product: Product) => (
         this.props.data.length >= 1
           ? (
-            <a onClick={() => this.props.onSell(product)}>Sell</a>
+            <a onClick={() => this.props.onSell(product)}>{i18n('product.tableData.sell')}</a>
           ) : {}
       )
     } : {

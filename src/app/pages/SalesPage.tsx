@@ -7,6 +7,7 @@ import TimeRangeSwitcher from "../components/utils/TimeRangeSwitcher";
 import moment = require("moment");
 import {Icon} from "antd";
 import PageTitle from "../components/utils/PageTitle";
+import i18n from '../libs/i18n'
 
 type props = {}
 type state = {
@@ -147,12 +148,12 @@ class SalesPage extends React.Component<props, state> {
 
   render() {
     return <div>
-      <PageTitle title={'SALES HISTORY'}/>
+      <PageTitle title={i18n('sales.title')}/>
       <Tabs type="card">
-        <TabPane tab={<div><Icon type="table"/>Overview</div>} key={"1"}>
+        <TabPane tab={<div><Icon type="table"/>{i18n('tabs.overview')}</div>} key={"1"}>
           <SalesTable data={this.state.sales.products}/>
         </TabPane>
-        <TabPane tab={<div><Icon type="calendar"/>Monthly view</div>} key={"2"}>
+        <TabPane tab={<div><Icon type="calendar"/>{i18n('tabs.monthly')}</div>} key={"2"}>
           <TimeRangeSwitcher returnRange={this.timeRangeUpdateHandler}/>
           <SalesTable data={this.state.monthlySales}/>
         </TabPane>

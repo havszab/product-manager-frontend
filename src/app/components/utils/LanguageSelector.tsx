@@ -26,7 +26,7 @@ export default class LanguageSelector extends React.Component<Props, State> {
 
         return (
             <div>
-                <RadioGroup onChange={this.onChange} defaultValue={'en'}>
+                <RadioGroup onChange={this.onChange} defaultValue={'hu'}>
                     <RadioButton value={'hu'}>HU</RadioButton>
                     <RadioButton value={'en'}>EN</RadioButton>
                 </RadioGroup>

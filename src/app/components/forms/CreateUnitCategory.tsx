@@ -23,7 +23,7 @@ class CreateUnitCategory extends React.Component<CreateUnitCategoryProps, {}> {
     e.preventDefault()
     this.props.form.validateFields(async (err, values: {email: string, name: string}) => {
       if (!values.name) {
-        message.warning("Add type first!")
+        message.warning(i18n('form.unitRequired'))
         return
       }
       values.email = user().email
@@ -52,7 +52,7 @@ class CreateUnitCategory extends React.Component<CreateUnitCategoryProps, {}> {
             required: true,
             getFieldDecorator,
             label: i18n('acquisition.product.unitName'),
-            errorMessage: 'This field is required'
+            errorMessage: i18n('form.required')
           })}
         </div>
         <Row type="flex" justify="space-around" >
