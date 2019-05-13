@@ -3,6 +3,7 @@ import {get} from "../../libs/utils/request";
 import {user} from "../../libs/utils/user";
 import {Button, Icon, message, Timeline, Row, Card, Statistic, Tooltip, Col} from "antd";
 import Chart from "../../components/charts/Chart";
+import i18n from '../../libs/i18n'
 
 type props = {}
 type state = {
@@ -249,9 +250,9 @@ class OverviewTab extends React.Component<props, state> {
               <Chart data={this.state.incomesOfYears}
                      height={400}
                      width={600}
-                     title={'Net sales of years'}
+                     title={i18n('dashboard.charts.annualIncome.title')}
                      type={'BAR'}
-                     label={'Net sales [million HUF]'}
+                     label={i18n('dashboard.charts.annualIncome.label')}
                      colors={this.getColors('#52c41a', this.state.incomesOfYears.length)}
                      toMillion={true}
               />
@@ -268,7 +269,7 @@ class OverviewTab extends React.Component<props, state> {
                 <Chart data={this.state.profitPercent}
                        height={355}
                        width={290}
-                       title={'Top 5 product\'s profit portion'}
+                       title={i18n('dashboard.charts.prodProfit.title')}//'Top 5 product\'s profit portion'}
                        type={'DOUGHNUT'}
                        colors={colorSet1}
 
@@ -282,10 +283,10 @@ class OverviewTab extends React.Component<props, state> {
                 <Chart data={this.state.profitsOfYears}
                        height={350}
                        width={500}
-                       title={'Gross margin earned yearly'}
+                       title={i18n('dashboard.charts.annualGP.title')}
                        type={'BAR'}
                        colors={this.getColors("#FFCE56", this.state.profitsOfYears.length)}
-                       label={'Gross margin [million HUF]'}
+                       label={i18n('dashboard.charts.annualGP.label')}
                        toMillion={true}
                 />
               </Card>
@@ -297,10 +298,10 @@ class OverviewTab extends React.Component<props, state> {
               <Card>
                 <Statistic
                   title={
-                    <div style={statisticHeaderStyle}><Tooltip title={'Number of deals made since the beginnings'}>
+                    <div style={statisticHeaderStyle}><Tooltip title={i18n('statistics.deals.info')}>
                         <span><Icon type="info-circle" theme="twoTone"
                                     style={{fontSize: '0.7em', marginRight: 8}}/></span>
-                    </Tooltip>Deals</div>
+                    </Tooltip>{i18n('statistics.deals.title')}</div>
                   }
                   value={this.state.soldProductsCount.toLocaleString()}
                   precision={0}
@@ -312,10 +313,10 @@ class OverviewTab extends React.Component<props, state> {
               <Card style={{marginTop: 10, marginBottom: 10}}>
                 <Statistic
                   title={
-                    <div style={statisticHeaderStyle}><Tooltip title={'Current number of employees'}>
+                    <div style={statisticHeaderStyle}><Tooltip title={i18n('statistics.employees.info')}>
                         <span><Icon type="info-circle" theme="twoTone"
                                     style={{fontSize: '0.7em', marginRight: 8}}/></span>
-                    </Tooltip>Employees</div>
+                    </Tooltip>{i18n('statistics.employees.title')}</div>
                   }
                   value={this.state.employeesCount}
                   precision={0}
@@ -329,10 +330,10 @@ class OverviewTab extends React.Component<props, state> {
                 <Statistic
                   title={
                     <div style={statisticHeaderStyle}><Tooltip
-                      title={'Sum of net sales from the first year to the last'}>
+                      title={i18n('statistics.totalInc.info')}>
                         <span><Icon type="info-circle" theme="twoTone"
                                     style={{fontSize: '0.7em', marginRight: 8}}/></span>
-                    </Tooltip>Historical income</div>
+                    </Tooltip>{i18n('statistics.totalInc.title')}</div>
                   }
                   value={this.state.sumIncomes.toLocaleString()}
                   precision={0}
@@ -350,7 +351,9 @@ class OverviewTab extends React.Component<props, state> {
             <Card>
               <Chart data={this.state.top5Annual}
                      height={costChartHeight}
-                     width={costChartWidth} type={'PIE'} title={'The 5 highest annual expenses'}
+                     width={costChartWidth}
+                     type={'PIE'}
+                     title={i18n('dashboard.costs.fiveHighest') + ' ' + i18n('dashboard.costs.annual')}
                      colors={blueColorSet}
               />
             </Card>
@@ -359,7 +362,9 @@ class OverviewTab extends React.Component<props, state> {
             <Card>
               <Chart data={this.state.top5Monthly}
                      height={costChartHeight}
-                     width={costChartWidth} type={'PIE'} title={'The 5 highest monthly expenses'}
+                     width={costChartWidth}
+                     type={'PIE'}
+                     title={i18n('dashboard.costs.fiveHighest') + ' ' + i18n('dashboard.costs.monthly')}
                      colors={blueColorSet}
               />
             </Card>
@@ -368,7 +373,9 @@ class OverviewTab extends React.Component<props, state> {
             <Card>
               <Chart data={this.state.top5Weekly}
                      height={costChartHeight}
-                     width={costChartWidth} type={'PIE'} title={'The 5 highest weekly expenses'}
+                     width={costChartWidth}
+                     type={'PIE'}
+                     title={i18n('dashboard.costs.fiveHighest') + ' ' + i18n('dashboard.costs.weekly')}
                      colors={blueColorSet}
               />
             </Card>
@@ -376,8 +383,10 @@ class OverviewTab extends React.Component<props, state> {
           <Col span={6}>
             <Card>
               <Chart data={this.state.top5Other}
-                     height={costChartHeight} width={costChartWidth}
-                     type={'PIE'} title={'The 5 highest other expenses'}
+                     height={costChartHeight}
+                     width={costChartWidth}
+                     type={'PIE'}
+                     title={i18n('dashboard.costs.fiveHighest') + ' ' + i18n('dashboard.costs.other')}
                      colors={blueColorSet}
               />
             </Card>

@@ -12,6 +12,7 @@ import moment = require("moment");
 import BarChart from "../components/charts/BarChart";
 import AnnualDashboardTab from "./tabs/AnnualDashboardTab";
 import OverviewTab from "./tabs/OverviewTab";
+import i18n from '../libs/i18n'
 
 const TabPane = Tabs.TabPane;
 
@@ -280,18 +281,6 @@ class DashboardPage extends Component<props, state> {
       })
   }
 
-  renderTimeLineItems = (): React.ReactNode => {
-    let timeLineActions = []
-    if (this.state.actions.length != null)
-      for (let action of this.state.actions) {
-        let date = new Date(action.date)
-        timeLineActions.push(<Timeline.Item key={action.date + ''}
-                                            color={action.color.toLowerCase()}><span
-          style={{fontWeight: 'bold'}}>{date.toLocaleDateString()}</span> - {action.name}</Timeline.Item>)
-      }
-    return timeLineActions
-  }
-
   setTimeRange = (from: Date, to: Date) => {
     this.setState({
       dateFrom: from,
@@ -309,14 +298,6 @@ class DashboardPage extends Component<props, state> {
       ])
     }
     return result
-  }
-
-  getColors = (color: string, length: number): Array<string> => {
-    let colors = Array<string>()
-    for (let i = 0; i < length; i++) {
-      colors.push(color)
-    }
-    return colors
   }
 
   render() {
@@ -358,12 +339,12 @@ class DashboardPage extends Component<props, state> {
     }
 
     return <div>
-      <PageTitle title={'Dashboard'}/>
+      <PageTitle title={i18n('dashboard.title')}/>
       <Tabs type="card">
-        <TabPane tab={<div><Icon type="pie-chart"/>Overview</div>} key={"1"}>
+        <TabPane tab={<div><Icon type="pie-chart"/>{i18n('tabs.overview')}</div>} key={"1"}>
          <OverviewTab/>
         </TabPane>
-        <TabPane tab={<div><Icon type="bar-chart"/>Monthly view</div>} key="2">
+        <TabPane tab={<div><Icon type="bar-chart"/>{i18n('tabs.monthly')}</div>} key="2">
 
           <TimeRangeSwitcher returnRange={this.setTimeRange}/>
 
@@ -395,7 +376,7 @@ class DashboardPage extends Component<props, state> {
           </Row>
         </TabPane>
 
-        <TabPane tab={<div><Icon type="rise"/>Annual view</div>} key="3">
+        <TabPane tab={<div><Icon type="rise"/>{i18n('tabs.annual')}</div>} key="3">
           <AnnualDashboardTab/>
         </TabPane>
       </Tabs>

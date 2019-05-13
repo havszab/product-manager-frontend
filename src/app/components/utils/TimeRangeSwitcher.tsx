@@ -2,6 +2,7 @@ import React from "react"
 import {Icon, Button, Row} from "antd"
 import moment = require("moment")
 import Draggable from "react-draggable";
+import i18n from '../../libs/i18n'
 
 type props = {
   returnRange: (from: Date, to: Date) => void
@@ -13,8 +14,10 @@ type state = {
 }
 
 const monthNames = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
+  i18n('months.jan'), i18n('months.feb'), i18n('months.march'),
+  i18n('months.apr'), i18n('months.may'), i18n('months.jun'),
+  i18n('months.jul'), i18n('months.aug'), i18n('months.sept'),
+  i18n('months.oct'), i18n('months.nov'), i18n('months.dec')
 ]
 
 class TimeRangeSwitcher extends React.Component<props, state> {

@@ -37,13 +37,11 @@
     "register": "Nem vagy még regisztrálva?",
     "registerHere": "Itt megteheted"
   },
-
-  "form" : {
-    "required" : "A mező kitöltése kötelező",
-    "productRequired" : "Adjon meg terméket!",
-    "unitRequired" : "Adjon meg egységet!"
+  "form": {
+    "required": "A mező kitöltése kötelező",
+    "productRequired": "Adjon meg terméket!",
+    "unitRequired": "Adjon meg egységet!"
   },
-
   "product": {
     "tableData": {
       "product": "Termék",
@@ -56,9 +54,9 @@
       "edit": "Szerkesztés",
       "sell": "Eladás"
     },
-    "value" : "Érték",
-    "income" : "Bevétel",
-    "profit" : "Profit",
+    "value": "Érték",
+    "income": "Bevétel",
+    "profit": "Profit",
     "currentAcquisition": "Aktuális beszerzés"
   },
   "menuItems": {
@@ -79,11 +77,11 @@
       "title": "Tételek áthelyezve a raktárba!",
       "msg": "A kiválasztott tételek sikeresen kiszállítva a raktárba. Ezeket a raktár menüpont alatt kezelheti ezentúl. "
     },
-    "itemSold" : {
+    "itemSold": {
       "title": "Tétel eladva",
-      "of" : " ",
-      "sold" : "sikeresen eladva",
-      "for" : "-ért"
+      "of": " ",
+      "sold": "sikeresen eladva",
+      "for": "-ért"
     },
     "removed": "A kiválasztott tételek sikeresen eltávolítva a listáról."
   },
@@ -119,28 +117,86 @@
       }
     }
   },
-  "stock" : {
+  "stock": {
     "title": "Raktárkészlet",
-    "form" : {
-      "data" : "Beszerzési adatok",
-      "value" : "Beszerzési érték",
-      "inStock" : "Raktáron",
-      "unitPrice" : "Beszerzési egységár",
-      "sellForm" : "Adja meg az eladási mennyiséget és árat!",
-      "sellData" : "Eladási adatok"
+    "form": {
+      "data": "Beszerzési adatok",
+      "value": "Beszerzési érték",
+      "inStock": "Raktáron",
+      "unitPrice": "Beszerzési egységár",
+      "sellForm": "Adja meg az eladási mennyiséget és árat!",
+      "sellData": "Eladási adatok"
     }
   },
-  "sales" : {
+  "sales": {
     "title": "Jegyzett eladások",
-    "table" : {
+    "table": {
       "product": "Termék",
       "value": "Beszési érték",
       "soldFor": "Eladási ár",
       "soldOn": "Eladás dátuma"
     }
   },
-  "tabs"  : {
-    "overview" : "Áttekintés",
-    "monthly" : "Havi nézet"
+  "dashboard": {
+    "title": "Kimutatások",
+    "income": "Bevétel",
+    "prodCosts": "Eladott áruk költsége",
+    "grossProfit": "Bruttó profit",
+    "opCosts": "Közvetett költségek",
+    "accCosts": "Számviteli költségek",
+    "accProfit": "Számviteli profit",
+    "costs": {
+      "fiveHighest": "Öt legmagasabb",
+      "annual": "éves költség",
+      "monthly": "havi költség",
+      "weekly": "heti költség",
+      "other": "egyéb költség"
+    },
+    "charts": {
+      "annualIncome": {
+        "title": "Bevétel éves alakulása",
+        "label": "Összeg [millió HUF]"
+      },
+      "prodProfit": {
+        "title": "Top 5 termék részesedése a profitból"
+      },
+      "annualGP": {
+        "title": "Bruttó profit éves alakulása",
+        "label": "Összeg [millió HUF]"
+      }
+    }
+  },
+  "statistics": {
+    "deals": {
+      "title": "Eladott tételek",
+      "info": "A vállalat működésének kezdete óta eladott tételek száma"
+    },
+    "employees": {
+      "title": "Alkalmazottak száma",
+      "info": "Aktuálisan regisztrált alkalmazottak száma"
+    },
+    "totalInc": {
+      "title": "Összes bevétel",
+      "info": "A vállalat működésének kezdete óta realizált bevétel"
+    }
+  },
+  "tabs": {
+    "overview": "Áttekintés",
+    "monthly": "Havi nézet",
+    "annual": "Éves nézet"
+  },
+  "months": {
+    "jan": "Január",
+    "feb": "Február",
+    "march": "Március",
+    "apr": "Április",
+    "may": "Május",
+    "jun": "Június",
+    "jul": "Július",
+    "aug": "Augusztus",
+    "sept": "Szeptember",
+    "oct": "Október",
+    "nov": "November",
+    "dec": "December"
   }
 }

@@ -155,10 +155,68 @@
         "soldFor": "Sold for",
         "soldOn": "Sold on"
       }
-    },
-    "tabs"  : {
-      "overview" : "Overview",
-      "monthly" : "Monthly view"
     }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "income": "Income",
+    "prodCosts": "Product costs",
+    "grossProfit": "Gross profit",
+    "opCosts": "Operating costs",
+    "accCosts": "Accounting costs",
+    "accProfit": "Accounting profit",
+    "costs": {
+      "fiveHighest": "Five highest",
+      "annual": "annual costs",
+      "monthly": "monthly costs",
+      "weekly": "weekly costs",
+      "other": "other costs"
+    },
+    "charts": {
+      "annualIncome": {
+        "title": "Income of years",
+        "label": "Amount [million HUF]"
+      },
+      "prodProfit": {
+        "title": "Top 5 product's profit portion"
+      },
+      "annualGP": {
+        "title": "Gross profit of years",
+        "label": "Amount [million HUF]"
+      }
+    }
+  },
+  "statistics": {
+    "deals": {
+      "title": "Sold items",
+      "info": "Sum of sold items since the beginnings"
+    },
+    "employees": {
+      "title": "Employees",
+      "info": "Number of registered employees"
+    },
+    "totalInc": {
+      "title": "Total income",
+      "info": "Sum of income since the beginnings"
+    }
+  },
+  "months": {
+    "jan": "January",
+    "feb": "February",
+    "march": "March",
+    "apr": "April",
+    "may": "May",
+    "jun": "June",
+    "jul": "July",
+    "aug": "August",
+    "sept": "September",
+    "okt": "October",
+    "nov": "November",
+    "dec": "December"
+  },
+  "tabs"  : {
+    "overview" : "Overview",
+    "monthly" : "Monthly view",
+    "annual": "Annual view"
   }
 }
