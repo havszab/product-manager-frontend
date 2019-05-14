@@ -4,6 +4,7 @@ import ListCategories from "../../components/ListCategories";
 import Row from "antd/lib/grid/row";
 import {Button, Col, Icon} from "antd";
 import {user} from "../../libs/utils/user";
+import UtilButton from '../../components/utils/UtilButton'
 
 type props = {}
 type state = {
@@ -94,8 +95,8 @@ class AdministrationTab extends React.Component<props, state> {
     const btnStyle = {fontSize: '1em', paddingRight: 6, paddingLeft: 6, paddingTop: 2, margin: 5}
 
     const expandButton = this.state.isExtended ?
-      <Button type={'primary'} shape={"round"} style={btnStyle} onClick={() => this.isExtendedSwitcher(false)}><Icon type={'up-circle'}/></Button> :
-      <Button type={'primary'} shape={"round"} style={btnStyle} onClick={() => this.isExtendedSwitcher(true)}><Icon type={'down-circle'}/></Button>
+      <UtilButton tooltip={''} onClick={() => this.isExtendedSwitcher(false)}><Icon type={'up-circle'}/></UtilButton> :
+      <UtilButton tooltip={''} onClick={() => this.isExtendedSwitcher(true)}><Icon type={'down-circle'}/></UtilButton>
 
 
     return (

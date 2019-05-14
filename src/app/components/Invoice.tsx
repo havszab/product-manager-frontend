@@ -2,7 +2,7 @@ import React from "react"
 import {Button, Card, Cascader, Col, DatePicker, Empty, Icon, Modal, Row} from 'antd'
 import InvoiceItemTable from './tables/InvoiceItemTable'
 import InvoiceCard from './cards/InvoiceCard'
-import AddButton from '../libs/utils/AddButton'
+import UtilButton from './utils/UtilButton'
 import i18n from '../libs/i18n'
 import ItemSell from '../pages/StockPage'
 import BusinessPartnerForm from './forms/BusinessPartnerForm'
@@ -152,8 +152,8 @@ class Invoice extends React.Component<props, state> {
         <Row type={'flex'} justify={'space-around'} style={{margin: 5}}>
           <Button type={'danger'}>Mégse</Button>
           <Button type={'primary'}>Számla kiállítása</Button>
-          <AddButton tooltip={i18n('invoice.preview')} onClick={() => this.isModalVisibleSwitchHandler(true)}><Icon
-            type="file-search"/></AddButton>
+          <UtilButton tooltip={i18n('invoice.preview')} onClick={() => this.isModalVisibleSwitchHandler(true)}><Icon
+            type="file-search"/></UtilButton>
         </Row>
         {preview}
       </div>

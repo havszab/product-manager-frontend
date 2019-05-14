@@ -6,7 +6,7 @@ import {Card, Cascader, Col, Icon, Modal, Row} from 'antd'
 import ItemSell from "../components/forms/ItemSellForm"
 import PageTitle from "../components/utils/PageTitle"
 import i18n from '../libs/i18n'
-import AddButton from '../libs/utils/AddButton'
+import UtilButton from '../components/utils/UtilButton'
 import Invoice from '../components/Invoice'
 
 interface StockPageProps extends React.Props <any> {
@@ -134,24 +134,24 @@ class StockPage extends React.Component<StockPageProps, state> {
         <Col span={12}>
           <Row type={'flex'} justify={'space-around'}>
 
-            <AddButton tooltip={i18n('invoice.new')} onClick={() => this.setIsInvoiceVisible(false)}><Icon
-              type="close-circle"/></AddButton>
+            <UtilButton tooltip={i18n('invoice.new')} onClick={() => this.setIsInvoiceVisible(false)}><Icon
+              type="close-circle"/></UtilButton>
 
             <Cascader style={cascaderCSS} options={null} placeholder={i18n('invoice.blockChoose')}/>
 
-            <AddButton tooltip={i18n('invoice.newBlock')} onClick={() => {
+            <UtilButton tooltip={i18n('invoice.newBlock')} onClick={() => {
             }}/>
 
             <Cascader style={cascaderCSS} options={null} placeholder={i18n('invoice.buyerChoose')}/>
 
-            <AddButton tooltip={i18n('invoice.newBuyer')} onClick={() => {
+            <UtilButton tooltip={i18n('invoice.newBuyer')} onClick={() => {
             }}/>
           </Row>
         </Col>
       </Row>
       :
-      <AddButton tooltip={i18n('invoice.new')} onClick={() => this.setIsInvoiceVisible(true)}>
-        <Icon type="file-sync"/></AddButton>
+      <UtilButton tooltip={i18n('invoice.new')} onClick={() => this.setIsInvoiceVisible(true)}>
+        <Icon type="file-sync"/></UtilButton>
 
 
     const stockContent = this.state.isInvoiceVisible ?

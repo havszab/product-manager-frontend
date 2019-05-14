@@ -7,7 +7,7 @@ type props = {
 }
 type state = {}
 
-class AddButton extends React.Component<props, state> {
+class UtilButton extends React.Component<props, state> {
   state = {}
 
   render() {
@@ -24,4 +24,4 @@ class AddButton extends React.Component<props, state> {
 
 }
 
-export default AddButton;
+export default UtilButton;

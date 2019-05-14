@@ -4,7 +4,7 @@ import {user} from "../../libs/utils/user";
 import {Modal, Row} from "antd";
 import EmployeeForm from "../../components/forms/EmployeeForm";
 import PageTitle from "../../components/utils/PageTitle";
-import AddButton from "../../libs/utils/AddButton";
+import UtilButton from "../../components/utils/UtilButton";
 import EmployeeCard from "../../components/cards/EmployeeCard";
 
 type props = {}
@@ -77,7 +77,7 @@ class EmployeeTab extends React.Component<props, state> {
 
     return (
       <div>
-        <AddButton tooltip={'New employee'} onClick={() => this.isModalVisibleSwitchHandler(true)}/>
+        <UtilButton tooltip={'New employee'} onClick={() => this.isModalVisibleSwitchHandler(true)}/>
         {modalForm}
         <Row type={"flex"} justify={"space-around"}>
           {this.renderEmployees()}

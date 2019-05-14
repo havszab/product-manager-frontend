@@ -4,7 +4,7 @@ import {message, Row, Button, Icon, Modal, Tooltip} from "antd";
 import {get} from "../../libs/utils/request";
 import {user} from "../../libs/utils/user";
 import InvestmentForm from "../../components/forms/InvestmentForm";
-import AddButton from "../../libs/utils/AddButton";
+import UtilButton from "../../components/utils/UtilButton";
 
 type props = {}
 type state = {
@@ -82,7 +82,7 @@ class InvestmentTab extends React.Component<props, state> {
     return (
       <div>
         {modalForm}
-        <AddButton tooltip={'New investment'} onClick={() => this.isModalVisibleSwitchHandler(true)}/>
+        <UtilButton tooltip={'New investment'} onClick={() => this.isModalVisibleSwitchHandler(true)}/>
 
         <Row type={"flex"} justify={"space-around"}>
           {this.renderInvestments()}

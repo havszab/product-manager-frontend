@@ -4,7 +4,7 @@ import CostForm from "../../components/forms/CostForm";
 import {get} from "../../libs/utils/request";
 import {user} from "../../libs/utils/user";
 import CostCard from "../../components/cards/CostCard";
-import AddButton from "../../libs/utils/AddButton";
+import UtilButton from "../../components/utils/UtilButton";
 import CostWidgets from "../../components/utils/CostWidgets";
 
 type props = {}
@@ -90,7 +90,7 @@ class CostTab extends React.Component<props, state> {
     return (
       <div>
         {modalForm}
-        <AddButton tooltip={'New cost'} onClick={() => this.isModalVisibleSwitchHandler(true)}/>
+        <UtilButton tooltip={'New cost'} onClick={() => this.isModalVisibleSwitchHandler(true)}/>
         <CostWidgets sums={this.state.sums}/>
         <Row type={"flex"} justify={"space-around"}>
           {this.renderCosts()}
