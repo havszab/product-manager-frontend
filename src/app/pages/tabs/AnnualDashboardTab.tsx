@@ -1,8 +1,8 @@
-import React from "react";
-import {Button, Card, Col, Icon, message, Row, Statistic, Table, Tooltip} from "antd";
-import {get} from "../../libs/utils/request";
-import {user} from "../../libs/utils/user";
-import Chart from "../../components/charts/Chart";
+import React from "react"
+import {Button, Card, Col, Empty, Icon, message, Row, Statistic, Table, Tooltip} from "antd"
+import {get} from "../../libs/utils/request"
+import {user} from "../../libs/utils/user"
+import Chart from "../../components/charts/Chart"
 import i18n from '../../libs/i18n'
 
 type props = {}
@@ -386,6 +386,7 @@ class AnnualDashboardTab extends React.Component<props, state> {
                          rowKey={record => {
                            return record.name
                          }}
+                         locale={{emptyText: <Empty description={i18n('statusMessage.dataMissing')}/>}}
                   />
                 </div>
               </Card>
@@ -405,7 +406,7 @@ class AnnualDashboardTab extends React.Component<props, state> {
                      height={200} width={200} type={'DOUGHNUT'}/>
             </Col>
             <Col span={10} offset={1}>
-              <Chart title={`${i18n('dashboard.charts.annual.opCostRatio')} [${this.state.selectedYear}]` }
+              <Chart title={`${i18n('dashboard.charts.annual.opCostRatio')} [${this.state.selectedYear}]`}
                      data={this.getAccountingChartData()}
                      height={200} width={200} type={'DOUGHNUT'}
                      colors={['rgb(255,34,45, 1)', 'rgb(255,34,45, 0.6)', '#3f8600']}/>
@@ -415,7 +416,8 @@ class AnnualDashboardTab extends React.Component<props, state> {
                align={'middle'}
                style={{border: '1px solid #1890ff', paddingBottom: 10, borderRadius: 4, margin: 10, width: '80%'}}>
             <Col span={12} offset={1}>
-              <Chart title={`${i18n('dashboard.charts.annual.costs')} [${this.state.selectedYear}]`} data={this.mapCostsToChartData()}
+              <Chart title={`${i18n('dashboard.charts.annual.costs')} [${this.state.selectedYear}]`}
+                     data={this.mapCostsToChartData()}
                      height={200} width={200} type={'PIE'} labelPosition={'right'}/>
             </Col>
           </Row>
@@ -426,4 +428,4 @@ class AnnualDashboardTab extends React.Component<props, state> {
 
 }
 
-export default AnnualDashboardTab;
+export default AnnualDashboardTab

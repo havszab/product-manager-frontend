@@ -15,7 +15,7 @@ class AddButton extends React.Component<props, state> {
       <div>
         <Row type={"flex"} justify={"space-between"}>
           <Tooltip placement="topLeft" title={this.props.tooltip}>
-            <Button onClick={this.props.onClick} shape={'circle'} type={'primary'}>+</Button>
+            <Button onClick={this.props.onClick} shape={'circle'} type={'primary'}>{this.props.children ? this.props.children : '+'}</Button>
           </Tooltip>
         </Row>
       </div>

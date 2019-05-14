@@ -50,7 +50,13 @@
       "required" : "This field is required"
     }
   },
-
+  "status": {
+    "new": "New",
+    "paid": "Paid",
+    "ready": "Ready",
+    "in_stock": "In stock",
+    "changed": "Status change was successful!"
+  },
   "form" : {
     "required" : "This field is required",
     "productRequired" : "Product required!",
@@ -78,7 +84,7 @@
   "menuItems" : {
     "menu" : "MENU",
     "acquisition" : "Acquisition",
-    "store" : "Stock",
+    "store" : "Stock & sale",
     "dashboard" : "Dashboard",
     "admin" : "Admin & settings",
     "sales" : "Sales",
@@ -87,7 +93,8 @@
 
   "statusMessage" : {
     "noData" : "Could not load data from server!",
-    "operationFailed" : "Your request can not be fulfilled at the moment!"
+    "operationFailed" : "Your request can not be fulfilled at the moment!",
+    "dataMissing": "No data"
   },
 
   "notificationMessage" : {
@@ -147,14 +154,17 @@
       "sellForm" : "Set quantity and price!",
       "sellData" : "Selling details"
     },
-    "sales" : {
-      "title": "Sales history",
-      "table" : {
-        "product": "Product",
-        "value": "Acquisition value",
-        "soldFor": "Sold for",
-        "soldOn": "Sold on"
-      }
+    "invoice": {
+      "addInvoice": "Create invoice"
+    }
+  },
+  "sales" : {
+    "title": "Sales history",
+    "table" : {
+      "product": "Product",
+      "value": "Acquisition value",
+      "soldFor": "Sold for",
+      "soldOn": "Sold on"
     }
   },
   "dashboard": {

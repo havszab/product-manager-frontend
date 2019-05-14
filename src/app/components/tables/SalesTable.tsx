@@ -1,9 +1,9 @@
-import * as React from "react";
-import {Table} from "antd";
-import i18n from "../../libs/i18n";
-import PageTitle from "../utils/PageTitle";
-import {get, post} from "../../libs/utils/request";
-import {user} from "../../libs/utils/user";
+import * as React from "react"
+import {Empty, Table} from "antd"
+import i18n from "../../libs/i18n"
+import PageTitle from "../utils/PageTitle"
+import {get, post} from "../../libs/utils/request"
+import {user} from "../../libs/utils/user"
 
 type props = {
   data: Array<Product>
@@ -58,7 +58,7 @@ class SalesTable extends React.Component<props, state> {
   }
 
 
-  async componentDidMount (): Promise<void> {
+  async componentDidMount(): Promise<void> {
     await this.fetchProductCategories()
     this.setState({
       filters: this.getProductCategoryFilters()
@@ -150,9 +150,17 @@ class SalesTable extends React.Component<props, state> {
     ]
 
     return <div>
-      <Table rowKey={record => {return record.id.toString()}} dataSource={this.props.data} columns={columns} bordered={true}/>
+      <Table
+        rowKey={record => {
+          return record.id.toString()
+        }}
+        dataSource={this.props.data}
+        columns={columns}
+        bordered={true}
+        locale={{emptyText: <Empty description={i18n('statusMessage.dataMissing')}/>}}
+      />
     </div>
   }
 }
 
-export default SalesTable;
+export default SalesTable

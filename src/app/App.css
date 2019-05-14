@@ -75,3 +75,7 @@ body {
 .ant-menu-item > a:hover, .ant-menu-item-selected > a {
     color: #0065BD !important;
 }
+
+.ant-input::placeholder {
+    color: #a3daff;
+}

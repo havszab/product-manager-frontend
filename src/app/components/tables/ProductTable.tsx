@@ -1,9 +1,10 @@
 import * as React from "react";
 import i18n from "../../libs/i18n";
-import {message, Table, Cascader, Icon} from "antd";
+import {message, Table, Cascader, Icon, Empty} from "antd"
 import {get, post} from "../../libs/utils/request";
 import {CascaderOptionType} from "antd/es/cascader";
 import {user} from "../../libs/utils/user";
+import {TableSize} from 'antd/es/table'
 
 interface ProductTableProps extends React.Props<any> {
   data: Array<Product>
@@ -12,6 +13,7 @@ interface ProductTableProps extends React.Props<any> {
   onEdit?: (product: Product) => void
   onSelect?: (products: Array<Product>) => void
   onSuccess?: () => void
+  size?: TableSize
 }
 
 type state = {
@@ -81,7 +83,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
     if (this.state.statuses.length !== 0) {
       for (let status of this.state.statuses) {
         statuses.push({
-          label: status,
+          label: i18n('status.' + status.toLowerCase()),
           value: JSON.stringify({status: status, id: id}),
           disabled: status === 'IN_STOCK' && !this.props.stockOperations
         })
@@ -151,13 +153,13 @@ class ProductTable extends React.Component<ProductTableProps, state> {
     const status = JSON.parse(selectedOptions[0].value)
     console.log(status)
     await post('set-product-status', status)
-      .then((response: { success: boolean, message: string }) => {
+      .then((response: { success: boolean}) => {
         if (response.success) {
-          message.success(response.message)
-        } else message.error(response.message)
+          message.success(i18n('status.changed'))
+        } else message.error(i18n('statusMessage.operationFailed'))
       })
       .catch(err => {
-        message.error('Status change failed! Reason: ' + err)
+        message.error(i18n('statusMessage.operationFailed') + ' ' + err)
       })
     this.setState({
       statusEditId: -1
@@ -197,7 +199,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
     const filters = this.state.categoryFilter
     const statusFilters = this.state.statusFilter
 
-    const columns = [
+    const columns = !this.props.size ? [
       {
         title: i18n('product.tableData.product'),
         dataIndex: 'productCategory.productName',
@@ -233,7 +235,7 @@ class ProductTable extends React.Component<ProductTableProps, state> {
                       size={'small'}
                       style={{width: 100}}
 
-            /></div> : <div onClick={() => this.activateStatusEditor(product.id)}>{product.status}</div>
+            /></div> : <div onClick={() => this.activateStatusEditor(product.id)}>{i18n('status.' + product.status.toLowerCase())}</div>
         }),
         filters: statusFilters,
         onFilter: (value: string, record: Product) => record.status.indexOf(value) === 0,
@@ -247,13 +249,51 @@ class ProductTable extends React.Component<ProductTableProps, state> {
         sorter: (a: Product, b: Product) => a.itemPrice - b.itemPrice
       },
       utilCol
-    ]
+    ] :
+      [
+        {
+          title: i18n('product.tableData.product'),
+          dataIndex: 'productCategory.productName',
+          filters: filters,
+          onFilter: (value: string, record: Product) => record.productCategory.productName.indexOf(value) === 0,
+        },
+        {
+          title: i18n('product.tableData.quantity'),
+          dataIndex: 'quantity',
+          render: (value: string, product: Product) => (
+            `${product.quantity.toLocaleString()} ${product.unitCategory.unitName}`
+          ),
+          sorter: (a: Product, b: Product) => a.quantity - b.quantity
+        },
+        {
+          title: i18n('product.tableData.unitPrice'),
+          dataIndex: 'unitPrice',
+          render: (value: string, product: Product) => (
+            `${product.unitPrice.toLocaleString()} ${currency} / ${product.unitCategory.unitName}`
+          ),
+          sorter: (a: Product, b: Product) => a.unitPrice - b.unitPrice
+        },
+        {
+          title: i18n('product.tableData.itemPrice'),
+          dataIndex: 'itemPrice',
+          render: (value: string, product: Product) => (
+            `${product.itemPrice.toLocaleString()} ${currency}`
+          ),
+          sorter: (a: Product, b: Product) => a.itemPrice - b.itemPrice
+        },
+        utilCol
+      ]
 
     return (
       <div style={{marginTop: 10}}>
         <Table rowSelection={rowSelection}
                rowKey={record => {return record.id.toString()}}
-               dataSource={this.props.data} columns={columns}/>
+               dataSource={this.props.data} columns={columns}
+               size={this.props.size}
+               bordered={this.props.size==='small'}
+               pagination={this.props.size==='small'? {position:'both'}:{position:'bottom'}}
+               locale={{ emptyText: <Empty description={i18n('statusMessage.dataMissing')}/> }}
+        />
       </div>)
   }
 }

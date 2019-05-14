@@ -6,21 +6,6 @@
       "hide": "ELREJTÉS"
     }
   },
-  "menu": {
-    "companies": "Ügyfelek",
-    "logs": "Logok",
-    "reports": "Riportok",
-    "logout": "Kijelentkezés"
-  },
-  "companies": {
-    "listTitle": "Ügyfelek",
-    "addNewCompany": "Új ügyfél hozzáadása",
-    "table": {
-      "name": "Név",
-      "email": "Email",
-      "address": "Cím"
-    }
-  },
   "login": {
     "title": "Jelentkezz be!",
     "subtitle": "Használd a kapott bejelentkezési adatokat",
@@ -36,6 +21,13 @@
     },
     "register": "Nem vagy még regisztrálva?",
     "registerHere": "Itt megteheted"
+  },
+  "status": {
+    "new": "Új",
+    "paid": "Fizetve",
+    "ready": "Kész",
+    "in_stock": "Raktáron",
+    "changed": "Státusz sikeresen megváltoztatva!"
   },
   "form": {
     "required": "A mező kitöltése kötelező",
@@ -62,7 +54,7 @@
   "menuItems": {
     "menu": "MENÜ",
     "acquisition": "Beszerzés",
-    "store": "Raktár",
+    "store": "Raktár & eladás",
     "dashboard": "Kimutatás",
     "admin": "Admin & beállítások",
     "sales": "Eladások",
@@ -70,7 +62,8 @@
   },
   "statusMessage": {
     "noData": "Az adatok betöltése sikertelen!",
-    "operationFailed": "Nem sikerült végrehajtani a műveletet!"
+    "operationFailed": "Nem sikerült végrehajtani a műveletet!",
+    "dataMissing": "Nincs adat"
   },
   "notificationMessage": {
     "movedToStock": {
@@ -126,6 +119,9 @@
       "unitPrice": "Beszerzési egységár",
       "sellForm": "Adja meg az eladási mennyiséget és árat!",
       "sellData": "Eladási adatok"
+    },
+    "invoice": {
+      "addInvoice": "Számla kiállítása"
     }
   },
   "sales": {
@@ -193,7 +189,7 @@
     },
     "incomeInfo": "Tárgyévben, az eladott termékekből származó összeg",
     "prodCostInfo": "Termékbeszerzésre költött összeg",
-    "grossProfitInfo" : "A bevétel és az árubeszerzés különbsége",
+    "grossProfitInfo": "A bevétel és az árubeszerzés különbsége",
     "opCostInfo": "Termékbeszerzésen felüli kölségek",
     "accCostInfo": "Tárgyévi termékbeszerzés és folyóköltségek összege",
     "accProfitInfo": "A bruttó profit és a közvetett költségek különbsége"
@@ -216,5 +212,38 @@
     "oct": "Október",
     "nov": "November",
     "dec": "December"
+  },
+  "invoice": {
+    "invoice": "Számla",
+    "new": "Számla kiállítása",
+    "blockChoose": "Számlasablon kiválasztása",
+    "newBlock": "Számlasablon hozzáadása",
+    "buyerChoose": "Vevő kiválasztása",
+    "newBuyer": "Vevő regisztrálása",
+    "address": "Cím",
+    "seller": "Eladó",
+    "buyer": "Vevő",
+    "no": "Sorszám",
+    "vat": "ÁFA",
+    "bankNum": "Bankszámlaszám",
+    "invoicingDate": "Kiállítás időpontja",
+    "paymentDeadline": "Fizetési határidő",
+    "paymentDate": "Fizetés időpontja",
+    "paymentMethod": "Fizetés módja",
+    "bankTransfer": "Átutalás",
+    "cash": "Készpénz",
+    "advance": "Előre utalás",
+    "vatAmount": "ÁFA összege",
+    "grossValue": "Bruttó érték",
+    "preview": "Előnézet",
+    "form": {
+      "companyName": "Cég neve",
+      "zip": "Irányítószám",
+      "city": "Város",
+      "street": "Utca",
+      "type": "Közterület típusa",
+      "number": "Házszám",
+      "taxNumber": "Adószám"
+    }
   }
 }
