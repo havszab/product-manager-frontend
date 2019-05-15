@@ -1,15 +1,30 @@
 import React from "react"
 import {Button, Card, Cascader, Col, DatePicker, Empty, Icon, Modal, Row} from 'antd'
 import InvoiceItemTable from './tables/InvoiceItemTable'
-import InvoiceCard from './cards/InvoiceCard'
+import BusinessPartnerCard from './cards/BusinessPartnerCard'
 import UtilButton from './utils/UtilButton'
 import i18n from '../libs/i18n'
-import ItemSell from '../pages/StockPage'
-import BusinessPartnerForm from './forms/BusinessPartnerForm'
 
-type props = {}
+type props = {
+  onPartnerCreate: (isSeller: boolean) => void
+  seller: Template
+  buyer: Template
+}
 type state = {
   isModalVisible: boolean
+}
+
+interface Template {
+  bankNumber?: string
+  city: string
+  companyName: string
+  houseNumber: string
+  isClient: boolean
+  locationType: string
+  street: string
+  taxNumber?: string
+  templateName: string
+  zipCode: number
 }
 
 class Invoice extends React.Component<props, state> {
@@ -34,6 +49,26 @@ class Invoice extends React.Component<props, state> {
 
     const datePickerStyle = {width: '100%', marginTop: 5}
 
+    const seller = this.props.seller ?
+      <BusinessPartnerCard template={this.props.seller}/> :
+      <Card>
+        <Empty description={i18n('statusMessage.dataMissing')}>
+          <Button type={'primary'} onClick={() => this.props.onPartnerCreate(true)}>
+            {i18n('invoice.newBlock')}
+          </Button>
+        </Empty>
+      </Card>
+
+    const buyer = this.props.buyer ?
+      <BusinessPartnerCard template={this.props.buyer}/> :
+      <Card>
+        <Empty description={i18n('statusMessage.dataMissing')}>
+          <Button type={'primary'} onClick={() => this.props.onPartnerCreate(false)}>
+            {i18n('invoice.newBuyer')}
+          </Button>
+        </Empty>
+      </Card>
+
     const preview = (<Modal visible={this.state.isModalVisible}
                             footer={null}
                             centered={true}
@@ -52,10 +87,10 @@ class Invoice extends React.Component<props, state> {
 
         <Row gutter={8}>
           <Col span={12}>
-            <InvoiceCard/>
+            {seller}
           </Col>
           <Col span={12}>
-            <InvoiceCard/>
+            {buyer}
           </Col>
         </Row>
 
@@ -95,6 +130,9 @@ class Invoice extends React.Component<props, state> {
       </div>
     </Modal>)
 
+
+
+
     return (
       <div style={{marginTop: 10, padding: 5, border: '1px solid #1890ff', borderRadius: 4}}>
         <Row type={'flex'} justify={'space-between'} style={{borderBottom: '1px solid #1890ff', marginBottom: 5}}>
@@ -108,10 +146,10 @@ class Invoice extends React.Component<props, state> {
 
         <Row gutter={8}>
           <Col span={12}>
-            <Card><Empty description={i18n('statusMessage.dataMissing')}><Button type={'primary'}>{i18n('invoice.newBlock')}</Button></Empty></Card>
+            {seller}
           </Col>
           <Col span={12}>
-            <Card><Empty description={i18n('statusMessage.dataMissing')}><Button type={'primary'}>{i18n('invoice.newBuyer')}</Button></Empty></Card>
+            {buyer}
           </Col>
         </Row>
 

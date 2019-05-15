@@ -237,13 +237,15 @@
     "grossValue": "Bruttó érték",
     "preview": "Előnézet",
     "form": {
+      "templateName": "Sablon neve",
       "companyName": "Cég neve",
-      "zip": "Irányítószám",
+      "zip": "Ir.szám",
       "city": "Város",
       "street": "Utca",
       "type": "Közterület típusa",
       "number": "Házszám",
       "taxNumber": "Adószám"
-    }
+    },
+    "templateSuccess": "Sablon létrehozása sikeresen megtörtént!"
   }
 }

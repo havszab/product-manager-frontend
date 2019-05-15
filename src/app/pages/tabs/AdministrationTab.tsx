@@ -92,12 +92,9 @@ class AdministrationTab extends React.Component<props, state> {
 
   render() {
 
-    const btnStyle = {fontSize: '1em', paddingRight: 6, paddingLeft: 6, paddingTop: 2, margin: 5}
-
     const expandButton = this.state.isExtended ?
       <UtilButton tooltip={''} onClick={() => this.isExtendedSwitcher(false)}><Icon type={'up-circle'}/></UtilButton> :
       <UtilButton tooltip={''} onClick={() => this.isExtendedSwitcher(true)}><Icon type={'down-circle'}/></UtilButton>
-
 
     return (
       <div>

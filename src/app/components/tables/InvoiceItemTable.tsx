@@ -12,22 +12,28 @@ class InvoiceItemTable extends React.Component<props, state> {
 
     const columns = [
       {
-        title: i18n('product.tableData.product')
+        title: i18n('product.tableData.product'),
+        key: 1
       },
       {
-        title: i18n('product.tableData.unitPrice')
+        title: i18n('product.tableData.unitPrice'),
+        key: 2
       },
       {
-        title: i18n('product.value')
+        title: i18n('product.value'),
+        key: 3
       },
       {
-        title: 'ÁFA'
+        title: 'ÁFA',
+        key: 4
       },
       {
-        title: 'ÁFA összege'
+        title: 'ÁFA összege',
+        key: 5
       },
       {
-        title: i18n('product.tableData.totalPrice')
+        title: i18n('product.tableData.totalPrice'),
+        key: 6
       }
     ]
 
@@ -36,7 +42,9 @@ class InvoiceItemTable extends React.Component<props, state> {
         <Table columns={columns}
                size={'small'}
                bordered={true}
-               locale={{ emptyText: <Empty description={i18n('statusMessage.dataMissing')}/> }}/>
+               locale={{ emptyText: <Empty description={i18n('statusMessage.dataMissing')}/> }}
+               rowKey={record => {return record.toString()}}
+        />
       </div>
     )
   }
