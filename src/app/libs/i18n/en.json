@@ -67,6 +67,7 @@
     "tableData": {
       "product": "Product",
       "quantity" : "Quantity",
+      "quant": "Quant.",
       "unit" : "Unit",
       "unitPrice" : "Unit Price",
       "itemPrice" : "Item price",
@@ -152,8 +153,10 @@
       "inStock" : "In stock",
       "unitPrice" : "Unit value",
       "sellForm" : "Set quantity and price!",
-      "sellData" : "Selling details"
+      "sellData" : "Selling details",
+      "netIncome": "Net income"
     },
+    "sellDataMissing": "Please provide selling conditions!",
     "invoice": {
       "addInvoice": "Create invoice"
     }
@@ -223,7 +226,7 @@
     },
     "incomeInfo": "Amount derived from sold products",
     "prodCostInfo": "Amount spent for product acquisition",
-    "grossProfitInfo" : "Income - prodduct costs",
+    "grossProfitInfo" : "Income - product costs",
     "opCostInfo": "All the expenses excluding product acquisition costs",
     "accCostInfo": "Sum of all expenses (product costs and operating expenses)",
     "accProfitInfo": "Gross profit - operating costs"
@@ -246,5 +249,8 @@
     "overview" : "Overview",
     "monthly" : "Monthly view",
     "annual": "Annual view"
-  }
+  },
+  "bank_transfer": "Bank transfer",
+  "cash": "Cash",
+  "advance": "Advance"
 }

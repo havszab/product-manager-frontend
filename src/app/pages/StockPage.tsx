@@ -26,6 +26,8 @@ type state = {
   selectedSellerTemplate?: Template
   clientTemplates: Array<Template>
   selectedClientTemplate?: Template
+  invoiceItems: Array<Product>
+  paymentMethods: Array<string>
 }
 
 interface Stock {
@@ -39,16 +41,18 @@ interface Response {
 }
 
 interface Template {
+  id: number
   bankNumber?: string
   city: string
   companyName: string
   houseNumber: string
-  isClient: boolean
+  client: boolean
   locationType: string
   street: string
   taxNumber?: string
   templateName: string
   zipCode: number
+  owner?: { email: string, password: string, id: number }
 }
 
 interface Product {
@@ -58,8 +62,12 @@ interface Product {
   unitPrice: number
   quantity: number
   status: string
-  productCategory: ProductCategory,
+  productCategory: ProductCategory
   unitCategory: UnitCategory
+  taxKey?: number
+  taxAmount?: number
+  totalAmount?: number
+  sellingPrice: number
 }
 
 interface ProductCategory {
@@ -93,7 +101,9 @@ class StockPage extends React.Component<StockPageProps, state> {
       isRegistration: false,
       isSellerCreate: false,
       sellerTemplates: Array<Template>(),
-      clientTemplates: Array<Template>()
+      clientTemplates: Array<Template>(),
+      invoiceItems: Array<Product>(),
+      paymentMethods: Array<string>()
     }
   }
 
@@ -105,6 +115,7 @@ class StockPage extends React.Component<StockPageProps, state> {
     await this.fetchStock()
     await this.fetchSellerTemplates()
     await this.fetchClientTemplates()
+    await this.fetchPaymentMethods()
   }
 
   fetchStock = async () => {
@@ -132,6 +143,14 @@ class StockPage extends React.Component<StockPageProps, state> {
       })
   }
 
+  fetchPaymentMethods = async () => {
+    await get('get-payment-methods')
+      .then((response: {success: boolean, paymentMethods: Array<string>}) => {
+        if (response.success) this.setState({paymentMethods: response.paymentMethods})
+          else message.error(i18n('statusMessage.noData'))
+      })
+  }
+
   handleSell = (prod: Product) => {
     this.setState({
       prodToSell: prod,
@@ -139,8 +158,8 @@ class StockPage extends React.Component<StockPageProps, state> {
     })
   }
 
-  onSellFormSubmitHandler = () => {
-    this.fetchStock()
+  onSellFormSubmitHandler = (fetchStock: boolean) => {
+    if (fetchStock) this.fetchStock()
     this.setState({
       isModalVisible: false,
       prodToSell: null
@@ -167,10 +186,56 @@ class StockPage extends React.Component<StockPageProps, state> {
     })
   }
 
-  partnerModalCancelHandler = () => {
+  partnerModalCancelHandler = (reFetch?: boolean) => {
     this.setState({
       isRegistration: false
     })
+    if (reFetch) this.fetchAll()
+  }
+
+  handleCascaderChange = (value: string[], selectedOptions: CascaderOptionType[]) => {
+    const template: Template = JSON.parse(JSON.stringify(selectedOptions[0].value))
+    if (!template.client) this.setState({selectedSellerTemplate: template})
+    else this.setState({selectedClientTemplate: template})
+  }
+
+  onItemPushHandler = async (item: Product) => {
+    let prState = {...this.state}
+    let needToPush: boolean = true
+    if (prState.invoiceItems.length === 0) {
+      prState.invoiceItems.push(item)
+      needToPush = false
+    } else {
+      for (let invItem of prState.invoiceItems) {
+        if (invItem.id === item.id && invItem.taxKey === item.taxKey) {
+          invItem.quantity += item.quantity
+          invItem.itemPrice += item.itemPrice
+          invItem.taxAmount += item.taxAmount
+          invItem.totalAmount += item.totalAmount
+          item.unitPrice = invItem.itemPrice / invItem.quantity
+          needToPush = false
+          break
+        }
+      }
+    }
+    if (needToPush) prState.invoiceItems.push(item)
+    for (let stockItem of this.state.stock.products) {
+      if (stockItem.id === item.id) {
+        stockItem.quantity -= item.quantity
+        stockItem.itemPrice = stockItem.unitPrice * stockItem.quantity
+      }
+    }
+    await this.setState({...prState})
+  }
+
+  invoiceCreatedHandler = () => {
+    this.setState({
+      isInvoiceVisible: false,
+      selectedClientTemplate: null,
+      selectedSellerTemplate: null,
+      invoiceItems: Array<Product>()
+    })
+    this.fetchAll()
   }
 
   render() {
@@ -182,17 +247,20 @@ class StockPage extends React.Component<StockPageProps, state> {
              onCancel={this.modalCancelHandler}
              closable={false}>
         <ItemSell product={this.state.prodToSell}
+                  isInvoice={this.state.isInvoiceVisible}
                   onCancel={this.modalCancelHandler}
-                  onSubmit={this.onSellFormSubmitHandler}/>
+                  onSubmit={() => this.onSellFormSubmitHandler(!this.state.isInvoiceVisible)}
+                  onPush={this.onItemPushHandler}/>
       </Modal>) : null
 
     const partnerModal = (
       <Modal visible={this.state.isRegistration}
              footer={null}
              centered={true}
-             onCancel={this.partnerModalCancelHandler}
+             onCancel={() => this.partnerModalCancelHandler()}
              closable={true}>
-        <BusinessPartnerForm seller={this.state.isSellerCreate} closeModal={this.partnerModalCancelHandler}/>
+        <BusinessPartnerForm seller={this.state.isSellerCreate}
+                             closeModal={() => this.partnerModalCancelHandler(true)}/>
       </Modal>
     )
 
@@ -203,17 +271,25 @@ class StockPage extends React.Component<StockPageProps, state> {
         <Col span={12}>
           <Row type={'flex'} justify={'space-around'}>
 
-            <UtilButton tooltip={i18n('invoice.new')} onClick={() => this.setIsInvoiceVisible(false)}><Icon
+            <UtilButton tooltip={i18n('operations.cancel')} onClick={() => this.setIsInvoiceVisible(false)}><Icon
               type="close-circle"/></UtilButton>
 
-            <Cascader style={cascaderCSS} options={convertToCascaderType('templateName', this.state.sellerTemplates)} placeholder={i18n('invoice.blockChoose')}/>
+            <Cascader style={cascaderCSS}
+                      options={convertToCascaderType(this.state.sellerTemplates, false, 'templateName')}
+                      placeholder={i18n('invoice.blockChoose')}
+                      onChange={this.handleCascaderChange}/>
 
             <UtilButton tooltip={i18n('invoice.newBlock')} onClick={() => {
+              this.partnerCreateHandler(true)
             }}/>
 
-            <Cascader style={cascaderCSS} options={convertToCascaderType('templateName', this.state.clientTemplates)} placeholder={i18n('invoice.buyerChoose')}/>
+            <Cascader style={cascaderCSS}
+                      options={convertToCascaderType( this.state.clientTemplates, false,'templateName')}
+                      placeholder={i18n('invoice.buyerChoose')}
+                      onChange={this.handleCascaderChange}/>
 
             <UtilButton tooltip={i18n('invoice.newBuyer')} onClick={() => {
+              this.partnerCreateHandler(false)
             }}/>
           </Row>
         </Col>
@@ -227,8 +303,11 @@ class StockPage extends React.Component<StockPageProps, state> {
       <Row gutter={8}>
         <Col span={12}>
           <Invoice onPartnerCreate={this.partnerCreateHandler}
-                   seller={null}
-                   buyer={null}
+                   seller={this.state.selectedSellerTemplate}
+                   buyer={this.state.selectedClientTemplate}
+                   items={this.state.invoiceItems}
+                   paymentMethods={this.state.paymentMethods}
+                   onSuccess={this.invoiceCreatedHandler}
           />
         </Col>
         <Col span={12}>

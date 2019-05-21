@@ -38,6 +38,7 @@
     "tableData": {
       "product": "Termék",
       "quantity": "Mennyiség",
+      "quant": "Menny.",
       "unit": "Egység",
       "unitPrice": "Egységár",
       "itemPrice": "Tétel ára",
@@ -118,8 +119,10 @@
       "inStock": "Raktáron",
       "unitPrice": "Beszerzési egységár",
       "sellForm": "Adja meg az eladási mennyiséget és árat!",
-      "sellData": "Eladási adatok"
+      "sellData": "Eladási adatok",
+      "netIncome": "Nettó bevétel"
     },
+    "sellDataMissing": "Adja meg az eladási feltételeket!",
     "invoice": {
       "addInvoice": "Számla kiállítása"
     }
@@ -216,6 +219,7 @@
   "invoice": {
     "invoice": "Számla",
     "new": "Számla kiállítása",
+    "itemToInvoice": "Feljegyzés a számlára",
     "blockChoose": "Számlasablon kiválasztása",
     "newBlock": "Számlasablon hozzáadása",
     "buyerChoose": "Vevő kiválasztása",
@@ -230,12 +234,14 @@
     "paymentDeadline": "Fizetési határidő",
     "paymentDate": "Fizetés időpontja",
     "paymentMethod": "Fizetés módja",
-    "bankTransfer": "Átutalás",
+    "bank_transfer": "Átutalás",
     "cash": "Készpénz",
-    "advance": "Előre utalás",
-    "vatAmount": "ÁFA összege",
-    "grossValue": "Bruttó érték",
+    "advance": "Előleg",
+    "taxAmount": "ÁFA összege",
+    "taxKey": "ÁFA kulcs",
+    "grossValue": "Bruttó összeg",
     "preview": "Előnézet",
+    "newItem": "Egyéni tétel hozzáadása",
     "form": {
       "templateName": "Sablon neve",
       "companyName": "Cég neve",
@@ -244,8 +250,15 @@
       "street": "Utca",
       "type": "Közterület típusa",
       "number": "Házszám",
-      "taxNumber": "Adószám"
+      "taxNumber": "Adószám",
+      "invoiceDate": "Számla kelte",
+      "paymentDeadline": "Teljesítés határideje",
+      "paymentDate": "Teljesítés időpontja",
+      "choosePayment": "Válasszon fizetési módot!"
     },
     "templateSuccess": "Sablon létrehozása sikeresen megtörtént!"
-  }
+  },
+  "bank_transfer": "Átutalás",
+  "cash": "Készpénz",
+  "advance": "Előre utalás"
 }

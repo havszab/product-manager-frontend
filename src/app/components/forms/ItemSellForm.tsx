@@ -7,23 +7,30 @@ import {user} from "../../libs/utils/user"
 import {post} from "../../libs/utils/request"
 import {openNotification} from "../../libs/utils/notification"
 import i18n from '../../libs/i18n'
+import TaxKeyCascader from '../utils/TaxKeyCascader'
 
 
 interface ItemSellProps extends React.Props <any> {
   product: Product
+  isInvoice: boolean
   onCancel: () => void
   onSubmit: () => void
+  onPush?: (item: Product) => void
 }
 
 interface Product {
   id: number
   description?: string
-  itemPrice: number
+  itemPrice?: number
   unitPrice: number
   quantity: number
-  status: string
+  status?: string
   productCategory: ProductCategory,
   unitCategory: UnitCategory,
+  taxKey?: number
+  taxAmount?: number
+  totalAmount?: number
+  sellingPrice: number
 }
 
 interface ProductCategory {
@@ -44,6 +51,9 @@ type state = {
   profitPerUnit: number
   remainingInStock: number
   isLoading: boolean
+  taxKey: number
+  taxAmount: number
+  totalAmount: number
 }
 
 
@@ -58,7 +68,10 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
       profit: 0,
       profitPerUnit: 0,
       remainingInStock: 0,
-      isLoading: false
+      isLoading: false,
+      taxKey: 0,
+      taxAmount: 0,
+      totalAmount: 0,
     }
   }
 
@@ -76,44 +89,71 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
   }
 
   productSellHandler = async () => {
+    let prState = {...this.state}
     let requestBody = {
       prodToSell: this.props.product.id,
-      quantToSell: this.state.quantToSell,
-      value: this.props.product.unitPrice * this.state.quantToSell,
-      income: !isNaN(this.state.priceToSell) ? this.state.priceToSell : 0,
-      profit: (!isNaN(this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell) ?
-        this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell : 0),
-      email: user().email
+      quantToSell: prState.quantToSell,
+      value: this.props.product.unitPrice * prState.quantToSell,
+      income: !isNaN(prState.priceToSell) ? prState.priceToSell : 0,
+      profit: (!isNaN(prState.priceToSell - this.props.product.unitPrice * prState.quantToSell) ?
+        prState.priceToSell - this.props.product.unitPrice * prState.quantToSell : 0),
+      email: user().email,
+      taxKey: prState.taxKey,
+      totalAmount: !isNaN(prState.priceToSell) ? prState.priceToSell + prState.priceToSell * prState.taxKey / 100 : 0,
     }
     if (requestBody.income == 0 && requestBody.quantToSell == 0) {
-      message.warning('Please provide selling conditions!')
+      message.warning(i18n('stock.sellDataMissing'))
       return
     }
     this.setState({
       isLoading: true
     })
-    await post('sell-item', requestBody)
-      .then((res: { success: boolean, message: string }) => {
-        if (res.success) openNotification("success", "Item sold!",
-          requestBody.quantToSell + ' ' +
-          this.props.product.unitCategory.unitName +
-          i18n('notificationMessage.itemSold.of') + ' ' +
-          this.props.product.productCategory.productName + ' ' +
-          i18n('notificationMessage.itemSold.sold') + ' ' + requestBody.income + ' HUF' +
-          i18n('notificationMessage.itemSold.for'))
-        else message.error(res.message)
-      }).catch(err => {
-        message.error(err)
-      })
-      .then(() => this.setState({
-        isLoading: false
-      }))
+    if (!this.props.isInvoice) {
+      await post('sell-item', requestBody)
+        .then((res: { success: boolean, message: string }) => {
+          if (res.success) openNotification("success", "Item sold!",
+            requestBody.quantToSell + ' ' +
+            this.props.product.unitCategory.unitName +
+            i18n('notificationMessage.itemSold.of') + ' ' +
+            this.props.product.productCategory.productName + ' ' +
+            i18n('notificationMessage.itemSold.sold') + ' ' + requestBody.totalAmount + ' HUF' +
+            i18n('notificationMessage.itemSold.for'))
+          else message.error(res.message)
+        }).catch(err => {
+          message.error(err)
+        })
+    } else {
+      let itemToPush: Product = {
+        id: requestBody.prodToSell,
+        productCategory: this.props.product.productCategory,
+        unitCategory: this.props.product.unitCategory,
+        quantity: requestBody.quantToSell,
+        unitPrice: requestBody.income / requestBody.quantToSell,
+        taxKey: requestBody.taxKey,
+        totalAmount: requestBody.totalAmount,
+        taxAmount: requestBody.totalAmount - requestBody.income,
+        itemPrice: this.props.product.unitPrice * requestBody.quantToSell,
+        sellingPrice: requestBody.income
+      }
+      this.props.onPush(itemToPush)
+    }
+
+    this.setState({
+      isLoading: false
+    })
     this.props.onSubmit()
   }
 
+  taxKeyChosenHandler = (key: number) => {
+    console.log(key)
+    this.setState({
+      taxKey: key
+    })
+  }
 
   render() {
     const {product} = this.props
+    let prState = {...this.state}
 
     const colStyle = {width: '50%'}
     const headerCol = {borderRight: '1px solid #ccc', width: '48%', marginRight: '2%'}
@@ -126,19 +166,23 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
       margin: 5
     }
 
-    const profit = !isNaN(this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell) ?
-      this.state.priceToSell - this.props.product.unitPrice * this.state.quantToSell : 0
+    const profit = !isNaN(prState.priceToSell - this.props.product.unitPrice * prState.quantToSell) ?
+      prState.priceToSell - this.props.product.unitPrice * prState.quantToSell : 0
 
     const fontColor = profit > 0 ? {width: '50%', color: '#52c41a'} : {width: '50%', color: '#f5222d'}
 
     const income = !isNaN(this.state.priceToSell) ?
       this.state.priceToSell : 0
 
+    const taxAmount = income * this.state.taxKey / 100
+
+    const totalAmount = income + taxAmount
+
     const sellBtn = this.state.isLoading
       ? <Button type={"primary"} style={{minWidth: '30%'}} disabled={true} onClick={this.productSellHandler}><Icon
         type="loading"/></Button>
       : <Button type={"primary"} style={{minWidth: '30%'}}
-                onClick={this.productSellHandler}>{i18n('product.tableData.sell')}</Button>
+                onClick={this.productSellHandler}>{this.props.isInvoice ? i18n('invoice.itemToInvoice') : i18n('product.tableData.sell')}</Button>
 
 
     return (
@@ -174,8 +218,14 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
         </Row>
 
         <Row type={"flex"} justify={"space-around"}>
-          <Input type={'number'} style={{width: '60%'}} min={0} onChange={this.priceInputChangeHandler}
-                 placeholder={'Price'}/>
+          <Input type={'number'}
+                 style={{width: '60%', margin: 5}}
+                 min={0} onChange={this.priceInputChangeHandler}
+                 placeholder={i18n('product.tableData.itemPrice')}/>
+        </Row>
+
+        <Row type={"flex"} justify={"space-around"}>
+          <TaxKeyCascader style={{width: 200, margin: 5}} onChoose={this.taxKeyChosenHandler}/>
         </Row>
 
         <Row type={"flex"} justify={"space-around"} style={titleStyle}><h3>{i18n('stock.form.sellData')}</h3></Row>
@@ -195,6 +245,18 @@ class ItemSellForm extends React.Component<ItemSellProps, state> {
           <Row type={"flex"} justify={"space-between"}>
             <div style={headerCol}>{i18n('product.profit')}</div>
             <div style={fontColor}>{profit.toLocaleString()} HUF</div>
+          </Row>
+          <Row type={"flex"} justify={"space-between"}>
+            <div style={headerCol}>{i18n('invoice.taxKey')}</div>
+            <div style={colStyle}>{this.state.taxKey}%</div>
+          </Row>
+          <Row type={"flex"} justify={"space-between"}>
+            <div style={headerCol}>{i18n('invoice.taxAmount')}</div>
+            <div style={colStyle}>{taxAmount.toLocaleString()} HUF</div>
+          </Row>
+          <Row type={"flex"} justify={"space-between"}>
+            <div style={headerCol}>{i18n('invoice.grossValue')}</div>
+            <div style={colStyle}>{totalAmount.toLocaleString()} HUF</div>
           </Row>
         </div>
         <Row type={"flex"} justify={"space-around"}>

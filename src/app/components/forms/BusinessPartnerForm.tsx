@@ -132,7 +132,7 @@ class BusinessPartnerForm extends React.Component<props, state> {
               </Form.Item>
 
             </Row>
-            <Row>
+            <Row type={"flex"} justify={"space-around"}>
 
               <Button type={'danger'} onClick={this.props.closeModal}>Cancel</Button>
               <Button type={'primary'} htmlType={'submit'}>Save</Button>
